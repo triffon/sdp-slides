@@ -1,0 +1,29 @@
+% стандартни пакети
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage[english,bulgarian]{babel}
+\usepackage{multirow}
+\usepackage{colortbl}
+\usepackage[export]{adjustbox}
+
+% кратки команди за форматиране
+\renewcommand{\tt}{\texttt}
+
+% настройки общи за всички слайдове
+\mode<presentation>
+{
+%  \usetheme{Hannover}
+}
+\author{Трифон Трифонов}
+\date{\small Структури от данни и програмиране,\\
+спец. Компютърни науки, 2 поток, 2015/16 г.}
+\subject{LectureSlides}
+
+% среди
+\newenvironment{bittable}{%
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{ccccccccc}
+}{%
+  \end{tabular}
+}
