@@ -1,0 +1,11 @@
+*.aux
+*.log
+*.nav
+*.out
+bitwise.pdf
+files.pdf
+org.pdf
+streams.pdf
+*.snm
+*.toc
+*.vrb
