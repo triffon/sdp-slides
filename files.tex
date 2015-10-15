@@ -3,7 +3,7 @@
 
 \title{Файлове}
 
-\date{9 октомври 2015 г.}
+\date{16 октомври 2015 г.}
 
 \titlegraphic{\includegraphics[height=0.4\textheight]{images/files.jpg}}
 
@@ -12,6 +12,8 @@
 \begin{frame}
   \titlepage
 \end{frame}
+
+\section{Основни понятия}
 
 \begin{frame}
   \frametitle{Какво е файл?}
@@ -76,6 +78,7 @@
   \end{itemize}
 \end{frame}
 
+\section{Файлове в C++}
 
 \begin{frame}
   \frametitle{Поточна йерархия в C++}
@@ -141,6 +144,27 @@ f << "Ignore the following text, please!";
 \end{verbatim}
 \end{frame}
 
+\begin{frame}[<1-2>]
+  \frametitle{Файлов указател}
+  \newcommand{\pta}{\phantom{\tt a}}
+
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \rowcolor{blue!60!green!40}
+    \hline
+    \pta&\pta&\pta&\tt H&\tt e&\tt l&\tt l&\tt o&\tt ,&\pta&\tt w&\tt o&\tt r&\tt l&\tt d&\tt !&\tt{\textbackslash n}&\pta&\pta
+
+    \alt<1>
+    {\\\hline
+    \rowcolor{white}
+    \multicolumn{3}{c}{}&\multicolumn{1}{c}{$\big\uparrow\!$}&\multicolumn{15}{c}{}}
+    {\\\hline
+    \rowcolor{white}
+    \multicolumn{9}{c}{}&\multicolumn{1}{c}{$\big\uparrow\!$}&\multicolumn{9}{c}{}}
+  \end{tabular}
+  \pause
+
+\end{frame}
+
 \begin{frame}[fragile]
   \frametitle{Пряк достъп до файлове}
 
@@ -167,8 +191,10 @@ ostream& seekp(streampos, seekdir = beg)
 
 \end{frame}
 
+\section{Блокови файлове}
+
 \begin{frame}[fragile]
-  \frametitle{Структурирани файлове}
+  \frametitle{Блокова организация}
 
   \begin{center}
     \newcommand{\yc}{\cellcolor{yellow}\hskip 1ex}
