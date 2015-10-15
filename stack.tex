@@ -1,0 +1,43 @@
+\documentclass{beamer}
+\usepackage{sdp}
+
+\title{Стек}
+
+\date{16 октомври 2015 г.}
+
+\titlegraphic{\includegraphics[height=0.4\textheight]{images/stack.jpg}}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Последователно представяне}
+  \newcommand{\pha}{\phantom{$a_n$}}
+
+  \begin{center}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+      \hline
+      $a_0$&$a_1$&$a_2$&\ldots&$a_n$&\pha&\pha&\pha&\pha&\pha&\pha\\
+      \hline
+      \multicolumn{4}{c}{}&\multicolumn{1}{c}{\bigg\uparrow}&\multicolumn{6}{c}{}\\
+      \multicolumn{4}{c}{}&\multicolumn{1}{c}{top}&\multicolumn{6}{c}{}
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Свързано представяне}
+
+  \begin{center}
+    \begin{tabular}{ccc@{}c@{}cc}
+      \nextcell{a_n}&\nextcell{a_{n-1}}&\hspace{1ex}\ldots&$\nextarrow$&\nextcell{a_1}&\nilcell{a_0}\\
+      \bigg\uparrow&&&&&\\
+      top&&&&&
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\end{document}

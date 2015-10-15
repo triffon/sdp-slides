@@ -6,6 +6,7 @@
 \usepackage{multirow}
 \usepackage{colortbl}
 \usepackage[export]{adjustbox}
+\usepackage{amsmath}
 
 % кратки команди за форматиране
 \renewcommand{\tt}{\texttt}
@@ -28,3 +29,13 @@
 }{%
   \end{tabular}
 }
+
+% диаграми
+\newcommand{\nextarrow}{\xrightarrow{\hspace{5ex}}}
+\newcommand{\dualcell}[2]{\begin{tabular}{|c|c|}
+                            \hline
+                            $#1$&$#2$\\
+                            \hline
+                          \end{tabular}}
+\newcommand{\nextcell}[1]{\dualcell{#1}{\nextarrow\hspace{-4ex}}}
+\newcommand{\nilcell}[1]{\dualcell{#1}{\cellcolor{lightgray}\hspace{2ex}}}
