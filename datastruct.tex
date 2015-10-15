@@ -1,0 +1,294 @@
+\documentclass{beamer}
+\usepackage{sdp}
+
+\title[СД+А=П]{Структури от данни\\+\\алгоритми\\=\\програми}
+
+\date{16 октомври 2015 г.}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{Типове и структури}
+
+\begin{frame}
+  \frametitle{Тип данни}
+
+  Инструмент за класификация на данните, характеризиращ се с:
+  \begin{itemize}
+  \item Множество от стойности
+  \item Операции над стойностите
+  \end{itemize}
+  \vspace{1em}
+
+  \pause
+
+  \alert{За какво служат типовете?}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Типове данни (ТД)}
+
+  Примитивни:
+  \begin{itemize}
+  \item булев (\tt{bool})
+  \item целочислен (\tt{short}, \tt{int}, \tt{long}, \tt{unsigned})
+  \item числа с плаваща запетая (\tt{float}, \tt{double})
+  \item символен (\tt{char})
+  \item указател (\tt*)
+  \item псевдоним (\tt\&)
+  \end{itemize}
+
+  Съставни:
+  \begin{itemize}
+  \item масив (\tt{[]})
+  \item структура / запис (\tt{struct})
+  \item клас (\tt{class})
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Структури от данни (СД)}
+
+  \begin{itemize}[<+->]
+  \item СД са схеми за организация на даден вид данни с цел ефективност
+  \item Всеки ТД в частност може да се разглежда като СД
+  \item СД обикновено се реализират чрез потребителски дефинирани ТД
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Абстрактен тип данни (АТД)}
+
+  \begin{itemize}[<+->]
+  \item Формален модел на ТД или СД
+    \begin{itemize}
+    \item Множество от стойности
+    \item Описание на имената и вида на операциите
+    \item Описание на поведението и свойствата на операциите
+    \end{itemize}
+  \item Не налага конкретна организация
+    \begin{itemize}
+    \item (за разлика от СД)
+    \end{itemize}
+  \item Не налага конкретно представяне
+    \begin{itemize}
+    \item (за разлика от ТД)
+    \end{itemize}
+  \item Допуска една или повече реализации
+  \item \alert{Какви са предимствата на АТД?}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Видове описания на СД}
+
+  Логическо описание
+  \begin{itemize}
+  \item състав
+  \item компоненти
+  \item операции
+  \item свойства
+  \end{itemize}
+  \vspace{1em}
+
+  Физическо описание
+  \begin{itemize}
+  \item организация на паметта
+  \item представяне с един или повече ТД
+  \item реализация на операциите
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Видове СД}
+
+  \begin{itemize}
+  \item Според вида на комопонентите си
+    \begin{itemize}
+    \item хомогенни
+    \item хетерогенни
+    \end{itemize}
+  \item Според способността за промяна на размера
+    \begin{itemize}
+    \item статични
+    \item динамични
+    \end{itemize}
+  \item Според вътрешната структура
+    \begin{itemize}
+    \item линейни (свързан списък)
+    \item разклонени (дърво)
+    \item мрежови (граф)
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Алгоритми}
+
+\begin{frame}
+  \frametitle{Какво е алгоритъм?}
+
+  \pause
+
+  \textbf{Неформално:}
+
+  Добре дефиниран набор от инструкции за извършване на дадено пресмятане.
+  \vspace{2cm}
+
+  \pause
+
+  \textbf{Формално:}
+
+  Машина на Тюринг
+\end{frame}
+
+\begin{frame}
+  \frametitle{Масови задачи}
+
+  \begin{itemize}[<+->]
+  \item Масова задача: общ изчислителен проблем, който може да бъде формулиран за входни данни с произволен размер
+    \begin{itemize}
+    \item Пример: подреждане на елементи на масив във възходящ ред (сортиране)
+    \end{itemize}
+  \item Алгоритъмът като решение на масова задача
+  \item Една масова задача може да има много възможни решения
+  \item \alert{Как да сравнявамеме алгоритмите?}
+  \item Добре е да имаме мярка за ефективността на алгоритъма
+  \end{itemize}
+
+  \pause
+  \vspace{1em}
+  Видове сложност
+  \begin{itemize}
+  \item времева сложност --- оценка на времето за изпълнение на алгоритъма
+  \item пространствена сложност --- оценка на паметта използвана от алгоритъма
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Сложност на алгоритъм}
+
+  \pause
+  \vspace{1em}
+
+  Как да оценим колко ресурс използва даден алгоритъм?
+  \begin{itemize}[<+->]
+  \item брой процесорни инструкции и брой байтове?
+    \begin{itemize}
+    \item не знаем на какъв процесор ще се изпълнява програмата!
+    \end{itemize}
+  \item брой ``атомарни операции'' и брой ``единици памет''?
+    \begin{itemize}
+    \item зависи колко големи данни подадем на алгоритъма
+    \end{itemize}
+  \item функция на броя операции или променливи в зависимост от големината на входа?
+    \begin{itemize}
+    \item точният брой може да варира в зависимост от конкретната реализация или език за програмиране
+    \item но варирането \textbf{не трябва да зависи от големината на входа}
+    \end{itemize}
+  \end{itemize}
+  \vspace{1em}
+
+  \onslide<.->{
+  \textbf{Асимптотична сложност}
+
+  Оценка на функцията на сложност при произволно голям вход.
+  }
+\end{frame}
+
+\begin{frame}
+  \frametitle{$O$-нотация}
+
+  \textbf{Проблем:} искаме да категоризираме функциите относно поведението им при големи стойности
+
+  \textbf{Решение:} дефинираме класове от функции
+  \vspace{1em}
+
+  \pause
+
+  Нека $f, g : \mathbb N \to \mathbb N$.
+  \begin{eqnarray*}
+    &f \in O(g) \Leftrightarrow \exists C \exists k \forall n \geq k (0 \leq f(n) \leq C\cdot g(n))& (\text{\small $f$ расте по-бавно от $g$})\\
+    \pause
+    &f \in \Omega(g) \Leftrightarrow \exists C \exists k \forall n \geq k (0 \leq C\cdot g(n) \leq f(n))& (\text{\small $f$ расте по-бързо от $g$})
+  \end{eqnarray*}
+  \pause
+  Лесно се вижда, че $f\in O(g) \Leftrightarrow g\in \Omega(f)$.
+  \pause
+
+  \begin{equation*}
+    f\in \theta(g) \Leftrightarrow \exists C_1 \exists C_2 \exists k \forall n \geq k (0 \leq C_1\cdot g(n) \leq f(n) \leq C_2\cdot g(n))
+  \end{equation*}
+
+  \pause
+
+  Лесно се вижда, че $\Theta(g) = O(g) \cap \Omega(g)$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{$O$-нотация: примери}
+
+  \begin{itemize}[<+->]
+  \item $f \in O(f), f \in \Theta(f)$
+  \item $1000n^2 \in O(n^3)$ (при $C = 1000$ е вярно, че $1000n^2 \leq 1000n^3$)
+  \item $3n^2 + 100 \in \Theta(n^2)$, защото при $C_1 = 1, C_2 = 4, k = 10$ е вярно, че
+    \begin{equation*}
+      \forall n \geq 10 (0 \leq n^2 \leq 3n^2 + 100 \leq 4n^2)
+    \end{equation*}
+  \item $2^n \in O(3^n)$, $\log_2 (n) \in \Theta(log_{10}(n))$
+    \begin{itemize}
+    \item обикновено бележим просто $\log n$, понеже основата няма значение
+    \end{itemize}
+  \item $\log n \in O(n^{0.001})$, $n^{1000}\i O(1.001^n)$
+  \item $\forall C (C \in \Theta(1))$, $O(1) = \Theta(1)$, $\Omega(1) = \mathbb N^{\mathbb N}$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Видове сложност}
+
+  \begin{itemize}[<+->]
+  \item В най-лошия случай (песимистична)
+    \begin{itemize}
+    \item Какъв е максималният възможен брой операции (единици памет), които могат да са нужни на алгоритъма, за да реши задачата?
+    \end{itemize}
+
+  \item В най-добрия случай (оптимистична)
+    \begin{itemize}
+    \item Какъв е минималният възможен брой операции (единици памет), които може да извърши (използва) алгоритъмът, за да реши задачата?
+    \end{itemize}
+
+  \item В средния случай (средна)
+    \begin{itemize}
+    \item Ако считаме, че всеки възможен вход е равновероятен, какво е ``средното аритметично'' на броя операции (единици памет), които трябват при всички възможни входове?
+    \end{itemize}
+
+  \item В контекста на конкретна програма (амортизирана)
+    \begin{itemize}
+    \item Ако алгоритъмът ще се извиква няколко пъти в рамките на дадена програма, колко операции (единици памет) средно ще са му необходими за едно извикване?
+    \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Пресмятане на сложност: пример}
+
+\begin{verbatim}
+for(int i = 0; i < n-1; i++)
+  for(int j = n-2; j >= i; j--)
+    if (a[j] > a[j+1]) {
+      double x = a[j];
+      a[j] = a[j+1];
+      a[j+1]= x;
+    }
+\end{verbatim}
+
+Да се оценят песимистична, оптимистична и средна времева сложност.
+\end{frame}
+
+\end{document}
