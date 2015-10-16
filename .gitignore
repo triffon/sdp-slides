@@ -1,7 +1,9 @@
+*~
 *.aux
 *.log
 *.nav
 *.out
+array.pdf
 bitwise.pdf
 datastruct.pdf
 files.pdf
