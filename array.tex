@@ -45,8 +45,8 @@
 \begin{frame}
   \frametitle{Статично представяне}
 
-  \begin{tabular}{|c|c|c|c|c|c|c|c|}
-    \rowcolor{blue!60!green!40}
+  \begin{tabular}{|*8{c|}}
+    \rowcolor{diagramblue}
     \hline
     $a_0$&$a_1$&$a_2$&\ldots&\ldots&\ldots&\ldots&$a_{n-1}$\\
     \hline
@@ -64,13 +64,13 @@
   \frametitle{Динамично представяне}
   \newcommand{\pha}{\hspace{2ex}}
 
-  \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
-    \multicolumn{16}{c}{$\overbrace{\hspace{60ex}}^{\text{капацитет}}$}\\
-    \rowcolor{blue!60!green!40}
+  \begin{tabular}{|*{16}{c|}}
+    \multicolumn{16}c{$\overbrace{\hspace{60ex}}^{\text{капацитет}}$}\\
+    \rowcolor{diagramblue}
     \hline
     $a_0$&$a_1$&$a_2$&\ldots&\ldots&\ldots&\ldots&$a_{n-1}$&\pha&\pha&\pha&\pha&\pha&\pha&\pha&\pha\\
     \hline
-    \multicolumn{8}{c}{$\underbrace{\hspace{40ex}}_{\text{дължина}}$}\\
+    \multicolumn 8c{$\underbrace{\hspace{40ex}}_{\text{дължина}}$}&\multicolumn 8c{}
   \end{tabular}
   \vspace{3em}
 
@@ -133,8 +133,8 @@
 
   \begin{itemize}
   \item \tt{create(a,b)} --- създава двойка от елементите \tt a и \tt b
-  \item \tt{p.first} --- връща първия елемент на двойката
-  \item \tt{p.second} --- връща втория елемент на двойката
+  \item \tt{first} --- първият елемент на двойката
+  \item \tt{second} --- вторият елемент на двойката
   \end{itemize}
   \vspace{0.5em}
 
@@ -154,7 +154,7 @@
   \begin{center}
     \begin{tabular}{|m{5ex}|m{8ex}|}
       \hline
-      \rowcolor{blue!60!green!40}
+      \rowcolor{diagramblue}
       a&b\\
       \hline
     \end{tabular}
