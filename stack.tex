@@ -113,7 +113,7 @@
     \end{itemize}
 
     \column{0.4\textwidth}
-    
+
     \begin{center}
       \begin{forest} for tree={circle,draw,fill=diagramblue}
         [\tt* [\tt+ [\tt1] [\tt2]] [\tt- [\tt3] [\tt/ [\tt4] [\tt5]]]]
@@ -128,28 +128,157 @@
   \begin{center}
     \begin{tabular}{|p{20ex}p{25ex}@{}m{0pt}@{}}
       \hline
-      \cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}обратен полски запис}&\\[5em]
+      \cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}обратен полски запис}&\\[3em]
       \cline{2-3}
-      \multicolumn 1{|c|}{\cellcolor{diagramblue}резултати}&\multicolumn 1c{}&\\[5em]
+      \multicolumn 1{|c|}{\cellcolor{diagramblue}резултати}&\multicolumn 1c{}&\\[7em]
       \cline{1-1}
     \end{tabular}
   \end{center}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Пример: Пресмятане на израз в обратен полски запис}
+
+  \begin{center}
+    \begin{tabular}{|p{20ex}p{15ex}@{}m{0pt}@{}}
+      \hline
+      \cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}
+      \tt{
+      \onslide<-+>1%
+      \onslide<-+>2%
+      \onslide<-+>+%
+      \onslide<-+>3%
+      \onslide<-+>4%
+      \onslide<-+>5%
+      \onslide<-+>/%
+      \onslide<-+>-%
+      \onslide<-+>*%
+      \onslide<-+>\phantom
+      }}
+      &\\[3em]
+      \cline{2-3}
+      \multicolumn 1{|c|}{\cellcolor{diagramblue}
+      \begin{tabular}{c}
+        \only<10>{\\\tt{6.6}}%
+        \only<9>{\\\tt{2.2}}%
+        \only<8>{\\\tt{0.8}}%
+        \only<7>{\\\tt 5}%
+        \only<6-7>{\\\tt 4}%
+        \only<5-8>{\\\tt 3}%
+        \only<4-9>{\\\tt 3}%
+        \only<3>{\\\tt 2}%
+        \only<2-3>{\\\tt 1}%
+      \end{tabular}
+      }&\multicolumn 1c{}&\\[7em]
+      \cline{1-1}
+    \end{tabular}
+  \end{center}
+\end{frame}
 
 \begin{frame}
-  \frametitle{Преобразуване на израз в обратен полски запис}
+  \frametitle{Пример: Преобразуване в обратен полски запис}
 
   \begin{center}
     \begin{tabular}{p{25ex}p{20ex}p{20ex}@{}m{0pt}@{}}
       \hline
-      \multicolumn 1{|c}{\cellcolor{diagramblue}обратен полски запис}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}инфиксен запис}&\\[5em]
+      \multicolumn 1{|c}{\cellcolor{diagramblue}%
+      \tt{%
+      \only<3->1%
+      \only<5->2%
+      \only<8->+%
+      \only<12->3%
+      \only<14->4%
+      \only<16->5%
+      \only<19->/%
+      \only<20->-%
+      \only<22->*%
+      }}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}%
+      \tt{%
+      \onslide<-1>(%
+      \onslide<-2>1%
+      \onslide<-3>+%
+      \onslide<-4>2%
+      \onslide<-5>)%
+      \onslide<-9>*%
+      \onslide<-10>(%
+      \onslide<-11>3%
+      \onslide<-12>-%
+      \onslide<-13>4%
+      \onslide<-14>/%
+      \onslide<-15>5%
+      \onslide<-16>)%
+      \onslide<-22>\phantom
+      }}&\\[3em]
       \cline{1-1} \cline{3-3}
-      \multicolumn 1c{}&\multicolumn 1{|c|}{\cellcolor{diagramblue}операции}&\multicolumn 1c{}&\\[5em]
+      \multicolumn 1{p{20ex}}{}&\multicolumn 1{|c|}{\cellcolor{diagramblue}%
+      \begin{tabular}{c}
+      \only<17>{\\\tt)}%
+      \only<15-18>{\\\tt/}%
+      \only<13-19>{\\\tt-}%
+      \only<11-20>{\\\tt(}%
+      \only<10-21>{\\\tt*}%
+      \only<6>{\\\tt)}%
+      \only<4-7>{\\\tt+}%
+      \only<2-8>{\\\tt(}%
+      \end{tabular}
+      }&\multicolumn 1c{}&\\[7em]
       \cline{2-2}
     \end{tabular}
   \end{center}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Пример 2: Преобразуване в обратен полски запис}
+
+  \begin{center}
+    \begin{tabular}{p{25ex}p{20ex}p{20ex}@{}m{0pt}@{}}
+      \hline
+      \multicolumn 1{|c}{\cellcolor{diagramblue}%
+      \tt{%
+      \only<3->1%
+      \only<5->2%
+      \only<8->+%
+      \only<12->3%
+      \only<14->4%
+      \only<15->/%
+      \only<16->5%
+      \only<19->-%
+      \only<21->*%
+      }}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}%
+      \tt{%
+      \onslide<-1>(%
+      \onslide<-2>1%
+      \onslide<-3>+%
+      \onslide<-4>2%
+      \onslide<-5>)%
+      \onslide<-9>*%
+      \onslide<-10>(%
+      \onslide<-11>3%
+      \onslide<-12>/%
+      \onslide<-13>4%
+      \onslide<-14>-%
+      \onslide<-15>5%
+      \onslide<-16>)%
+      \onslide<-21>\phantom
+      }}&\\[3em]
+      \cline{1-1} \cline{3-3}
+      \multicolumn 1{p{20ex}}{}&\multicolumn 1{|c|}{\cellcolor{diagramblue}%
+      \begin{tabular}{c}
+      \only<17>{\\\tt)}%
+      \only<15-18>{\\\tt-}%
+      \only<13-14>{\\\tt/}%
+      \only<11-19>{\\\tt(}%
+      \only<10-20>{\\\tt*}%
+      \only<6>{\\\tt)}%
+      \only<4-7>{\\\tt+}%
+      \only<2-8>{\\\tt(}%
+      \end{tabular}
+      }&\multicolumn 1c{}&\\[7em]
+      \cline{2-2}
+    \end{tabular}
+  \end{center}
+\end{frame}
+
 
 \begin{frame}
   \frametitle{Директно пресмятане на израз}
@@ -157,9 +286,61 @@
   \begin{center}
     \begin{tabular}{|p{20ex}p{5ex}p{20ex}p{20ex}@{}m{0pt}@{}}
       \hline
-      \cellcolor{diagramblue}&\cellcolor{diagramblue}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}инфиксен запис}&\\[5em]
+      \cellcolor{diagramblue}&\cellcolor{diagramblue}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}инфиксен запис}&\\[3em]
       \cline{2-2} \cline{4-4}
-      \multicolumn 1{|c|}{\cellcolor{diagramblue}резултати}&\multicolumn 1c{}&\multicolumn 1{|c|}{\cellcolor{diagramblue}операции}&\multicolumn 1c{}&\\[5em]
+      \multicolumn 1{|c|}{\cellcolor{diagramblue}резултати}&\multicolumn 1c{}&\multicolumn 1{|c|}{\cellcolor{diagramblue}операции}&\multicolumn 1c{}&\\[7em]
+      \cline{1-1} \cline{3-3}
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Пример: Директно пресмятане на израз}
+
+  \begin{center}
+    \begin{tabular}{|p{20ex}p{5ex}p{20ex}p{20ex}@{}m{0pt}@{}}
+      \hline
+      \cellcolor{diagramblue}&\cellcolor{diagramblue}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}\tt{%
+      \onslide<-1>(%
+      \onslide<-2>1%
+      \onslide<-3>+%
+      \onslide<-4>2%
+      \onslide<-5>)%
+      \onslide<-9>*%
+      \onslide<-10>(%
+      \onslide<-11>3%
+      \onslide<-12>-%
+      \onslide<-13>4%
+      \onslide<-14>/%
+      \onslide<-15>5%
+      \onslide<-16>)%
+      \onslide<-22>\phantom
+      }}&\\[3em]
+      \cline{2-2} \cline{4-4}
+      \multicolumn 1{|c|}{\cellcolor{diagramblue}
+      \begin{tabular}{c}
+        \only<22>{\\\tt{6.6}}%
+        \only<20-21>{\\\tt{2.2}}%
+        \only<19>{\\\tt{0.8}}%
+        \only<16-18>{\\\tt5}%
+        \only<14-18>{\\\tt4}%
+        \only<12-19>{\\\tt3}%
+        \only<8-21>{\\\tt3}%
+        \only<5-7>{\\\tt2}%
+        \only<3-7>{\\\tt1}%
+      \end{tabular}
+      }&\multicolumn 1c{}&\multicolumn 1{|c|}{\cellcolor{diagramblue}
+      \begin{tabular}{c}
+      \only<17>{\\\tt)}%
+      \only<15-18>{\\\tt/}%
+      \only<13-19>{\\\tt-}%
+      \only<11-20>{\\\tt(}%
+      \only<10-21>{\\\tt*}%
+      \only<6>{\\\tt)}%
+      \only<4-7>{\\\tt+}%
+      \only<2-8>{\\\tt(}%
+      \end{tabular}
+      }&\multicolumn 1c{}&\\[7em]
       \cline{1-1} \cline{3-3}
     \end{tabular}
   \end{center}
