@@ -3,7 +3,7 @@
 
 \title{Редици}
 
-\date{16 октомври 2015 г.}
+\date{23 октомври 2015 г.}
 
 \titlegraphic{\includegraphics[height=0.3\textheight]{images/array.jpg}}
 
@@ -22,6 +22,8 @@
   \vspace{1em}
 
   Операции
+  \vspace{0.5em}
+
   \begin{itemize}
   \item \tt{create(n)} --- създаване на масив със зададена големина
   \item \tt{get(i)} --- получаване на елемент с индекс \tt i
@@ -31,6 +33,8 @@
   \vspace{1em}
 
   Свойства на операциите
+  \vspace{0.5em}
+
   \begin{itemize}
   \item \tt{a.set(i,x).get(i)} = \tt x
   \item \tt{a.set(i,x).get(j)} = \tt{a.get(j)}, ако \tt{i $\neq$ j}
@@ -52,7 +56,7 @@
 
   Реализация: масив във C++.
 
-  \tt{int a[10];}
+  Пример: \tt{int a[10];}
 
 \end{frame}
 
@@ -88,11 +92,32 @@
   \item \tt{pop\_back()} --- изтриване на последния елемент
   \item \tt{insert(...)} --- вмъкване на елементи на произволна позиция
   \item \tt{erase(...)} --- изтриване на елементи на произволна позиция
+  \item \tt{==,!=,<,>,<=,>=} --- лексикорафско сравнение на два вектора 
   \end{itemize}
+  \pause
+  Специализация \tt{vector<bool>}: реализирана чрез битови масиви
 \end{frame}
 
 \begin{frame}
   \frametitle{\tt{std::string}}
+
+  Реализация на низ (динамична редица от символи)
+  \begin{itemize}
+  \item Всички методи на \tt{std::vector<char>}
+    \begin{itemize}
+    \item \alert{но не го наследява!}
+    \end{itemize}
+  \item Методите са съвместими с \tt{char*}
+  \item \tt{replace(...)} --- подмяна на символи на произволна позиции
+  \item \tt{+,+=,append(...)} --- конкатенация на низове
+  \item \tt{<{}<, >{}>} --- операции за вход и изход
+  \item \tt{c\_str()} --- конвертиране към стандартен C++ низ
+  \item \tt{find(...), rfind(...)} --- търсене на първо/последно срещане
+  \item \tt{find\_first\_of(...)} --- първо срещане на символ от друг низ
+  \item \tt{substr(...)} --- извличане на подниз
+  \item \tt{compare(...)} --- сравнение с друг низ
+  \item \tt{copy(...)} --- копиране на символи от C++ низ
+  \end{itemize}
 \end{frame}
 
 \section{Кортежи}
@@ -101,15 +126,21 @@
   \frametitle{АТД: Наредена двойка}
 
   Двойка от елементи от потенциално различен тип, в която редът има значение.
+  \vspace{0.5em}
 
   Операции
+  \vspace{0.5em}
+
   \begin{itemize}
   \item \tt{create(a,b)} --- създава двойка от елементите \tt a и \tt b
   \item \tt{p.first} --- връща първия елемент на двойката
   \item \tt{p.second} --- връща втория елемент на двойката
   \end{itemize}
+  \vspace{0.5em}
 
   Свойства на операциите
+  \vspace{0.5em}
+
   \begin{itemize}
   \item \tt{create(a,b).first} = \tt a
   \item \tt{create(a,b).second} = \tt b
@@ -121,10 +152,10 @@
   \frametitle{Физическо представяне}
 
   \begin{center}
-    \begin{tabular}{|m{3ex}|m{5ex}|}
+    \begin{tabular}{|m{5ex}|m{8ex}|}
       \hline
       \rowcolor{blue!60!green!40}
-      \centering a&\centering b\\
+      a&b\\
       \hline
     \end{tabular}
   \end{center}
@@ -139,10 +170,40 @@
 
 \begin{frame}
   \frametitle{\tt{std::pair}}
+
+  Реализация на наредена двойка
+  \begin{itemize}
+  \item \tt{pair(x,y)} --- създаване на двойка (\tt x,\tt y)
+  \item \tt{first} --- първи елемент
+  \item \tt{second} --- втори елемент
+  \item \tt{==,!=,<,>,<=,>=} --- лексикорафско сравнение на две двойки
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{АТД: Кортеж}
+
+  Редица от фиксиран брой елементи от потенциално различен тип, в която редът има значение.
+  \vspace{0.5em}
+
+  Операции
+  \vspace{0.5em}
+
+  \begin{itemize}
+  \item \tt{create(...)} --- създаване на кортеж по единични елементи
+  \item \tt{get(i)} --- получаване на елемент с индекс/име \tt i
+  \item \tt{set(i,x)} --- задаване на стойност \tt x на елемента с индекс/име \tt i
+  \end{itemize}
+
+  Свойства на операциите
+  \vspace{0.5em}
+
+  \begin{itemize}
+  \item \tt{create(a$_1$,\ldots,a$_i$,\ldots,a$_n$).get(i)} = \tt{a$_i$}
+  \item \tt{t.set(i,x).get(i)} = \tt x
+  \item \tt{t.set(i,x).get(j)} = \tt{a.get(j)}, ако \tt{i $\neq$ j}
+  \end{itemize}
+  
 \end{frame}
 
 \end{document}
