@@ -3,7 +3,7 @@
 
 \title{Стек}
 
-\date{16 октомври 2015 г.}
+\date{23 октомври 2015 г.}
 
 \titlegraphic{\includegraphics[height=0.4\textheight]{images/stack.jpg}}
 
@@ -13,31 +13,172 @@
   \titlepage
 \end{frame}
 
+\section{АТД стек}
+
+\begin{frame}
+  \frametitle{АТД: стек}
+
+  Хомогенна линейна структура с организация ``последен влязъл --- пръв излязъл'' (LIFO)
+  \vspace{1em}
+
+  Операции
+  \vspace{0.5em}
+  \begin{itemize}
+  \item \tt{create()} --- създаване на празен стек
+  \item \tt{empty()} --- проверка за празнота на стек
+  \item \tt{push(x)} --- включване на елемент на стек
+  \item \tt{pop()} --- изключване на елемент от стек
+  \item \tt{top()} --- последен елемент на стека
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{АТД: стек}
+
+  Свойства на операциите
+  \vspace{0.5em}
+
+  \begin{itemize}
+  \item \tt{create().empty()} = \tt{true}
+  \item \tt{s.push(x).empty()} = \tt{false}
+  \item \tt{create().top()}, \tt{create().pop()} --- \alert{грешка}
+  \item \tt{s.push(x).top()} = \tt x
+  \item \tt{s.push(x).pop()} = \tt s
+  \end{itemize}
+\end{frame}
+
 \begin{frame}
   \frametitle{Последователно представяне}
-  \newcommand{\pha}{\phantom{$a_n$}}
+  \newcommand{\pha}{\phantom{$a_0$}}
 
   \begin{center}
-    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+    \begin{tabular}{|*{11}{c|}}
       \hline
-      $a_0$&$a_1$&$a_2$&\ldots&$a_n$&\pha&\pha&\pha&\pha&\pha&\pha\\
+      \rowcolor{diagramblue}
+      $a_0$&$a_1$&$a_2$&\ldots&$a_n$&\alt<1>\pha{$a_{n+1}$}&\pha&\pha&\pha&\pha&\pha\\
       \hline
-      \multicolumn{4}{c}{}&\multicolumn{1}{c}{\bigg\uparrow}&\multicolumn{6}{c}{}\\
-      \multicolumn{4}{c}{}&\multicolumn{1}{c}{top}&\multicolumn{6}{c}{}
+      \rowcolor{white}
+      \multicolumn 4c{}&
+      \multicolumn 1c{\onslide<1,3>{\bigg\uparrow}}&
+      \multicolumn 1c{\onslide<2>{\bigg\uparrow}}&
+      \multicolumn 5c{}\\
+      \multicolumn 4c{}&
+      \multicolumn 1c{\onslide<1,3>{top}}&
+      \multicolumn 1c{\onslide<2>{top}}&
+      \multicolumn 5c{}
     \end{tabular}
   \end{center}
+
+  \begin{itemize}
+    \item<2-> включване на елемент (push)
+    \item<3-> изключване на елемент (pop)
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Свързано представяне}
 
   \begin{center}
-    \begin{tabular}{ccc@{}c@{}cc}
-      \nextcell{a_n}&\nextcell{a_{n-1}}&\hspace{1ex}\ldots&$\nextarrow$&\nextcell{a_1}&\nilcell{a_0}\\
-      \bigg\uparrow&&&&&\\
-      top&&&&&
+    \scriptsize
+    \begin{tabular}{cccc@{}c@{}cc}
+      \onslide<2-4>{\nextcell{a_{n+1}}}&\nextcell{a_n}&\nextcell{a_{n-1}}&\hspace{1ex}\ldots&$\nextarrow$&\nextcell{a_1}&\nilcell{a_0}\\
+      \onslide<2-4>{\bigg\uparrow}&\onslide<1,4-5>{\bigg\uparrow}&\multicolumn 5c{}\\
+      \onslide<2-4>{\only<3-4>p\only<3>,\only<2-3>{top}}&\onslide<1,4-5>{top}&\multicolumn 5c{}
     \end{tabular}
   \end{center}
+
+  \begin{itemize}
+    \item<2-> включване на елемент (push)
+    \item<3-> изключване на елемент (pop)
+  \end{itemize}
+\end{frame}
+
+\section{Приложения на стек}
+
+\subsection{Пресмятане на израз}
+
+\begin{frame}
+  \frametitle{Обратен полски запис}
+
+  \begin{columns}[t,onlytextwidth]
+    \column{0.6\textwidth}
+
+    \begin{itemize}
+    \item инфиксен запис:\\
+      \tt{(1+2)*(3-4/5)}
+    \item префиксен (полски) запис:\\
+      \tt{*+12-3/45}
+    \item постфиксен (обратен полски) запис\\
+      \tt{12+345/-*}
+    \end{itemize}
+
+    \column{0.4\textwidth}
+    
+    \begin{center}
+      \begin{forest} for tree={circle,draw,fill=diagramblue}
+        [\tt* [\tt+ [\tt1] [\tt2]] [\tt- [\tt3] [\tt/ [\tt4] [\tt5]]]]
+      \end{forest}
+    \end{center}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Пресмятане на израз в обратен полски запис}
+
+  \begin{center}
+    \begin{tabular}{|p{20ex}p{25ex}@{}m{0pt}@{}}
+      \hline
+      \cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}обратен полски запис}&\\[5em]
+      \cline{2-3}
+      \multicolumn 1{|c|}{\cellcolor{diagramblue}резултати}&\multicolumn 1c{}&\\[5em]
+      \cline{1-1}
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Преобразуване на израз в обратен полски запис}
+
+  \begin{center}
+    \begin{tabular}{p{25ex}p{20ex}p{20ex}@{}m{0pt}@{}}
+      \hline
+      \multicolumn 1{|c}{\cellcolor{diagramblue}обратен полски запис}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}инфиксен запис}&\\[5em]
+      \cline{1-1} \cline{3-3}
+      \multicolumn 1c{}&\multicolumn 1{|c|}{\cellcolor{diagramblue}операции}&\multicolumn 1c{}&\\[5em]
+      \cline{2-2}
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Директно пресмятане на израз}
+
+  \begin{center}
+    \begin{tabular}{|p{20ex}p{5ex}p{20ex}p{20ex}@{}m{0pt}@{}}
+      \hline
+      \cellcolor{diagramblue}&\cellcolor{diagramblue}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}инфиксен запис}&\\[5em]
+      \cline{2-2} \cline{4-4}
+      \multicolumn 1{|c|}{\cellcolor{diagramblue}резултати}&\multicolumn 1c{}&\multicolumn 1{|c|}{\cellcolor{diagramblue}операции}&\multicolumn 1c{}&\\[5em]
+      \cline{1-1} \cline{3-3}
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\subsection{Симулиране на рекурсия}
+
+\begin{frame}
+  \frametitle{Симулиране на рекурсия}
+
+  \begin{itemize}
+  \item Стекова рамка
+    \begin{itemize}
+    \item при извикване на функция
+    \item при рекурсия
+    \end{itemize}
+  \item Стек вместо стекова рамка
+  \item Пример: ход на коня
+  \end{itemize}
 \end{frame}
 
 \end{document}
