@@ -1,17 +1,40 @@
-% стандартни пакети
+%%% стандартни пакети
+
+% поддръжка на български език
 \usepackage[T2A]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{hyperref}
 \usepackage[english,bulgarian]{babel}
+
+% поддръжка на линкове
+\usepackage{hyperref}
+
+% дървета
+\usepackage{forest}
+
+% коментари
+\usepackage{comment}
+
+% вертикално сливане на клетки от повече от един ред
 \usepackage{multirow}
+
+% цветни таблици
 \usepackage{colortbl}
+
+% вертикално подравняване на \includegraphics
 \usepackage[export]{adjustbox}
+
+% математически символи
 \usepackage{amsmath}
 
-% кратки команди за форматиране
+%%% кратки команди за форматиране
+
+% код
 \renewcommand{\tt}{\texttt}
 
-% настройки общи за всички слайдове
+% по-приличен pause (за математика и таблици)
+\newcommand{\nxt}[1]{\visible<+->{#1}}
+
+%%% настройки общи за всички слайдове
 \mode<presentation>
 {
   \usetheme{CambridgeUS}
@@ -22,20 +45,32 @@
 спец. Компютърни науки, 2 поток, 2015/16 г.}
 \subject{LectureSlides}
 
-% среди
+%%% среди
+
+% таблица от битове
 \newenvironment{bittable}{%
   \setlength{\tabcolsep}{4pt}
-  \begin{tabular}{ccccccccc}
+  \begin{tabular}{*9c}
 }{%
   \end{tabular}
 }
 
-% диаграми
+%%% макроси
+
+%% диаграми
+
+% стрелка напред, сочеща следваща клетка
 \newcommand{\nextarrow}{\xrightarrow{\hspace{5ex}}}
+
+% двойна кутия за свързани структури
 \newcommand{\dualcell}[2]{\begin{tabular}{|c|c|}
                             \hline
                             $#1$&$#2$\\
                             \hline
                           \end{tabular}}
+
+% двойна кутия със указател към следващата
 \newcommand{\nextcell}[1]{\dualcell{#1}{\nextarrow\hspace{-4ex}}}
+
+% двойна кутия без указател към следващата
 \newcommand{\nilcell}[1]{\dualcell{#1}{\cellcolor{lightgray}\hspace{2ex}}}
