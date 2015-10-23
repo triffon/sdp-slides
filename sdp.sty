@@ -26,6 +26,9 @@
 % математически символи
 \usepackage{amsmath}
 
+% шахматни символи
+\usepackage{chessfss}
+
 %%% кратки команди за форматиране
 
 % код
@@ -78,3 +81,15 @@
 
 % двойна кутия без указател към следващата
 \newcommand{\nilcell}[1]{\dualcell{#1}{\cellcolor{lightgray}\hspace{2ex}}}
+
+% шахматна дъска 4x4
+\newenvironment{chessboard}{\begin{tabular}{|*4{m{1ex}|}@{}c@{}}}{\end{tabular}}
+
+% бяло квадратче на шахматна дъска
+\newcommand{\ws}{\phantom\BlackKnightOnWhite}
+
+% черен кон
+\newcommand{\bk}{\BlackKnightOnWhite}
+
+% черен код на слайд с даден номер
+\newcommand{\bks}[1]{\alt<#1>\bk\ws}
