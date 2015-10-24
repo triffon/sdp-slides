@@ -91,5 +91,11 @@
 % черен кон
 \newcommand{\bk}{\BlackKnightOnWhite}
 
+% бял кон
+\newcommand{\wk}{\WhiteKnightOnWhite}
+
 % черен код на слайд с даден номер
-\newcommand{\bks}[1]{\alt<#1>\bk\ws}
+\newcommand{\bks}[1]{\temporal<#1>\ws\bk\wk}
+
+% покажи засивен текст
+\newcommand{\gc}[2]{\onslide<#1>{\textcolor{gray}{#2}}}
