@@ -3,13 +3,7 @@
 *.log
 *.nav
 *.out
-array.pdf
-bitwise.pdf
-datastruct.pdf
-files.pdf
-org.pdf
-stack.pdf
-streams.pdf
+*.pdf
 *.snm
 *.toc
 *.vrb
