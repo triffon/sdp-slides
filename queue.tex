@@ -84,8 +84,8 @@
   \end{center}
 
   \begin{itemize}
-    \item<2-> включване на елемент (enqueue)
-    \item<3-> изключване на елемент (dequeue)
+    \item<2-> изключване на елемент (dequeue)
+    \item<3-> включване на елемент (enqueue)
   \end{itemize}
 \end{frame}
 
@@ -208,6 +208,38 @@
 \item Всяка от получените две опашки сортираме рекурсивно.
 \item Сливаме двете сортирани опашки в една.
 \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Метод на вълната}
+
+  \scriptsize
+  \begin{center}
+    \begin{chessboard}{10}{0.5ex}
+      \hline
+      \empty&\empty&\empty&\empty&\wave8\empty&\wave7\empty&\wave6\empty&\wave7\empty&\wave8\empty&\empty&\\
+      \hline
+      \empty&\empty&\noway&\empty&\empty&\noway&\wave5\empty&\wave6\empty&\wave7\empty&\wave8\empty&\\
+      \hline
+      \empty&\empty&\noway&\empty&\empty&\noway&\wave4\empty&\wave5\empty&\wave6\empty&\noway&\\
+      \hline
+      \empty&\empty&\empty&\empty&\noway&\wave2\empty&\wave3\empty&\wave4\empty&\noway&\empty&\\
+      \hline
+      \empty&\empty&\empty&\noway&\wave2\empty&\wave1\empty&\wave2\empty&\noway&\empty&\empty&\\
+      \hline
+      \noway&\empty&\empty&\noway&\wave3\empty&\wave2\empty&\noway&\empty&\empty&\noway&\\
+      \hline
+      \noway&\noway&\empty&\noway&\noway&\wave3\empty&\noway&\noway&\empty&\empty&\\
+      \hline
+      \empty&\empty&\noway&\wave6\empty&\wave5\empty&\wave4\empty&\noway&\empty&\empty&\noway&\\
+      \hline
+      \empty&\empty&\wave8\empty&\wave7\empty&\wave6\empty&\wave5\empty&\noway&\empty&\empty&\empty&\\
+      \hline
+      \empty&\empty&\empty&\noway&\wave7\empty&\wave6\empty&\wave7\empty&\wave8\empty&\noway&\empty&\\
+      \hline
+      \multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&
+    \end{chessboard}
+  \end{center}
 \end{frame}
 
 \section{STL}
