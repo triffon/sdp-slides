@@ -246,43 +246,37 @@
   \end{tikzpicture}}
 \end{frame}
 
-% \begin{frame}
-%   \frametitle{Ход на коня --- най-кратък път}
-%   \setboardfontsize{12pt}
-%   \def\arraystretch{0}
-%   \begin{tabular}{|@{}c@{}|@{}c@{}|}
-%     \hline
-%     \BlackKnightOnWhite & \BlackKnightOnWhite\\
-%     \hline
-%     \BlackKnightOnWhite & \BlackKnightOnWhite\\
-%     \hline
-%   \end{tabular}
-%     \def\arraystretch{0}
-%   \begin{chessboard}{10}{0.5ex}
-%     \hline
-%     \bks1&\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\\
-%     \hline
-%     \ws  &\ws  &\bks2&\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\\
-%     \hline
-%     \ws  &\bks2&\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\\
-%     \hline
-%     \ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\\
-%     \hline
-%     \ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\\
-%     \hline
-%     \ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\\
-%     \hline
-%     \ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\\
-%     \hline
-%     \ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\\
-%     \hline
-%     \ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\\
-%     \hline
-%     \ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\\
-%     \hline
-%     \multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&\multicolumn 1c\empty&
-%   \end{chessboard}
-% \end{frame}
+\begin{frame}
+  \frametitle{Ход на коня --- най-кратък път}
+  \setboardfontsize{16pt}
+  
+  \def\arraystretch{0}
+  \begin{center}
+    \begin{tabular}{|*{10}{@{}c@{}|}@{}c@{}}
+      \hline
+      \bkn1&\bkn4&\bkn3&\bkn4&\bkn3&\bkn4&\bkn5&\ws  &\bkn5&\ws  &\\
+      \hline
+      \bkn4&\bkn5&\bkn2&\bkn5&\bkn4&\bkn5&\bkn4&\bkn5&\ws  &\ws  &\\
+      \hline
+      \bkn3&\bkn2&\bkn5&\bkn4&\bkn3&\bkn4&\bkn5&\ws  &\bkn5&\ws  &\\
+      \hline
+      \bkn4&\bkn5&\bkn4&\bkn3&\bkn4&\bkn5&\bkn4&\bkn5&\ws  &\ws  &\\
+      \hline
+      \bkn3&\bkn4&\bkn3&\bkn4&\bkn5&\bkn4&\bkn5&\ws  &\bkn5&\ws  &\\
+      \hline
+      \bkn4&\bkn5&\bkn4&\bkn5&\bkn4&\bkn5&\ws  &\bkn5&\ws  &\ws  &\\
+      \hline
+      \bkn5&\bkn4&\bkn5&\bkn4&\bkn5&\ws  &\bkn5&\ws  &\ws  &\ws  &\\
+      \hline
+      \ws  &\bkn5&\ws  &\bkn5&\ws  &\bkn5&\ws  &\ws  &\ws  &\ws  &\\
+      \hline
+      \bkn5&\ws  &\bkn5&\ws  &\bkn5&\ws  &\ws  &\ws  &\ws  &\ws  &\\
+      \hline
+      \ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{frame}
 
 \section{STL}
 
