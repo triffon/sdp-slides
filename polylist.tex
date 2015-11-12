@@ -35,7 +35,15 @@
 
 \begin{frame}
   \frametitle{Физическо представяне}
-  \includegraphics[width=\textwidth]{images/polylist_example.png}
+  \newcommand{\pha}{\hspace{2ex}}
+  \newcommand{\classA}{\cbox{red}{\mystrut(2.5em,2em)Клас A}}
+  \newcommand{\classB}{\cbox{green}{\mystrut(1.5em,1em)Клас B}}
+  \newcommand{\classC}{\cbox{yellow}{\mystrut(2em,1.5em)Клас C}}
+  \begin{tabular}{*6l}
+    \nextcell\pha&\nextcell\pha&\nextcell\pha&\ldots&\nextcell\pha&\nilcell\pha\\
+    \bda&\bda&\bda&&\bda&\bda\\[-9pt]
+    \classA&\classB&\classC&&\classB&\classA
+  \end{tabular}
 \end{frame}
 
 \begin{frame}

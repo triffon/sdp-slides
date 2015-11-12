@@ -113,6 +113,9 @@
 % голяма стрелка нагоре (указател)
 \newcommand{\bua}{\bigg\uparrow}
 
+% голяма стрелка надолу (указател)
+\newcommand{\bda}{\bigg\downarrow}
+
 % непроходимо квадратче
 \newcommand{\noway}{$\bigotimes$}
 
@@ -121,3 +124,9 @@
 
 % пореден гребен на вълната
 \newcommand{\wave}[1]{\alt<#1->{#1}\empty}
+
+% разпъвач
+\def\mystrut(#1,#2){\vrule height #1 depth #2 width 0pt}
+
+% цветна клетка
+\newcommand{\cbox}[2]{\begin{tabular}[t]{|c|}\hline \rowcolor{#1} #2 \\\hline\end{tabular}}
