@@ -48,7 +48,7 @@
   \end{center}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[label=doublelinked]
   \frametitle{Двусвързано представяне}
 
   \begin{center}
@@ -88,38 +88,102 @@
   \frametitle{Итератор: физическо представяне}
 
   \begin{itemize}
-  \item при свързано представяне --- указател към двойна кутия
+  \item при свързано представяне --- указател към двойна или тройна кутия
   \item при последователно представяне --- индекс на пореден елемент
   \end{itemize}
 \end{frame}
-\end{document}
+
+\begin{frame}
+  \frametitle{Достъп до производен клас на шаблон}
+
+  \textbf{Проблем:} Какъв резултат трябва да връщат операциите \tt{++}, преместващи итераторите?\\[1em]
+  \begin{itemize}
+  \item \tt{Iterator\& operator++();}
+    \begin{itemize}
+    \item връщаме псевдоним към обект от абстрактен клас, ОК
+    \end{itemize}
+  \item\tt{Iterator operator++(int);}
+    \begin{itemize}
+    \item връщаме обект от абстрактен клас, \alert{грешка!}
+    \end{itemize}
+  \end{itemize}
+  \vspace{1em}
+  \pause
+  Трябва абстрактният базов клас да знае кой е конкретния му наследник! Възможно ли е това?\\[1em]
+  \pause
+  \alert{Да! Базовият клас трябва да е \textbf{шаблон, приемащ производния си клас за параметър}}
+\end{frame}
+
+\begin{frame}[fragile,fragile]
+  \frametitle{Curiously Recurring Template Pattern (CRTP)}
+
+\begin{verbatim}
+template <typename Derived>
+class Base {
+  ...
+};
+
+class Derived : public Base<Dervived> {
+  ...
+};
+\end{verbatim}
+  По този начин шаблонът \tt{Base} може да се обръща към наследяващия го клас.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Решение на проблема с \tt{operator++}}
+\begin{semiverbatim}
+template <typename T, \alert{typename ConcreteIterator}>
+class Iterator \{
+  ...
+  \alert{ConcreteIterator} operator++(int) \{
+    ConcreteIterator save = *this;
+    ++(*this);
+    return save;
+  \}
+\};
+
+template <typename T>
+class LinkedListIterator :
+         public Iterator<T, \alert{LinkedListIterator<T>} > \{
+  ...
+\};
+\end{semiverbatim}
+\end{frame}
+
 \section{Приложения на списъци}
 
 \begin{frame}
   \frametitle{Задачи за списъци}
 
-  \textbf{Задача.} Да се залепи на края на даден списък втори даден списък.
-  \vspace{3em}
+  \textbf{Задача.} Да се залепи на края на даден списък втори даден списък.\\[1em]
   \pause
-
-  \textbf{Задача.} Да се обърне реда на елементите в даден списък.
+  \textbf{Решение №1 (абстрактно):} \visible<4->{\alert{O(n)}}\\
+  Добавяме елементите на втория списък на края на първия.\\[1em]
+  \pause
+  \textbf{Решение №2 (конкретно):} \visible<4->{\alert{O(1)}}\\
+  Завързваме началото на втория списък за края на първия.\\[1em]
+  \pause\pause
+  \textbf{Задача.} Да се обърне реда на елементите в даден списък.\\[1em]
+  \pause
+  \textbf{Решение №1 (абстрактно):}\\
+  Преместваме последователно елементите след първия елемент на списъка в началото на списъка.\\[1em]
+  \pause
+  \textbf{Решение №2 (конкретно):}\\
+  Разместване на указателите ``на място''.
 \end{frame}
 
 \begin{frame}
   \frametitle{Сортиране чрез сливане}
 
-  \textbf{Задача.} Да се раздели даден списък на два други с приблизително равна дължина.
-  \vspace{1em}
+  \textbf{Задача.} Да се раздели даден списък на два други с приблизително равна дължина.\\[1em]
   \pause
-
-  \textbf{Задача.} Да се слеят два списъка, подредени във възходящ ред, в един.
-  \vspace{1em}
+  \textbf{Задача.} Да се слеят два възходящо подредени списъка в един.
   \pause
-
-  \textbf{Задача.} Да се сортира дадена списък чрез сливане.
-  \vspace{1em}
+  \textbf{Решение:} Винаги избираме по-малкия елемент от двата списъка.\\[1em]
   \pause
-
+  \textbf{Задача.} Да се сортира дадена списък чрез сливане.\\
+  \pause
   \textbf{Решение:}
   \begin{enumerate}
   \item Разделяме дадения списък на две.
@@ -169,10 +233,30 @@
   \textbf{Задача.} Да се намери произведението от най-малките положителни елементи на списък от списъци от числа.
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{$\lambda$-функции в C++11}
+  \begin{itemize}[<+->]
+  \item \tta{[](}<параметри>\tta{) -> }<тип> \tta{\{}<тяло>\tta{\}}
+  \item създава анонимна ($\lambda$) функция със сигнатура:\\
+    <тип> $\lambda$\tt(<параметри>\tt{) \{}<тяло>\tt\}
+  \item типът на израза е указател към функция с горната сигнатура, т.е.\\
+    <тип> \tt{(*)(}<параметри>\tt{) \{}<тяло>\tt\}
+  \item Примери:
+  \item \verb|map([](int x) -> int { return x * x; }, l)|
+  \item \verb|foldr([](int x, int y) -> int { return x + y; }, 0, l)|
+  \end{itemize}
+\end{frame}
+
+\section{Двусвързан списък}
+
+\againframe{doublelinked}
+
 \begin{frame}
   \frametitle{Задачи за двусвързан списък}
 
-  \textbf{Задача.} Да се провери дали даден двусвързан списък е палиндром.
+  \textbf{Задача.} Да се провери дали даден двусвързан списък е палиндром.\\[1em]
+  \pause
+  \textbf{Решение:} Обхождаме едновременно в двете посоки.
 \end{frame}
 
 \end{document}
