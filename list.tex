@@ -137,7 +137,7 @@ template <typename T, \alert{typename ConcreteIterator}>
 class Iterator \{
   ...
   \alert{ConcreteIterator} operator++(int) \{
-    ConcreteIterator save = *this;
+    ConcreteIterator save = (ConcreteIterator&)*this;
     ++(*this);
     return save;
   \}
@@ -149,6 +149,8 @@ class LinkedListIterator :
   ...
 \};
 \end{semiverbatim}
+\pause
+Експлицитното преобразуване на типа се налага, понеже \tt{*this} е от тип \tt{Iterator\&}, а конструкторът за копиране на \tt{ConcreteIterator} очаква тип \tt{ConcreteIterator\&}.
 \end{frame}
 
 \section{Приложения на списъци}
@@ -222,7 +224,7 @@ class LinkedListIterator :
     \end{equation*}
   \end{itemize}
 \end{frame}
-
+\end{document}
 \begin{frame}
   \frametitle{Задачи за функции от по-висок ред}
 
