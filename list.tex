@@ -259,4 +259,25 @@ class LinkedListIterator :
   \textbf{Решение:} Обхождаме едновременно в двете посоки.
 \end{frame}
 
+\begin{frame}
+  \frametitle{\tt{std::list}}
+  \small
+  Реализацията на \tt{std::list} в STL е двусвързана.
+  \begin{itemize}
+  \item \tt{front()}, \tt{back()} --- първи и последен елемент
+  \item \tt{begin()}, \tt{end()} --- итератори към началото и края
+  \item \tt{rbegin()}, \tt{rend()} --- итератори за обратно обхождане
+  \item \tt{push\_front()}, \tt{push\_back()} --- вмъкване в началото/края
+  \item \tt{pop\_front()}, \tt{pop\_back()} --- изтриване от началото/края
+  \item \tt{insert()}, \tt{erase()} --- вмъкване/изтриване на позиция
+  \item \tt{splice()} --- прехвърляне на елементи от един списък в друг
+  \item \tt{remove()}, \tt{remove\_if()} --- филтриране по стойност/условие
+  \item \tt{unique()} --- изтриване на повторения
+  \item \tt{merge()} --- сливане на подредени списъци
+  \item \tt{sort()} --- сортиране на списък (на място)
+  \item \tt{reverse()} --- обръщане на списък
+  \item \tt{==,!=,<,>,<=,>=} --- лексикорафско сравнение на два списъка
+  \end{itemize}
+\end{frame}
+
 \end{document}
