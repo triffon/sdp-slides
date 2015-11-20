@@ -224,7 +224,7 @@ class LinkedListIterator :
     \end{equation*}
   \end{itemize}
 \end{frame}
-\end{document}
+
 \begin{frame}
   \frametitle{Задачи за функции от по-висок ред}
 
@@ -239,10 +239,10 @@ class LinkedListIterator :
   \frametitle{$\lambda$-функции в C++11}
   \begin{itemize}[<+->]
   \item \tta{[](}<параметри>\tta{) -> }<тип> \tta{\{}<тяло>\tta{\}}
-  \item създава анонимна ($\lambda$) функция със сигнатура:\\
+  \item създава анонимна ($\lambda$) функция, дефинирана като:\\
     <тип> $\lambda$\tt(<параметри>\tt{) \{}<тяло>\tt\}
-  \item типът на израза е указател към функция с горната сигнатура, т.е.\\
-    <тип> \tt{(*)(}<параметри>\tt{) \{}<тяло>\tt\}
+  \item типът на израза е специален системен клас \tt{ClosureType}, който има операция за преобразуване на типа до указател към функция с горната сигнатура, т.е.\\
+    <тип> \tt{(*)(}<параметри>\tt{);}
   \item Примери:
   \item \verb|map([](int x) -> int { return x * x; }, l)|
   \item \verb|foldr([](int x, int y) -> int { return x + y; }, 0, l)|
@@ -274,7 +274,6 @@ class LinkedListIterator :
   \item \tt{insert()}, \tt{erase()} --- вмъкване/изтриване на позиция
   \item \tt{splice()} --- прехвърляне на елементи от един списък в друг
   \item \tt{remove()}, \tt{remove\_if()} --- филтриране по стойност/условие
-  \item \tt{unique()} --- изтриване на повторения
   \item \tt{merge()} --- сливане на подредени списъци
   \item \tt{sort()} --- сортиране на списък (на място)
   \item \tt{reverse()} --- обръщане на списък
