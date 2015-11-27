@@ -84,10 +84,10 @@
       a    &  a$_1$  & a$_{1,1}$&  a$_2$  &a$_{1,2}$ &  a$_3$  &a$_{3,1}$&a$_{3,2}$ &a$_{3,3}$ & \ldots\\
       \hline
       най-ляво дете &
-      1    &    2    &   -1    &    5    &   -1    &    9    &   -1    &   -1    &   -1    &  \ldots\\
+      1    &    2    &   -1    &    -1   &   -1    &    6    &   -1    &   -1    &   -1    &  \ldots\\
       \hline
       десен брат &
-      -1   &    3    &    4    &    -1   &   -1    &    6    &    7    &    8    &   -1    &  \ldots\\
+      -1   &    3    &    4    &    5    &   -1    &    9    &    7    &    8    &   -1    &  \ldots\\
       \hline
     \end{tabular}
   \end{center}
@@ -172,7 +172,7 @@
   Дефинициите за коренови дървета и $n$-арни дървета не са еквивалентни!\\[2em]
   \begin{center}
     \begin{forest}
-      default,align={top} [1 [2] [,phantom] [3]]
+      default [1 [2] [,phantom] [3]]
     \end{forest}
     $\qquad\neq\qquad$
     \begin{forest}
@@ -235,6 +235,43 @@
       \hline
     \end{tabular}
   \end{center}
+\end{frame}
+\end{document}
+\begin{frame}
+  \frametitle{Дървесни итератори}
+  Дървесният итератор абстрахира позиция в дървото.\\[1em]
+  Операции:
+  \begin{itemize}
+  \item \tt{root()} --- инициализация в корена на дървото
+  \item \tt{left()} --- преместване наляво
+  \item \tt{right()} --- преместване надясно
+  \item \tt{up()} --- преместване нагоре
+  \item \tt{get()} --- достъп до елемент на дадената позиция
+  \item \tt{valid()} --- проверка за валидност
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Псевдоними на стойности в C++11}
+  \begin{itemize}[<+->]
+  \item \verb|T&&| --- псевдоним на стойност от тип \tt T
+    \begin{itemize}
+    \item rvalue reference
+    \end{itemize}
+  \item разлика с \verb|T&|: може да се свърза със стойности (rvalue)
+    \begin{itemize}
+    \item \verb|int&  x = 3;| --- \alert{грешка}
+    \item \verb|int&& x = 3;| --- ОК
+    \end{itemize}
+  \item разлика с \verb|T const&|: може да променя стойността
+    \begin{itemize}
+    \item \verb|Point p = Point(1,2); p.x = 3;| --- променя се копието
+    \item \tt{Point const\& p = Point(1,2); \alert{p.x = 3;}} --- \alert{грешка}
+    \item \tt{\alert{Point\& p = Point(1,2);} p.x = 3;} --- \alert{грешка}
+    \item \verb|Point&& p = Point(1,2); p.x = 3;| --- ОК
+    \end{itemize}
+  \item използва се за ефективност: вместо \alert{копиране} на данните от временна стойност, може да се извърши \alert{преместване}
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
