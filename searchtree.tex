@@ -1,0 +1,163 @@
+\documentclass{beamer}
+\usepackage{sdp}
+
+\title{Дървета за търсене}
+
+\date{4 декември 2015 г.}
+
+\titlegraphic{\includegraphics[height=0.35\textheight]{images/searchtree.png}}
+
+\forestset{default/.style={baseline,for tree={fill=diagramblue,draw,circle,inner
+      sep=0pt,minimum size=4ex,edge=->}}}
+
+\forestset{scheme/.style=default,for tree={minimum size=6ex}}
+
+\forestset{tri/.style={shape=isosceles triangle,shape border rotate=90,minimum height=6em,child anchor=north,anchor=north}}
+
+\forestset{trismall/.style={tri,minimum height=4em}}
+
+\forestset{remove/.style={tikz={\draw[thick,red] (!.north west) -- (!.south east); \draw[thick,red] (!.north east) -- (!.south west);}}}
+
+\forestset{removesmall/.style={tikz={\draw[thick,red] (!.north west)++(1.5ex,1.5ex) -- ++(3ex,-3ex); \draw[thick,red] (!.north west)++(4.5ex,1.5ex) -- ++(-3ex,-3ex); \node at (!.north west) [xshift=3ex,circle,draw,inner sep=0.2ex]{Y};}}}
+
+\newcommand{\samplebinordtree}{%
+  \begin{forest}
+    default [5 [3 [2 [1] [,phantom]] [4]] [8 [6 [,phantom] [7] ] [10]]]
+  \end{forest}%
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Дървета за търсене}
+  \begin{itemize}
+  \item Организация, която позволява бързо намиране на елементи в дървото
+  \item Разчита на \textbf{линейна наредба} на елементите
+  \item Основни операции:
+    \begin{itemize}
+    \item \tt{create()} --- създаване на празно дърво за търсене
+    \item \tt{insert(x)} --- включване на елемент
+    \item \tt{remove(x)} --- изключване на елемент
+    \item \tt{search(x)} --- търсене на елемент
+    \end{itemize}
+  \item Обикновено елементите са двойки (ключ,стойност)
+  \item Елементите са наредени относно ключовете си
+  \item Стойностите носят данните на елемента
+  \end{itemize}
+\end{frame}
+
+\section{Двоично дърво за търсене}
+
+\begin{frame}
+  \frametitle{Двоично дърво за търсене}
+  \begin{definition}[Двоично дърво за търсене]
+    \begin{itemize}
+    \item Празното дърво $\bot$ е ДДТ
+    \item $(X,L,R)$ е ДДТ, ако
+      \begin{itemize}
+      \item $X$ е по-голямо от от всички елементи в $L$
+      \item $X$ е по-малко от от всички елементи в $R$
+      \item $L$ и $R$ също са ДДТ
+      \end{itemize}
+    \end{itemize}
+  \end{definition}
+  \pause
+  Пример:
+  \vspace{-1em}
+  \begin{center}
+    \small
+    \samplebinordtree
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Търсене на елемент}
+  \begin{center}
+    \begin{forest}
+      scheme [{=X} [<X,tri] [>X,tri]]
+    \end{forest}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Включване на елемент}
+  \small
+  \begin{columns}[t,onlytextwidth]
+    \begin{column}{0.3\textwidth}
+      \begin{forest}
+        scheme
+        [X [Y<X,anchor=north] [,tri]]
+      \end{forest}
+    \end{column}
+    \pause
+    \begin{column}{0.3\textwidth}
+      \begin{forest}
+        scheme
+        [X [,tri] [Y>X,anchor=north]]
+      \end{forest}
+    \end{column}
+    \pause
+    \begin{column}{0.4\textwidth}
+      \begin{forest}
+        scheme
+        [X [<X,tri] [>X,tri]]
+        \node at (!1.center) [yshift=3.5ex,xshift=-0.4ex,inner sep=0.2ex,draw,circle]{Y};
+        \node at (!2.center) [yshift=4.1ex,xshift=0.8ex,inner sep=0.2ex,draw,circle]{Y};
+      \end{forest}
+    \end{column}    
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Изключване на елемент}
+  \small
+  \begin{columns}[t,onlytextwidth]
+    \begin{column}{0.3\textwidth}
+      \begin{forest}
+        scheme
+        [\textbf{Y},remove [,tri,phantom] [,tri]]
+      \end{forest}
+    \end{column}
+    \pause
+    \begin{column}{0.3\textwidth}
+      \begin{forest}
+        scheme
+        [\textbf{Y},remove [,tri] [,tri,phantom]]
+      \end{forest}
+    \end{column}
+    \pause
+    \begin{column}{0.4\textwidth}
+      \begin{forest}
+        scheme
+        [X [<X,tri,removesmall] [>X,tri,removesmall]]
+      \end{forest}
+    \end{column}    
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Изключване на елемент --- общ случай}
+  \small
+  \begin{columns}[t,onlytextwidth]
+    \begin{column}{0.5\textwidth}
+      \begin{forest}
+        scheme
+        [\textbf{Y},remove [<Y<M,tri] [>M,tri,parent anchor=south west [M [,trismall,phantom] [>M\\<M',align=center,trismall]] [,tri,phantom]]]
+      \end{forest}
+    \end{column}
+    \pause
+    \begin{column}{0.5\textwidth}
+      \begin{forest}
+        scheme
+        [M [<M,tri] [>M,tri,parent anchor=south west [>M\\<M',align=center,trismall] [,trismall,phantom]]]
+      \end{forest}
+    \end{column}    
+  \end{columns}
+\end{frame}
+
+
+\end{document}
