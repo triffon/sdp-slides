@@ -3,7 +3,7 @@
 
 \title{Дървета за търсене}
 
-\date{4 декември 2015 г.}
+\date{11 декември 2015 г.}
 
 \titlegraphic{\includegraphics[height=0.35\textheight]{images/searchtree.png}}
 
@@ -25,6 +25,8 @@
     default [5 [3 [2 [1] [,phantom]] [4]] [8 [6 [,phantom] [7] ] [10]]]
   \end{forest}%
 }
+
+\includeonlyframes{current}
 
 \begin{document}
 
@@ -159,5 +161,129 @@
   \end{columns}
 \end{frame}
 
+\section{Балансирани дървета}
 
+\begin{frame}
+  \frametitle{Оптимална височина на дърво}
+  Сложността на всички операции за двоично дърво до търсене е $O(h)$, където $h$ е височината на дървото.\\[1em]
+  Знаем, че $\log_2 (n+1) \leq h \leq n$.
+  \begin{itemize}
+  \item $h = n \leftrightarrow $ дървото е изродено до списък
+  \item $h = \log_2(n+1)$, когато дървото е пълно
+  \item \alert{само тогава ли?}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Балансирано дърво}
+  \begin{definition}[Балансирано дърво]
+    \begin{itemize}
+    \item Празното дърво $\bot$ е балансирано
+    \item $(X,L,R)$ е балансирано, ако
+      \begin{itemize}
+      \item $|h(L) - h(R)| \leq 1$
+      \item<alert@2> $L$ и $R$ също са балансирани
+      \end{itemize}
+    \end{itemize}
+  \end{definition}
+  \pause
+  \small
+  \begin{columns}[t]
+    \begin{column}{0.5\textwidth}
+      \begin{center}
+        \begin{forest}
+          default [1 [2 [3 [4] [,phantom]] [,phantom]] [5 [,phantom]
+          [6]]]
+        \end{forest}
+      \end{center}
+    \end{column}
+    \pause
+    \begin{column}{0.5\textwidth}
+      \begin{center}
+        \begin{forest}
+          default [1 [2 [3] [4]] [5 [,phantom] [6]]]
+        \end{forest}
+      \end{center}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Оптимална височина на балансирано дърво}
+  \begin{theorem}
+    За балансирани дървета височината е възможно най-малка\pause, т.е. $h = \lceil log_2 (n+1) \rceil$.
+  \end{theorem}
+  \pause
+  \alert{Обратното вярно ли е?}\\[1em]
+  \pause
+  Не!
+  \begin{forest}
+    default
+    [1 [2 [3] [4]] [,phantom]]
+  \end{forest}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Идеално балансирано дърво}
+  \begin{definition}[Идеално балансирано дърво]
+    \begin{itemize}
+    \item Празното дърво $\bot$ е идеално балансирано
+    \item $(X,L,R)$ е идеално балансирано, ако
+      \begin{itemize}
+      \item $|s(L) - s(R)| \leq 1$, където $s(T)$ означава броя на възлите в $T$
+      \item $L$ и $R$ също са идеално балансирани
+      \end{itemize}
+    \end{itemize}
+  \end{definition}
+  \pause
+  Пример:
+  \begin{center}
+    \begin{forest}
+      default [1 [2 [3] [4]] [5 [,phantom] [6]]]
+    \end{forest}
+  \end{center}
+\end{frame}  
+
+\begin{frame}
+  \frametitle{Балансирани и идеално балансирани дървета}
+  Каква е връзката между балансирани и идеално балансирани дървета?
+  \pause
+  \begin{theorem}
+    Всяко идеално балансирано дърво е балансирано.
+  \end{theorem}
+  \pause
+  \begin{proof}
+    Индукция по височината на дървото.
+  \end{proof}
+  \pause
+  \alert{Обратното вярно ли е?}
+  \pause
+  Не:
+  \begin{forest}
+    default [1 [2 [3] [4]] [5]]
+  \end{forest}
+\end{frame}
+
+\begin{frame}[label=current]
+  \frametitle{Построяване на идеално балансирано дърво}
+  По даден сортиран списък можем да построим идеално балансирано двоично дърво за търсене.\\[1em]
+  Строим рекурсивно:
+  \begin{itemize}
+  \item Избираме за корен $X$ ``средния'' елемент на списъка
+  \item Лявото поддърво строим от подсписъка вляво от ``средния'' елемент
+  \item Дясното поддърво строим от подсписъка вдясно от ``средния'' елемент
+  \item Двата подсписъка имат приблизително равни дължини
+  \item Рекурсията ни гарантира идеална балансираност
+  \end{itemize}
+  \begin{center}
+    \renewcommand{\m}{\cellcolor{red!60}}
+    \renewcommand{\l}{\cellcolor{green!60}}
+    \renewcommand{\r}{\cellcolor{blue!60}}
+    \begin{tabular}{*{12}{|c}|}
+      \hline
+      \l1&\l2&\l3&\l4&\l5&\l6&\m7&\r8&\r9&\r10&\r11&\r12\\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{frame}
 \end{document}
