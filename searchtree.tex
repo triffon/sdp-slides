@@ -26,8 +26,6 @@
   \end{forest}%
 }
 
-\includeonlyframes{current}
-
 \begin{document}
 
 \begin{frame}
@@ -110,7 +108,7 @@
         \node at (!1.center) [yshift=3.5ex,xshift=-0.4ex,inner sep=0.2ex,draw,circle]{Y};
         \node at (!2.center) [yshift=4.1ex,xshift=0.8ex,inner sep=0.2ex,draw,circle]{Y};
       \end{forest}
-    \end{column}    
+    \end{column}
   \end{columns}
 \end{frame}
 
@@ -137,7 +135,7 @@
         scheme
         [X [<X,tri,removesmall] [>X,tri,removesmall]]
       \end{forest}
-    \end{column}    
+    \end{column}
   \end{columns}
 \end{frame}
 
@@ -157,7 +155,7 @@
         scheme
         [M [<M,tri] [>M,tri,parent anchor=south west [>M\\<M',align=center,trismall] [,trismall,phantom]]]
       \end{forest}
-    \end{column}    
+    \end{column}
   \end{columns}
 \end{frame}
 
@@ -242,7 +240,7 @@
       default [1 [2 [3] [4]] [5 [,phantom] [6]]]
     \end{forest}
   \end{center}
-\end{frame}  
+\end{frame}
 
 \begin{frame}
   \frametitle{Балансирани и идеално балансирани дървета}
@@ -264,7 +262,7 @@
   \end{forest}
 \end{frame}
 
-\begin{frame}[label=current]
+\begin{frame}
   \frametitle{Построяване на идеално балансирано дърво}
   По даден сортиран списък можем да построим идеално балансирано двоично дърво за търсене.\\[1em]
   Строим рекурсивно:
@@ -276,14 +274,53 @@
   \item Рекурсията ни гарантира идеална балансираност
   \end{itemize}
   \begin{center}
-    \renewcommand{\m}{\cellcolor{red!60}}
-    \renewcommand{\l}{\cellcolor{green!60}}
-    \renewcommand{\r}{\cellcolor{blue!60}}
+    \makecommand{\m}{\cellcolor{red!60}}
+    \makecommand{\l}{\cellcolor{green!60}}
+    \makecommand{\r}{\cellcolor{blue!60}}
     \begin{tabular}{*{12}{|c}|}
       \hline
       \l1&\l2&\l3&\l4&\l5&\l6&\m7&\r8&\r9&\r10&\r11&\r12\\
       \hline
     \end{tabular}
   \end{center}
+\end{frame}
+
+\section{AVL дървета}
+
+\begin{frame}
+  \frametitle{Самобалансиращи се дървета за търсене}
+  Можем да постигнем сложност $O(\log n)$ на операциите търсене, включване и изключване, ако работим само с балансирани дървета.\\[1em]
+  \pause
+  \textbf{Идея:} ако дървото се разбалансира след включване или изключване, да го балансираме наново.\\[1em]
+  \pause
+  Има различни вариации на самобалансиращи се дървета:
+  \begin{itemize}
+  \item 2-3 дърво
+  \item<alert@4> AVL дърво
+  \item червено-черно дърво
+  \item косо дърво (splay tree)
+  \item Декартово дърво (treap)
+  \end{itemize}
+  \pause
+\end{frame}
+
+\begin{frame}
+  \frametitle{AVL дърво}
+  Предложено от Адельсон-Велский и Ландис през 1962 г.\\[1em]
+  \textbf{Основна идея:} Всяко поддърво $T = (X,L,R)$ поддържа коефициент на баланс:
+  \begin{equation*}
+    b(T) = h(R) - h(L)
+  \end{equation*}
+  \pause
+  \begin{block}{}
+    \begin{center}
+      Едно AVL дърво $T$ е балансирано\\
+      $\Longleftrightarrow$\\
+      $b(T') \in \{-1,0,1\}$ за всяко поддърво $T'$ на $T$
+    \end{center}
+  \end{block}
+  \pause
+  При включване или изключване може да получим $b(T) = -2$ или $b(T) = 2$.\\[1em]
+  Дефинираме операции за ``завъртане'', които възстановяват баланса.
 \end{frame}
 \end{document}
