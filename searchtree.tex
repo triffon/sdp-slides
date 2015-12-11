@@ -1,3 +1,4 @@
+
 \documentclass{beamer}
 \usepackage{sdp}
 
@@ -284,7 +285,7 @@
     \end{tabular}
   \end{center}
 \end{frame}
-
+\end{document}
 \section{AVL дървета}
 
 \begin{frame}
@@ -319,8 +320,83 @@
       $b(T') \in \{-1,0,1\}$ за всяко поддърво $T'$ на $T$
     \end{center}
   \end{block}
-  \pause
-  При включване или изключване може да получим $b(T) = -2$ или $b(T) = 2$.\\[1em]
-  Дефинираме операции за ``завъртане'', които възстановяват баланса.
 \end{frame}
+
+\begin{frame}
+  \frametitle{Самобалансиране}
+  \begin{itemize}[<+->]
+  \item Операциите за включване и изключване може да променят баланса на някой възел!
+  \item Промяната няма как да е с повече от $\pm 1$ (защо?)
+  \item Разбалансиране се получава при $b(T) = \pm 2$
+    \begin{itemize}
+    \item $b(T) = -2$ --- лявото поддърво е с 2 нива по-високо от дясното
+      \begin{itemize}
+      \item<7> ``завъртаме надясно'' за да балансираме
+      \end{itemize}
+    \item $b(T) = 2$ --- дясното поддърво е с 2 нива по-високо от лявото
+      \begin{itemize}
+      \item<8> ``завъртаме наляво'' за да балансираме
+      \end{itemize}
+    \end{itemize}
+  \item
+    Дефинираме операции за ``завъртане'', които възстановяват баланса.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Завъртане надясно (zig)}
+  \begin{center}
+    \small
+    \begin{forest}
+      default [Y [X [A,trismall] [B,trismall]] [C,trismall]]
+    \end{forest}
+    {\Huge$\curvearrowright$}
+    \begin{forest}
+      default [X [A,trismall] [Y [B,trismall] [C,trismall]]]
+    \end{forest}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Завъртане наляво (zag)}
+  \begin{center}
+    \small
+    \begin{forest}
+      default [X [A,trismall] [Y [B,trismall] [C,trismall]]]
+    \end{forest}
+    {\Huge$\curvearrowleft$}
+    \begin{forest}
+      default [Y [X [A,trismall] [B,trismall]] [C,trismall]]
+    \end{forest}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Балансиране надясно}
+  \begin{center}
+    \small
+    \begin{forest}
+      default [Z [Y [X [A,trismall] [B,trismall]] [C,trismall]] [D,trismall]]
+    \end{forest}
+    {\Huge$\curvearrowright$}
+    \begin{forest}
+      default [Y [X [A,trismall] [B,trismall]] [Z [C,trismall] [D,trismall]]]
+    \end{forest}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Балансиране наляво}
+  \begin{center}
+    \small
+    \begin{forest}
+      default [X [A,trismall] [Y [B,trismall] [Z [C,trismall] [D,trismall]]]]
+    \end{forest}
+    {\Huge$\curvearrowleft$}
+    \begin{forest}
+      default [Y [X [A,trismall] [B,trismall]] [Z [C,trismall] [D,trismall]]]
+    \end{forest}
+  \end{center}
+\end{frame}
+
 \end{document}
