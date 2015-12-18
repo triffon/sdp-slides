@@ -1,4 +1,3 @@
-
 \documentclass{beamer}
 \usepackage{sdp}
 
@@ -285,7 +284,7 @@
     \end{tabular}
   \end{center}
 \end{frame}
-\end{document}
+
 \section{AVL дървета}
 
 \begin{frame}
@@ -331,11 +330,11 @@
     \begin{itemize}
     \item $b(T) = -2$ --- лявото поддърво е с 2 нива по-високо от дясното
       \begin{itemize}
-      \item<7> ``завъртаме надясно'' за да балансираме
+      \item<7-> ``завъртаме надясно'' за да балансираме
       \end{itemize}
     \item $b(T) = 2$ --- дясното поддърво е с 2 нива по-високо от лявото
       \begin{itemize}
-      \item<8> ``завъртаме наляво'' за да балансираме
+      \item<8-> ``завъртаме наляво'' за да балансираме
       \end{itemize}
     \end{itemize}
   \item
@@ -343,7 +342,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[label=rotright]
   \frametitle{Завъртане надясно (zig)}
   \begin{center}
     \small
@@ -354,10 +353,83 @@
     \begin{forest}
       default [X [A,trismall] [Y [B,trismall] [C,trismall]]]
     \end{forest}
-  \end{center}
+  \end{center} \pause \vspace{-1em}
+  \begin{overlayarea}{\textwidth}{10em}
+    \onslide<+->
+    \begin{onlyenv}<.-.(12)>
+      $$ b'(Y) = ? $$
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.-.(5)>
+      \textbf{I сл. }$b(X) \geq 0$
+      \onslide<+-> $\Rightarrow h(B) \geq h(A)$
+      \onslide<+-> $\Rightarrow h(X) = h(B) + 1$
+      \onslide<+-> $\Rightarrow b(Y) = h(C) - h(X)$
+      \onslide<+-> $ = \underbrace{h(C) - h(B)}_{b'(Y)} - 1$
+      \onslide<+-> $\Rightarrow b'(Y) = b(Y) + 1$
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.-.(5)>
+      \textbf{II сл.} $b(X) < 0$
+      \onslide<+-> $\Rightarrow h(B) < h(A)$
+      \onslide<+-> $\Rightarrow h(X) = h(A) + 1$
+      \onslide<+-> $\Rightarrow b(Y) = h(C) - h(A) - 1$
+      \onslide<+-> $ = \underbrace{h(C) - h(B)}_{b'(Y)} + \underbrace{h(B) - h(A)}_{b(X)} - 1$
+      \onslide<+-> $\Rightarrow b'(Y) = b(Y) - b(X) + 1$
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.,.(14)->
+      \begin{equation*}
+        b'(Y) =
+        \begin{cases}
+          b(Y) + 1,&\text{ ако }b(X) \geq 0,\\
+          b(Y) - b(X) + 1,&\text{ ако }b(X) < 0.
+        \end{cases}
+      \end{equation*}
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.-.(12)>
+      $$ b'(X) = ? $$
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.-.(5)>
+      \textbf{I сл. }$b'(Y) \leq 0$
+      \onslide<+-> $\Rightarrow h(B) \geq h(C)$
+      \onslide<+-> $\Rightarrow h'(Y) = h(B) + 1$
+      \onslide<+-> $\Rightarrow b'(X) = h'(Y) - h(A)$
+      \onslide<+-> $ = \underbrace{h(B) - h(A)}_{b(X)} + 1$
+      \onslide<+-> $\Rightarrow b'(X) = b(X) + 1$
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.-.(5)>
+      \textbf{II сл.} $b'(Y) > 0$
+      \onslide<+-> $\Rightarrow h(B) < h(C)$
+      \onslide<+-> $\Rightarrow h'(Y) = h(C) + 1$
+      \onslide<+-> $\Rightarrow b'(X) = h(C) + 1 - h(A)$
+      \onslide<+-> $ = \underbrace{h(C) - h(B)}_{b'(Y)} + \underbrace{h(B) - h(A)}_{b(X)} + 1$
+      \onslide<+-> $\Rightarrow b'(X) = b(X) + b'(Y) + 1$
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.->
+      \begin{equation*}
+        b'(X) =
+        \begin{cases}
+          b(X) + 1,&\text{ ако }b'(Y) \leq 0,\\
+          b(X) + b'(Y) + 1,&\text{ ако }b'(Y) > 0.
+        \end{cases}
+      \end{equation*}
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.>
+      \vspace{-0.5em}
+      \begin{equation*}
+        b'(X) > b(X), \quad b'(Y) > b(Y)
+      \end{equation*}
+    \end{onlyenv}
+  \end{overlayarea}
 \end{frame}
 
-\begin{frame}
+\begin{frame}<-5>
   \frametitle{Завъртане наляво (zag)}
   \begin{center}
     \small
@@ -369,12 +441,69 @@
       default [Y [X [A,trismall] [B,trismall]] [C,trismall]]
     \end{forest}
   \end{center}
+  \pause
+  \temporal<3>{
+    \alert{
+      \begin{equation*}
+        b'(Y) =
+        \begin{cases}
+          b(Y) + 1,&\text{ ако }b(X) \geq 0,\\
+          b(Y) - b(X) + 1,&\text{ ако }b(X) < 0.
+        \end{cases}
+      \end{equation*}
+      \begin{equation*}
+        b'(X) =
+        \begin{cases}
+          b(X) + 1,&\text{ ако }b'(Y) \leq 0,\\
+          b(X) + b'(Y) + 1,&\text{ ако }b'(Y) > 0.
+        \end{cases}
+      \end{equation*}
+    }
+  }
+  {
+    \alert{
+      \begin{equation*}
+        b(Y) =
+        \begin{cases}
+          b'(Y) + 1,&\text{ ако }b'(X) \geq 0,\\
+          b'(Y) - b'(X) + 1,&\text{ ако }b'(X) < 0.
+        \end{cases}
+      \end{equation*}
+      \begin{equation*}
+        b(X) =
+        \begin{cases}
+          b'(X) + 1,&\text{ ако }b(Y) \leq 0,\\
+          b'(X) + b(Y) + 1,&\text{ ако }b(Y) > 0.
+        \end{cases}
+      \end{equation*}
+    }
+  }
+  {
+    \begin{equation*}
+      b'(Y) =
+      \begin{cases}
+        b(Y) - 1,&\text{ ако }b'(X) \geq 0,\\
+        b(Y) + b'(X) - 1,&\text{ ако }b'(X) < 0.
+      \end{cases}
+    \end{equation*}
+    \begin{equation*}
+      b'(X) =
+      \begin{cases}
+        b(X) - 1,&\text{ ако }b(Y) \leq 0,\\
+        b(X) - b(Y) - 1,&\text{ ако }b(Y) > 0.
+      \end{cases}
+    \end{equation*}
+  }
+  \onslide<5>
+  \begin{equation*}
+    b'(X) < b(X), \quad b'(Y) < b(Y)
+  \end{equation*}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[label=balright]
   \frametitle{Балансиране надясно}
   \begin{center}
-    \small
+    \scriptsize
     \begin{forest}
       default [Z [Y [X [A,trismall] [B,trismall]] [C,trismall]] [D,trismall]]
     \end{forest}
@@ -383,12 +512,46 @@
       default [Y [X [A,trismall] [B,trismall]] [Z [C,trismall] [D,trismall]]]
     \end{forest}
   \end{center}
+  \begin{itemize}[<+->]
+  \item Въртим надясно, ако $b(Z) = -2$
+  \item \alert{Внимание:} Ако $b(Y) = 1$, то
+    \begin{itemize}
+    \item $b'(Z) = b(Z) + 1  = -1$
+    \item $b'(Y) = b(Y) + 1 = \alert2$
+    \end{itemize}
+  \item Трябва да подсигурим, че $b'(Y) \leq 0$...
+  \item ...с предварително завъртане наляво!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Двойно балансиране надясно (zag-zig)}
+  \begin{center}
+    \tiny
+    \begin{forest}
+      default [Z [X [A,trismall] [Y [B,trismall] [C,trismall]]] [D,trismall]]
+    \end{forest}
+    {\LARGE$\curvearrowleft$}
+    \begin{forest}
+      default [Z [Y [X [A,trismall] [B,trismall]] [C,trismall]] [D,trismall]]
+    \end{forest}
+    {\LARGE$\curvearrowright$}
+    \begin{forest}
+      default [Y [X [A,trismall] [B,trismall]] [Z [C,trismall] [D,trismall]]]
+    \end{forest}
+  \end{center}
+  \begin{itemize}[<+->]
+  \item Ако $b(X) = 1$, първо завъртаме наляво около $X$.
+  \item Така $b'(X) \leq 0$ и $b'(Y) \leq 0$
+  \item Вече можем да завъртим надясно около $Y$.
+  \item След балансиране сме сигурни, че $h'(Y) < h(Z)$, т.е. намаляваме височината.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Балансиране наляво}
   \begin{center}
-    \small
+    \scriptsize
     \begin{forest}
       default [X [A,trismall] [Y [B,trismall] [Z [C,trismall] [D,trismall]]]]
     \end{forest}
@@ -397,6 +560,70 @@
       default [Y [X [A,trismall] [B,trismall]] [Z [C,trismall] [D,trismall]]]
     \end{forest}
   \end{center}
+  \begin{itemize}[<+->]
+  \item Въртим надясно, ако $b(Z) = 2$
+  \item \alert{Внимание:} Ако $b(Y) = -1$, то
+    \begin{itemize}
+    \item $b'(Z) = b(Z) - 1  = 1$
+    \item $b'(Y) = b(Y) - 1 = \alert{-2}$
+    \end{itemize}
+  \item Трябва да подсигурим, че $b'(Y) \geq 0$...
+  \item ...с предварително завъртане надясно!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Двойно балансиране наляво (zig-zag)}
+  \begin{center}
+    \tiny
+    \begin{forest}
+      default [X [A,trismall] [Z [Y [B,trismall] [C,trismall]] [D,trismall]]]
+    \end{forest}
+    {\LARGE$\curvearrowright$}
+    \begin{forest}
+      default [X [A,trismall] [Y [B,trismall] [Z [C,trismall] [D,trismall]]]]
+    \end{forest}
+    {\LARGE$\curvearrowleft$}
+    \begin{forest}
+      default [Y [X [A,trismall] [B,trismall]] [Z [C,trismall] [D,trismall]]]
+    \end{forest}
+  \end{center}
+  \begin{itemize}[<+->]
+  \item Ако $b(Z) = -1$, първо завъртаме надясно около $Z$.
+  \item Така $b'(Z) \geq 0$ и $b'(Y) \geq 0$
+  \item Вече можем да завъртим наляво около $Y$.
+  \item След балансиране сме сигурни, че $h'(Y) < h(X)$, т.е. намаляваме височината.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Кога да балансираме?}
+  \begin{itemize}[<+->]
+  \item Когато включваме или изключваме елемент, трябва да следим кога балансът се променя
+  \item При промяна на баланс ще трябва да пребалансираме
+  \item Затова ще реализираме включването и изключването \textbf{рекурсивно}
+  \item На обратния ход на рекурсията ще пребалансираме при нужда
+  \item Балансът се променя когато височината на детето се е увеличила или намалила
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Балансиране при включване и изключване}
+  Балансиране при включване
+  \onslide<+->
+  \begin{itemize}[<+->]
+  \item При дъното на \textbf{включването} височината винаги се увеличава с 1
+  \item Ако височината на \textbf{по-ниското дете} се увеличи, то височината на родителя не се променя
+  \item При балансиране винаги компенсираме за увеличената височина на детето
+  \end{itemize}
+  \onslide<+->
+  Балансиране при изключване
+  \begin{itemize}[<+->]
+  \item При дъното на \textbf{изключването} дъното височината винаги се намалява с 1
+  \item Ако височината на \textbf{по-високото дете} се намали, то височината на родителя не се променя
+  \item Ако след балансиране $b(T) \neq 0$, значи сме компенсирали за намалената височина на детето
+  \item Ако след балансиране $b(T) = 0$, значи височината се е намалила
+  \end{itemize}
 \end{frame}
 
 \end{document}
