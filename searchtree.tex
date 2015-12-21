@@ -3,7 +3,7 @@
 
 \title{Дървета за търсене}
 
-\date{11 декември 2015 г.}
+\date{11 -- 18 декември 2015 г.}
 
 \titlegraphic{\includegraphics[height=0.35\textheight]{images/searchtree.png}}
 
@@ -519,7 +519,7 @@
     \item $b'(Z) = b(Z) + 1  = -1$
     \item $b'(Y) = b(Y) + 1 = \alert2$
     \end{itemize}
-  \item Трябва да подсигурим, че $b'(Y) \leq 0$...
+  \item Трябва да подсигурим, че $b(Y) \leq 0$...
   \item ...с предварително завъртане наляво!
   \end{itemize}
 \end{frame}
@@ -561,13 +561,13 @@
     \end{forest}
   \end{center}
   \begin{itemize}[<+->]
-  \item Въртим надясно, ако $b(Z) = 2$
+  \item Въртим наляво, ако $b(Z) = 2$
   \item \alert{Внимание:} Ако $b(Y) = -1$, то
     \begin{itemize}
     \item $b'(Z) = b(Z) - 1  = 1$
     \item $b'(Y) = b(Y) - 1 = \alert{-2}$
     \end{itemize}
-  \item Трябва да подсигурим, че $b'(Y) \geq 0$...
+  \item Трябва да подсигурим, че $b(Y) \geq 0$...
   \item ...с предварително завъртане надясно!
   \end{itemize}
 \end{frame}
@@ -625,7 +625,7 @@
   \item Ако след балансиране $b(T) = 0$, значи височината се е намалила
   \end{itemize}
 \end{frame}
-
+\end{document}
 \section{B-дървета}
 
 \begin{frame}
