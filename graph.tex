@@ -266,4 +266,207 @@
   \item \tt{removeEdge} --- \rvl{$O(|E|)$}
   \end{itemize}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Локални задачи}
+  \textbf{Задача. }Да се намерят върховете, които нямат наследници.\\
+  \pause
+  \textbf{Решение. }$\{u\;|\;\nexists v\, (u,v) \in E\}$\\[1em]
+  \pause
+  \textbf{Задача. }Да се намерят предшествениците на даден връх $v$.\\
+  \pause
+  \textbf{Решение. }$\{u\;|\;(u,v)\in E\}$\\[1em]
+  \pause
+  \textbf{Задача. }Да се провери дали граф е симетричен.\\
+  \pause
+  \textbf{Решение. }$\forall u,v\in V[(u,v)\in E \rightarrow (v,u)\in E]$
+\end{frame}
+
+\section{Схеми за обхождане}
+
+\begin{frame}
+  \frametitle{Обхождане в дълбочина}
+  \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+      \begin{block}{}
+        Обхождане на връх \tt v:
+        \begin{itemize}
+        \item Обходи последователно всички наследници на \tt v
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+    \end{column}
+    \begin{column}{0.3\textwidth}
+      \samplegraph[1]
+    \end{column}
+  \end{columns}
+  \pause
+  \begin{itemize}[<+->]
+  \item \alert{Имаме ли дъно?}
+    \begin{itemize}
+    \item Да: при празен списък от наследници няма рекурсивно
+      извикване!
+    \end{itemize}
+  \item \alert{Какво се случва ако графът е цикличен?}
+    \begin{itemize}
+    \item Програмата също зацикля! Как да се справим с този проблем?
+    \item Трябва да помним през кои върхове сме минали!
+    \end{itemize}
+  \end{itemize}
+  \onslide<+->
+  \begin{enumerate}[<+->]
+  \item да помним текущия път
+    \begin{itemize}
+    \item<10-> обхождаме върхове с повторение
+    \item<11-> сложност $O(|V||V|!)$
+    \end{itemize}
+  \item да помним всички обходени до момента върхове
+    \begin{itemize}
+    \item<10-> обхождаме всеки връх по един път
+    \item<11-> сложност $O(|E|)$
+    \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Схема на обхождане в ширина}
+
+  \begin{columns}[onlytextwidth]
+    \begin{column}{0.6\textwidth}
+      \begin{block}{}
+        Обхождане, започващо от връх \tt u:
+        \begin{itemize}
+        \item Маркира се \tt u за обхождане на ниво 1
+        \item За всеки връх \tt v маркиран за ниво $n$:
+          \begin{itemize}
+          \item Маркират се всички деца \tt s на \tt v за обхождане на
+            ниво $n+1$
+          \end{itemize}
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.1\textwidth}
+    \end{column}
+    \begin{column}{0.3\textwidth}
+      \samplegraph[1]
+    \end{column}
+  \end{columns}
+  \onslide<+->
+  \begin{itemize}[<+->]
+  \item \alert{Какво се случва ако графът е цикличен?}
+    \begin{itemize}
+    \item Ако има път: намира го.
+    \item Ако няма път: програмата зацикля!
+    \item Трябва да помним през кои върхове сме минали!
+    \end{itemize}
+  \end{itemize}
+  \begin{enumerate}[<+->]
+  \item да помним текущия път за всеки връх в текущото ниво
+    \begin{itemize}
+    \item<8-> обхождаме върхове с повторение
+    \item<9-> сложност по време \textbf{и памет} $O(|V||V|!)$
+    \end{itemize}
+  \item да помним всички обходени до момента върхове
+    \begin{itemize}
+    \item<8-> обхождаме всеки връх по един път
+    \item<9-> сложност $O(|E|)$ по време и $O(|V|)$ по памет
+    \end{itemize}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Сравнение на обхождане в дълбочина и ширина}
+  Обхождането в дълбочина\ldots
+  \pause
+  \begin{itemize}[<+->]
+  \item \ldots използва памет само за обходените до момента върхове
+  \item \ldots е подходящо за задачи, където търсим единична цел, която е ``надълбоко''
+  \item \ldots може да обхожда избрани пътища преференциално
+  \item \ldots естествено се реализира с \textbf{рекурсия}
+  \end{itemize}
+  \onslide<+->
+  Обхождането в ширина\ldots
+  \begin{itemize}[<+->]
+  \item \ldots използва памет за всички разглеждани нива
+  \item \ldots е подходящо за задачи, където търсим ``най-плитката'' цел
+  \item \ldots обхожда графа ``равномерно''
+  \item \ldots естествено се реализира с \textbf{итерация}
+  \end{itemize}
+\end{frame}
+
+\section{Задачи с обхождане}
+
+\begin{frame}
+  \frametitle{Търсене на път}
+  Търсене на път в дълбочина
+  \pause
+  \begin{itemize}[<+->]
+  \item удобно е да пазим текущия път в \textbf{стек}
+  \item при стъпка напред (последване на наследник) добавяме в стека
+  \item при стъпка назад (няма необходени наследници) премахваме от стека
+  \item има път от $u$ до $v$, ако:
+    \begin{itemize}
+    \item $u = v$ (дъно)
+    \item $\exists w\, (u,w)\in E\;\&\;$има път от $w$ до $v$
+    \end{itemize}
+  \end{itemize}
+  \onslide<+->
+  Търсене на път в ширина
+  \begin{itemize}[<+->]
+  \item удобно е да пазим в \textbf{опашка} обходените \textbf{ребра}
+  \item винаги намираме най-късия по брой ребра път
+  \item конструираме пътя като се връщаме назад по ребрата
+  \item има път от $u$ до $v$, ако при обхождане стартиращо от $u$ съществува  ниво $n$, така че на него обхождаме $v$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Намиране на цикли}
+  \textbf{Задача. }Да се намери цикъл в даден граф, ако такъв има.\\
+  \pause
+  \textbf{Решение:}\\
+  \begin{itemize}[<+->]
+  \item започваме от произволен връх $u$
+  \item обхождаме в ширина или дълбочина
+  \item запомняме обходените върхове и не ги обхождаме повторно
+  \item запомняме пътя (както при търсене на път)
+  \item ако достигнем вече обходен връх --- има цикъл, връщаме намерения път
+  \item ако успеем да обходим всички ребра --- няма цикъл
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Покриващо дърво}
+  \textbf{Задача. }По даден граф $(V,E)$ да се намери ацикличен граф (дърво) $(V,E')$ за $E' \subseteq E$.\\
+  \pause
+  \textbf{Решение:}\\
+  \begin{itemize}[<+->]
+  \item обхождаме в дълбочина или ширина
+  \item запомняме обходените върхове и не ги обхождаме повторно
+  \item добавяме в дървото всеки нов връх и реброто, по което сме дошли до него
+  \item приключваме при обхождане на всички върхове
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Топологично сортиране}
+  \textbf{Задача. }По даден граф $(V,E)$ търсим пермутация на върховете $v_{i_1},v_{i_2},\ldots,v_{i_n}$, така че $\forall (u,w)\in E\,\exists j < k\,(u = v_{i_j}\,\&\,w = v_{i_k})$.\\
+  \pause
+  \textbf{Решение: }Събираме списък от върхове $l$\\
+  \begin{itemize}[<+->]
+  \item първоначално в $l$ поставяме всички $u\in V$, за които $d^-(u) = 0$
+  \item обхождаме $l$ от началото, като за всеки обходен връх $u$:
+    \begin{itemize}
+    \item за всеки наследник $v$ на $u$
+      \begin{itemize}
+      \item премахваме реброто $(u,v)$ от графа
+      \item ако $d^-(v) = 0$ добавяме го в края на $l$
+      \end{itemize}
+    \end{itemize}
+  \item ако изчерпим $l$, но в графа останат още ребра --- грешка, имало е цикъл
+  \item в противен случай, една търсена редица е $l$
+  \end{itemize}
+\end{frame}
+
 \end{document}
