@@ -63,11 +63,12 @@
     (Ориентиран) граф е наредена двойка $(V,E)$, където
     \begin{itemize}
     \item $V \neq \emptyset$ е произволно множество от \textbf{върхове}
-    \item $E \subseteq V^2$ е множество от ребра
+    \item $E \subseteq V^2$ е множество от наредени двойки върхове --- \textbf{ребра}
     \end{itemize}
   \end{definition}
   \pause
   Ако пренебрегнем реда на компонентите в двойките в $Е$, получаваме \textbf{неориентиран} граф.\\[1em]
+  \pause
   \begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
       $E = \emptyset$ --- празен граф
@@ -83,15 +84,15 @@
 \begin{frame}
   \frametitle{АТД: граф}
   Нелинейна структура, описваща обекти и връзките между тях.\\
-  Операции:
+  Операции
   \begin{itemize}
   \item \tt{vertices()} --- списък на върховете
-  \item \tt{successors()} --- списък на съседите на даден връх
-  \item \tt{isEdge(a, b)} --- проверка за съществуване на ребро
-  \item \tt{addVertex(a)} --- включване на връх
-  \item \tt{removeVertex(a)} --- изключване на връх
-  \item \tt{addEdge(a, b)} --- включване на ребро
-  \item \tt{removeEdge(a, b)} --- изключване на ребро
+  \item \tt{successors(u)} --- списък на наследниците на даден връх
+  \item \tt{isEdge(u, v)} --- проверка за съществуване на ребро
+  \item \tt{addVertex(u)} --- включване на връх
+  \item \tt{removeVertex(u)} --- изключване на връх
+  \item \tt{addEdge(u, v)} --- включване на ребро
+  \item \tt{removeEdge(u, v)} --- изключване на ребро
   \end{itemize}
 \end{frame}
 
@@ -112,7 +113,7 @@
   \item за $(u, v)\in E$, $u$ наричаме \textbf{предшественик}, а $v$ --- \textbf{наследник}
   \item $(u, u)$ наричаме \textbf{примка}
   \item $d^+(u) = |\{ v\;|\;(u, v) \in E\}|$ --- \textbf{положителна полустепен}
-  \item $d^-(u) = |\{ u\;|\;(u, v) \in E\}|$ --- \textbf{отрицателна полустепен}
+  \item $d^-(v) = |\{ u\;|\;(u, v) \in E\}|$ --- \textbf{отрицателна полустепен}
   \item $d(u) = d^+(u) + d^-(u)$ --- \textbf{степен на връх}
   \item \textbf{път} в граф наричаме редица $v_1, v_2, \ldots, v_n$, където $(v_i, v_{i+1}) \in E$
     \begin{itemize}
@@ -128,7 +129,7 @@
 
 \section{Предствания на графи}
 
-\begin{frame}<1-17>
+\begin{frame}<1-19>
   \frametitle{Матрица на съседство}
   \begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
@@ -151,16 +152,17 @@
     \end{column}
   \end{columns}
   \pause
-  \alt<-12>{
+  \alt<-14>{
   \begin{itemize}[<+->]
-  \item $A_{i,j} = 1 \leftrightarrow (i,j) \in E$
+  \item $A_{i,j} = 1 \leftrightarrow (v_i,v_j) \in E$
   \item памет --- \rvl{$O(|V|^2)$}
   \item \tt{successors} --- \rvl{$O(|V|)$}
   \item \tt{isEdge} --- \rvl{$O(1)$}
-  \item \tt{addVertex, removeVertex} --- \rvl{$O(|V|)$}
+  \item \tt{addVertex} --- \rvl{$O(|V|)$}
+  \item \tt{removeVertex} --- \rvl{$O(|V|^2)$, ако се налага разместване}
   \item \tt{addEdge, removeEdge} --- \rvl{$O(1)$}
   \end{itemize}}{
-  \begin{itemize}[<+(11)->]
+  \begin{itemize}[<+(13)->]
   \item $A_{i,j} = 1 \leftrightarrow (v_i,v_j) \in E$
   \item $A^2_{i,j} > 0 \leftrightarrow \sum_{k=1}^n A_{i,k}A_{k,j} > 0 \leftrightarrow $ има път с дължина 2 от $v_i$ до $v_j$
   \item по индукция: $A^n_{i,j} > 0 \leftrightarrow $ има път с дължина $n$ от $v_i$ до $v_j$
@@ -169,7 +171,7 @@
   \end{itemize}}
 \end{frame}
 
-\begin{frame}<1-10>
+\begin{frame}<1-12>
   \frametitle{Матрица на инцидентност}
   \begin{equation*}
     A =
@@ -188,16 +190,17 @@
     \begin{column}{0.7\textwidth}
       \alt<1>{%
       \begin{itemize}
-      \item $A_{i,j} = 1 \leftrightarrow \exists v \in V\, e_j = (v, v_i) \leftrightarrow e_j\text{ е \textbf{изходящо} ребро за }v_i$
-      \item $A_{i,j} = -1 \leftrightarrow \exists v \in V\, e_j = (v_i, v) \leftrightarrow e_j\text{ е \textbf{входящо} ребро за }v_i$
+      \item $A_{i,j} = 1 \leftrightarrow \exists v \in V\, e_j = (v_i, v) \leftrightarrow e_j\text{ е \textbf{изходящо} ребро за }v_i$
+      \item $A_{i,j} = -1 \leftrightarrow \exists v \in V\, e_j = (v, v_i) \leftrightarrow e_j\text{ е \textbf{входящо} ребро за }v_i$
       \end{itemize}
     }{%
       \begin{itemize}[<+->]
       \item памет --- \rvl{$O(|V||E|)$}
-      \item \tt{successors} --- \rvl{$O(|E|+|V|)$}
+      \item \tt{successors} --- \rvl{$O(|V||E|)$}
       \item \tt{isEdge} --- \rvl{$O(|E|)$}
-      \item \tt{addVertex, removeVertex} --- \rvl{$O(|E|)$}
-      \item \tt{addEdge, removeEdge} --- \rvl{$O(|V|)$}
+      \item \tt{addVertex} --- \rvl{$O(|E|)$}
+      \item \tt{addEdge} --- \rvl{$O(|V|)$}
+      \item \tt{removeVertex, removeEdge} --- \rvl{$O(|V||E|)$, ако се налага разместване}
       \end{itemize}
     }
     \end{column}
@@ -228,14 +231,14 @@
     \end{column}
   \end{columns}
   \begin{itemize}[<+->]
-  \item $D_i = \{v\;|\;(v_i,v) \in E \}$
+  \item $D_i = \{v\;|\;(v_i,v) \in E \}$, може да е множество или списък
   \item памет --- \rvl{$O(|V|+|E|)$}
   \item \tt{successors} --- \rvl{$O(1)$}
-  \item \tt{isEdge} --- \rvl{$O(|V|)$}
+  \item \tt{isEdge} --- \rvl{$O(|V|)$ (ако е множество --- $O(1)$)} 
   \item \tt{addVertex} --- \rvl{$O(1)$}
-  \item \tt{removeVertex} --- \rvl{$O(|E|)$}
+  \item \tt{removeVertex} --- \rvl{$O(|E|)$, трябва да се премахнат входящите ребра}
   \item \tt{addEdge} --- \rvl{$O(1)$}
-  \item \tt{removeEdge} --- \rvl{$O(|V|)$}
+  \item \tt{removeEdge} --- \rvl{$O(|V|)$ (ако е множество --- $O(1)$)}
   \end{itemize}
 \end{frame}
 
@@ -257,13 +260,14 @@
     \end{column}
   \end{columns}
   \begin{itemize}[<+->]
+  \item може да е представено като списък или множество
   \item памет --- \rvl{$O(|E|)$}
   \item \tt{successors} --- \rvl{$O(|E|)$}
-  \item \tt{isEdge} --- \rvl{$O(|E|)$}
+  \item \tt{isEdge} --- \rvl{$O(|E|)$ (ако е множество --- $O(1)$)}
   \item \tt{addVertex} --- \rvl{$O(1)$}
   \item \tt{removeVertex} --- \rvl{$O(|E|)$}
   \item \tt{addEdge} --- \rvl{$O(1)$}
-  \item \tt{removeEdge} --- \rvl{$O(|E|)$}
+  \item \tt{removeEdge} --- \rvl{$O(|E|)$ (ако е множество --- $O(1)$)}
   \end{itemize}
 \end{frame}
 
@@ -314,17 +318,16 @@
     \item Трябва да помним през кои върхове сме минали!
     \end{itemize}
   \end{itemize}
-  \onslide<+->
   \begin{enumerate}[<+->]
   \item да помним текущия път
     \begin{itemize}
-    \item<10-> обхождаме върхове с повторение
-    \item<11-> сложност $O(|V||V|!)$
+    \item<9-> обхождаме върхове с повторение
+    \item<10-> сложност $O(|V||V|!)$
     \end{itemize}
   \item да помним всички обходени до момента върхове
     \begin{itemize}
-    \item<10-> обхождаме всеки връх по един път
-    \item<11-> сложност $O(|E|)$
+    \item<9-> обхождаме всеки връх по един път
+    \item<10-> сложност $O(|E|)$
     \end{itemize}
   \end{enumerate}
 \end{frame}
@@ -399,7 +402,7 @@
 
 \begin{frame}
   \frametitle{Търсене на път}
-  Търсене на път в дълбочина
+  Търсене на път \textbf{в дълбочина}
   \pause
   \begin{itemize}[<+->]
   \item удобно е да пазим текущия път в \textbf{стек}
@@ -412,12 +415,12 @@
     \end{itemize}
   \end{itemize}
   \onslide<+->
-  Търсене на път в ширина
+  Търсене на път \textbf{в ширина}
   \begin{itemize}[<+->]
   \item удобно е да пазим в \textbf{опашка} обходените \textbf{ребра}
   \item винаги намираме най-късия по брой ребра път
   \item конструираме пътя като се връщаме назад по ребрата
-  \item има път от $u$ до $v$, ако при обхождане стартиращо от $u$ съществува  ниво $n$, така че на него обхождаме $v$
+  \item има път от $u$ до $v$, ако при обхождане, стартиращо от $u$, съществува  ниво $n$, така че на него обхождаме $v$
   \end{itemize}
 \end{frame}
 
@@ -438,7 +441,7 @@
 
 \begin{frame}
   \frametitle{Покриващо дърво}
-  \textbf{Задача. }По даден граф $(V,E)$ да се намери ацикличен граф (дърво) $(V,E')$ за $E' \subseteq E$.\\
+  \textbf{Задача. }По даден граф $(V,E)$ да се намери дърво $(V,E')$ за $E' \subseteq E$.\\
   \pause
   \textbf{Решение:}\\
   \begin{itemize}[<+->]
