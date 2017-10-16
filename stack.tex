@@ -3,7 +3,7 @@
 
 \title{Стек}
 
-\date{23 октомври 2015 г.}
+\date{24 октомври 2017 г.}
 
 \titlegraphic{\includegraphics[height=0.4\textheight]{images/stack.jpg}}
 
@@ -18,32 +18,27 @@
 \begin{frame}
   \frametitle{АТД: стек}
 
-  Хомогенна линейна структура с организация ``последен влязъл --- пръв излязъл'' (LIFO)
-  \vspace{1em}
-
-  Операции
-  \vspace{0.5em}
+  Хомогенна линейна структура с организация ``последен влязъл --- пръв излязъл'' (LIFO)\\[1em]
+  Операции\\[0.5em]
   \begin{itemize}
-  \item \tt{create()} --- създаване на празен стек
-  \item \tt{empty()} --- проверка за празнота на стек
-  \item \tt{push(x)} --- включване на елемент на стек
-  \item \tt{pop()} --- изключване на елемент от стек
-  \item \tt{top()} --- последен елемент на стека
+  \item \lst{create()} --- създаване на празен стек
+  \item \lst{empty()} --- проверка за празнота на стек
+  \item \lst{push(x)} --- включване на елемент на стек
+  \item \lst{pop()} --- изключване на елемент от стек
+  \item \lst{top()} --- последен елемент на стека
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{АТД: стек}
 
-  Свойства на операциите
-  \vspace{0.5em}
-
+  Свойства на операциите\\[0.5em]
   \begin{itemize}
-  \item \tt{create().empty()} = \tt{true}
-  \item \tt{s.push(x).empty()} = \tt{false}
-  \item \tt{create().top()}, \tt{create().pop()} --- \alert{грешка}
-  \item \tt{s.push(x).top()} = \tt x
-  \item \tt{s.push(x).pop()} = \tt s
+  \item \lst{create().empty()} = \lst{true}
+  \item \lst{s.push(x).empty()} = \lst{false}
+  \item \lst{create().top()}, \lst{create().pop()} --- \alert{грешка}
+  \item \lst{s.push(x).top()} = \tt x
+  \item \lst{s.push(x).pop()} = \tt s
   \end{itemize}
 \end{frame}
 
@@ -101,24 +96,24 @@
   \frametitle{Обратен полски запис}
 
   \begin{columns}[t,onlytextwidth]
-    \column{0.6\textwidth}
+    \begin{column}{.6\textwidth}
+      \begin{itemize}
+      \item инфиксен запис:\\
+        \lst{(1+2)*(3-4/5)}
+      \item префиксен (полски) запис:\\
+        \lst{*+12-3/45}
+      \item постфиксен (обратен полски) запис\\
+        \lst{12+345/-*}
+      \end{itemize}
+    \end{column}
 
-    \begin{itemize}
-    \item инфиксен запис:\\
-      \tt{(1+2)*(3-4/5)}
-    \item префиксен (полски) запис:\\
-      \tt{*+12-3/45}
-    \item постфиксен (обратен полски) запис\\
-      \tt{12+345/-*}
-    \end{itemize}
-
-    \column{0.4\textwidth}
-
-    \begin{center}
-      \begin{forest} for tree={circle,draw,fill=diagramblue}
-        [\tt* [\tt+ [\tt1] [\tt2]] [\tt- [\tt3] [\tt/ [\tt4] [\tt5]]]]
-      \end{forest}
-    \end{center}
+    \begin{column}{0.4\textwidth}
+      \begin{center}
+        \begin{forest} for tree={circle,draw,fill=diagramblue}
+          [\tt* [\tt+ [\tt1] [\tt2]] [\tt- [\tt3] [\tt/ [\tt4] [\tt5]]]]
+        \end{forest}
+      \end{center}
+    \end{column}
   \end{columns}
 \end{frame}
 
@@ -366,47 +361,47 @@
   \frametitle{Пример: ход на коня}
 
   \begin{columns}[t,onlytextwidth]
-    \column{0.5\textwidth}
-    
-    \begin{chessboard}4{1ex}
-      \hline\bks1&\ws&\bks9&\ws&\\[1ex]
-      \hline\bks{10-}&\ws&\bks2&\bks5&\\[1ex]
-      \hline\bks3&\temporal<6>\ws\bk{\alt<8>\bk\wk}&\ws&\ws&\\[1ex]
-      \hline\ws&\ws&\bks4&\bks7&\\[1ex]
-      \hline
-    \end{chessboard}
+    \begin{column}{.5\textwidth}
+      \begin{chessboard}4{1ex}
+        \hline\bks1&\ws&\bks9&\ws&\\[1ex]
+        \hline\bks{10-}&\ws&\bks2&\bks5&\\[1ex]
+        \hline\bks3&\temporal<6>\ws\bk{\alt<8>\bk\wk}&\ws&\ws&\\[1ex]
+        \hline\ws&\ws&\bks4&\bks7&\\[1ex]
+        \hline
+      \end{chessboard}
+    \end{column}
 
-    \column{0.5\textwidth}
-
-    \begin{tabular}{|c|cc}
-      \cline{1-1}
-      \\\cline{1-1}
-      \\\cline{1-1}\onslide<10->{(1,0)}
-      \\\cline{1-1}\onslide<7->{\temporal<8>{(3,3)}{}{(0,2)}}
-      \\\cline{1-1}\onslide<6->{(2,1)}&\gc{11-}{(0,1)}
-      \\\cline{1-1}\onslide<5->{(1,3)}&\gc{11-}{(1,1)}
-      \\\cline{1-1}\onslide<4->{(3,2)}&\gc{11-}{(0,1)}
-      \\\cline{1-1}\onslide<3->{(2,0)}&\gc{11-}{(3,1)}&\gc{11-}{(3,3)}
-      \\\cline{1-1}\onslide<2->{(1,2)}&\gc{11-}{(2,1)}
-      \\\cline{1-1}\onslide<1->{(0,0)}
-      \\\cline{1-1}
-    \end{tabular}
+    \begin{column}{.5\textwidth}
+      \begin{tabular}{|c|cc}
+        \cline{1-1}
+        \\\cline{1-1}
+        \\\cline{1-1}\onslide<10->{(1,0)}
+        \\\cline{1-1}\onslide<7->{\temporal<8>{(3,3)}{}{(0,2)}}
+        \\\cline{1-1}\onslide<6->{(2,1)}&\gc{11-}{(0,1)}
+        \\\cline{1-1}\onslide<5->{(1,3)}&\gc{11-}{(1,1)}
+        \\\cline{1-1}\onslide<4->{(3,2)}&\gc{11-}{(0,1)}
+        \\\cline{1-1}\onslide<3->{(2,0)}&\gc{11-}{(3,1)}&\gc{11-}{(3,3)}
+        \\\cline{1-1}\onslide<2->{(1,2)}&\gc{11-}{(2,1)}
+        \\\cline{1-1}\onslide<1->{(0,0)}
+        \\\cline{1-1}
+      \end{tabular}
+    \end{column}
   \end{columns}
 \end{frame}
 
 \section{STL}
 
 \begin{frame}
-  \frametitle{\tt{std::stack<T>}}
+  \frametitle{\lst{std::stack<T>}}
 
   \begin{itemize}
-  \item \tt{stack()} --- създаване на празен стек
-  \item \tt{empty()} --- проверка за празнота на стек
-  \item \tt{push(x)} --- включване на елемент на стек
-  \item \tt{pop()} --- изключване на елемент от стек
-  \item \tt{top()} --- последен елемент на стека
-  \item \tt{size()} --- дължина на стека
-  \item \tt{==,!=,<,>,<=,>=} --- лексикорафско сравнение на два стека
+  \item \lst{stack()} --- създаване на празен стек
+  \item \lst{empty()} --- проверка за празнота на стек
+  \item \lst{push(x)} --- включване на елемент на стек
+  \item \lst{pop()} --- изключване на елемент от стек
+  \item \lst{top()} --- последен елемент на стека
+  \item \lst{size()} --- дължина на стека
+  \item \lst{==,!=,<,>,<=,>=} --- лексикорафско сравнение на два стека
   \end{itemize}
 \end{frame}
 
