@@ -309,6 +309,7 @@
       \onslide<-14>/%
       \onslide<-15>5%
       \onslide<-16>)%
+      \phantom !%
       \onslide<-22>\phantom
       }}&\\[3em]
       \cline{2-2} \cline{4-4}
@@ -359,13 +360,13 @@
 
 \begin{frame}
   \frametitle{Пример: ход на коня}
-
+  
   \begin{columns}[t,onlytextwidth]
     \begin{column}{.5\textwidth}
       \begin{chessboard}4{1ex}
         \hline\bks1&\ws&\bks9&\ws&\\[1ex]
-        \hline\bks{10-}&\ws&\bks2&\bks5&\\[1ex]
-        \hline\bks3&\temporal<6>\ws\bk{\alt<8>\bk\wk}&\ws&\ws&\\[1ex]
+        \hline\bks{10,11}&\ws&\bks2&\bks5&\\[1ex]
+        \hline\bks3&\safetemporal6\ws\bk{\alt<8>\bk\wk}&\ws&\ws&\\[1ex]
         \hline\ws&\ws&\bks4&\bks7&\\[1ex]
         \hline
       \end{chessboard}
@@ -376,7 +377,7 @@
         \cline{1-1}
         \\\cline{1-1}
         \\\cline{1-1}\onslide<10->{(1,0)}
-        \\\cline{1-1}\onslide<7->{\temporal<8>{(3,3)}{}{(0,2)}}
+        \\\cline{1-1}\onslide<7->{\safetemporal8{(3,3)}{}{(0,2)}}
         \\\cline{1-1}\onslide<6->{(2,1)}&\gc{11-}{(0,1)}
         \\\cline{1-1}\onslide<5->{(1,3)}&\gc{11-}{(1,1)}
         \\\cline{1-1}\onslide<4->{(3,2)}&\gc{11-}{(0,1)}
