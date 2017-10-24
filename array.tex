@@ -5,6 +5,7 @@
 
 \date{24 октомври 2017 г.}
 
+% TODO: източник на картинката
 \titlegraphic{\includegraphics[height=0.3\textheight]{images/array.jpg}}
 
 \begin{document}
@@ -25,7 +26,7 @@
   \item \lst{create(n)} --- създаване на масив със зададена големина
   \item \lst{get(i)} --- получаване на елемент с индекс \tt i
   \item \lst{set(i,x)} --- задаване на стойност \tt x на елемента с индекс \tt i
-  \item \lst{size} --- дължина на масива 
+  \item \lst{size} --- дължина на масива
   \end{itemize}
   \vspace{1em}
   \pause
@@ -40,6 +41,7 @@
 \begin{frame}
   \frametitle{Статично представяне}
 
+  % TODO: да се нарисува с TikZ
   \begin{tabular}{|*8{c|}}
     \rowcolor{diagramblue}
     \hline
@@ -49,12 +51,14 @@
   \end{tabular}\\[3em]
   \textbf{Реализация:} масив във C++.\\[1em]
   \textbf{Пример:} \lst{int a[10];}
+  % TODO: пример за операциите
 \end{frame}
 
 \begin{frame}
   \frametitle{Динамично представяне}
   \newcommand{\pha}{\hspace{2ex}}
 
+  % TODO: да се нарисува с TikZ
   \begin{tabular}{|*{16}{c|}}
     \multicolumn{16}c{$\overbrace{\hspace{60ex}}^{\text{капацитет}}$}\\
     \rowcolor{diagramblue}
@@ -75,12 +79,13 @@
   \item \lst{size} --- дължина на вектора
   \item \lst{capacity} --- капацитет на вектора
   \item \lst{[i]}, \lst{at(i)} --- достъп до елемент на индекс \tt i
+    % TODO: разлика между [] и at
   \item \lst{front()}, \lst{back()} --- достъп до първи и последен елемент
   \item \lst!push_back(x)! --- добавяне на елемента \tt x в края
   \item \lst!pop_back()! --- изтриване на последния елемент
   \item \lst{insert(...)} --- вмъкване на елементи на произволна позиция
   \item \lst{erase(...)} --- изтриване на елементи на произволна позиция
-  \item \lst{==,!=,<,>,<=,>=} --- лексикорафско сравнение на два вектора 
+  \item \lst{==,!=,<,>,<=,>=} --- лексикорафско сравнение на два вектора
   \end{itemize}
   \pause
   Специализация \lst{vector<bool>}: реализирана чрез битови масиви
@@ -132,6 +137,7 @@
 \begin{frame}[fragile]
   \frametitle{Физическо представяне}
 
+  % TODO: да се нарисува с TikZ
   \begin{center}
     \begin{tabular}{|m{5ex}|m{8ex}|}
       \hline
@@ -178,7 +184,7 @@
   \item \tt{create(a$_1$,\ldots,a$_i$,\ldots,a$_n$).get(i)} = \tt{a$_i$}
   \item \lst{t.set(i,x).get(i)} = \tt x
   \item \lst{t.set(i,x).get(j)} = \lst{a.get(j)}, ако \tt{i $\neq$ j}
-  \end{itemize}  
+  \end{itemize}
 \end{frame}
 
 \begin{frame}

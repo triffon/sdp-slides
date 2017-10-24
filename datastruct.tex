@@ -3,6 +3,8 @@
 
 \title[СД+А=П]{Структури от данни\\+\\алгоритми\\=\\програми}
 
+% TODO: Цитат на книгата на Н. Вирт
+
 \date{10 октомври 2017 г.}
 
 \begin{document}
@@ -255,6 +257,7 @@
 \begin{frame}
   \frametitle{$O$-нотация: примери}
 
+  % TODO: картинка с най-често използвани сложности
   \begin{itemize}[<+->]
   \item $f \in \Theta(f) = O(f) \cap \Omega(f)$
   \item $1000n^2 \in O(n^3)$ \onslide<+-> (при $C = 1000$ е вярно, че $1000n^2 \leq 1000n^3$)
@@ -301,7 +304,8 @@
 \begin{frame}[fragile]
   \frametitle{Пресмятане на сложност: пример}
 
-\begin{verbatim}
+  % TODO: разписване на пресмятането на сложност 
+\begin{lstlisting}
 for(int i = 0; i < n-1; i++)
   for(int j = n-2; j >= i; j--)
     if (a[j] > a[j+1]) {
@@ -309,7 +313,7 @@ for(int i = 0; i < n-1; i++)
       a[j] = a[j+1];
       a[j+1]= x;
     }
-\end{verbatim}
+\end{lstlisting}
 
 Да се оценят песимистична, оптимистична и средна времева сложност.
 \end{frame}

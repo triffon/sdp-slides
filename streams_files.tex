@@ -7,9 +7,11 @@
 
 \date{17 октомври 2017 г.}
 
+% TODO: източник на картинката
 \titlegraphic{\includegraphics[height=0.2\textheight]{images/stream.jpg}\hspace{5ex}
               \includegraphics[height=0.2\textheight]{images/files.jpg}}
 
+            % TODO: стиловете да се изнесат в sdp.sty файла
 \usetikzlibrary{arrows.meta,patterns,snakes,math}
 
 \tikzset{
@@ -47,6 +49,7 @@
 
   \begin{center}
     производител
+    % TODO: картинката да се нарисува с TikZ
     $\longrightarrow$ \includegraphics[width=0.4\textwidth,valign=c]{images/abstract_stream.pdf}
     $\longrightarrow$ консуматор
   \end{center}
@@ -105,6 +108,7 @@
   \item Служебни символи
   \item Кодиращи таблици
   \item Unicode (\lst!wchar_t!)
+    % TODO: картинка с обяснение на UTF-8
   \item UTF-8
   \end{itemize}
 \end{frame}
@@ -114,6 +118,7 @@
 \begin{frame}
   \frametitle{Поточна йерархия в C++}
 
+  % TODO: да се нарисува с TikZ
   \includegraphics[width=\textwidth]{images/stream_hierarchy.pdf}
 \end{frame}
 
@@ -134,6 +139,7 @@
   Неформатиран вход:\\[1em]
   \lst!istream& get(char&);!\\
   \lst!istream& get(char*,streamsize,char);!\\
+  % TODO: подсказка за разликата между get и getline
   \lst!istream& getline(char*,streamsize,char);!\\
   \lst!streamsize gcount() const;!\\
   \lst!istream& read(char*, streamsize);!\\[2em]
