@@ -153,6 +153,9 @@
 % черен кон на слайд с даден номер
 \newcommand{\bks}[1]{\safetemporal{#1}\ws\bk\wk}
 
+% черен кон на слайд с даден номер и с индекс на пореден ход
+\newcommand{\bkn}[1]{\safetemporal{#1}\ws\bk{\wk\hspace{-0.55em}{\scriptsize$^{#1}$}}}
+
 % покажи засивен текст
 \newcommand{\gc}[2]{\onslide<#1>{\textcolor{gray}{#2}}}
 
