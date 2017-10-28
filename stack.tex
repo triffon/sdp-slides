@@ -3,7 +3,7 @@
 
 \title{Стек}
 
-\date{24 октомври 2017 г.}
+\date{24--25 октомври 2017 г.}
 
 %TODO: източник за картинката
 \titlegraphic{\includegraphics[height=0.4\textheight]{images/stack.jpg}}
@@ -26,7 +26,7 @@
   \item \lst{empty()} --- проверка за празнота на стек
   \item \lst{push(x)} --- включване на елемент на стек
   \item \lst{pop()} --- изключване на елемент от стек
-  \item \lst{top()} --- последен елемент на стека
+  \item \lst{peek()} --- последен елемент на стека
   \end{itemize}
 \end{frame}
 
@@ -37,8 +37,8 @@
   \begin{itemize}
   \item \lst{create().empty()} = \lst{true}
   \item \lst{s.push(x).empty()} = \lst{false}
-  \item \lst{create().top()}, \lst{create().pop()} --- \alert{грешка}
-  \item \lst{s.push(x).top()} = \tt x
+  \item \lst{create().peek()}, \lst{create().pop()} --- \alert{грешка}
+  \item \lst{s.push(x).peek()} = \tt x
   \item \lst{s.push(x).pop()} = \tt s
   \end{itemize}
 \end{frame}
@@ -378,7 +378,8 @@
 
 \begin{frame}
   \frametitle{Пример: ход на коня}
-  
+
+  % TODO: да се нарисува с TikZ
   \begin{columns}[t,onlytextwidth]
     \begin{column}{.5\textwidth}
       \begin{chessboard}4{1ex}
@@ -390,6 +391,7 @@
       \end{chessboard}
     \end{column}
 
+    % TODO: различен цвят за коня на обратния ход
     \begin{column}{.5\textwidth}
       \begin{tabular}{|c|cc}
         \cline{1-1}
