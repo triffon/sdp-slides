@@ -8,6 +8,8 @@
 % TODO: източник на картинката
 \titlegraphic{\includegraphics[height=0.35\textheight]{images/queue.jpg}}
 
+\usetikzlibrary{decorations.pathmorphing}
+
 \begin{document}
 
 \begin{frame}
@@ -93,7 +95,7 @@
     \begin{tabular}{cccc@{}c@{}cc}
       \onslide<1-6>{\nextcell{a_0}}&\nextcell{a_1}&\nextcell{a_3}&\hspace{1ex}\ldots&$\nextarrow$&\alt<1,2>{\nilcell{a_n}}{\nextcell{a_n}}&\onslide<2->{\nilcell{a_{n+1}}}\\
       \onslide<1-6>{\bua}&\onslide<6->{\bua}&\multicolumn 3c{}&\onslide<1-3>{\bua}&\onslide<2->{\bua}\\
-      \only<5-6>p\only<5>,\only<1-5>{front}&\onslide<6->{front}&\multicolumn 3c{}&\onslide<1-3>{back}&\temporal<2-3>{}p{back}
+      \only<5-6>p\only<5>,\only<1-5>{front}&\onslide<6->{front}&\multicolumn 3c{}&\onslide<1-3>{back}&\only<2->{\alt<2-3>p{back}}
     \end{tabular}
   \end{center}
   \begin{itemize}
@@ -232,7 +234,7 @@
   \only<9>{
   \begin{tikzpicture}[remember picture,overlay]
     \foreach \r in {1.5,3.2,...,12}{
-      \draw[red,dashed,thick,xshift=21.2em,yshift=14.4em,rotate=45] (-\r em,-\r em) rectangle (\r em, \r em);
+      \draw[red,decorate,decoration={coil,segment length=4ex,amplitude=0.3ex},thick,xshift=21.2em,yshift=14.4em,rotate=45] (-\r em,-\r em) rectangle (\r em, \r em);
     }
   \end{tikzpicture}}
 \end{frame}
