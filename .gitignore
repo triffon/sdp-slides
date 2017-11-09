@@ -8,3 +8,6 @@
 *.toc
 *.vrb
 auto/
+out/
+*.xoj
+_region_.tex
