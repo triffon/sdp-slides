@@ -3,7 +3,7 @@
 
 \title{Списък}
 
-\date{6 ноември 2015 г.}
+\date{14 ноември 2017 г.}
 
 \titlegraphic{\includegraphics[height=0.35\textheight]{images/list.jpg}}
 
@@ -18,11 +18,8 @@
 \begin{frame}
   \frametitle{АТД: списък}
 
-  Хомогенна линейна структура с последователен достъп до елементите
-  \vspace{1em}
-
-  Операции
-  \vspace{0.5em}
+  Хомогенна линейна структура с последователен достъп до елементите\\[1em]
+  Операции:\\[0.5em]
   \begin{itemize}
   \item \tt{create()} --- създаване на празен списък
   \item \tt{empty()} --- проверка за празен списък
@@ -69,11 +66,8 @@
 \begin{frame}
   \frametitle{АТД итератор}
 
-  Абстракция на позиция, позволяваща обхождането на данни в дадена колекция
-  \vspace{1em}
-
-  Операции
-  \vspace{0.5em}
+  Абстракция на позиция, позволяваща обхождането на данни в дадена колекция\\[1em]
+  Операции:\\[0.5em]
   \begin{itemize}
   \item \tt{begin()} -- инициализация в началото на списъка
   \item \tt{end()} -- инициализация в края на списъка
@@ -93,16 +87,17 @@
   \end{itemize}
 \end{frame}
 
+\begin{comment}
 \begin{frame}
   \frametitle{Достъп до производен клас на шаблон}
 
   \textbf{Проблем:} Какъв резултат трябва да връщат операциите \tt{++}, преместващи итераторите?\\[1em]
   \begin{itemize}
-  \item \tt{Iterator\& operator++();}
+  \item \lst{Iterator\& operator++();}
     \begin{itemize}
     \item връщаме псевдоним към обект от абстрактен клас, ОК
     \end{itemize}
-  \item\tt{Iterator operator++(int);}
+  \item\lst{Iterator operator++(int);}
     \begin{itemize}
     \item връщаме обект от абстрактен клас, \alert{грешка!}
     \end{itemize}
@@ -114,44 +109,46 @@
   \alert{Да! Базовият клас трябва да е \textbf{шаблон, приемащ производния си клас за параметър}}
 \end{frame}
 
-\begin{frame}[fragile,fragile]
+\begin{frame}[fragile]
   \frametitle{Curiously Recurring Template Pattern (CRTP)}
 
-\begin{verbatim}
+\begin{lstlisting}
 template <typename Derived>
 class Base {
   ...
 };
 
-class Derived : public Base<Dervived> {
+class Derived : public Base<Derived> {
   ...
 };
-\end{verbatim}
-  По този начин шаблонът \tt{Base} може да се обръща към наследяващия го клас.
+\end{lstlisting}
+  По този начин шаблонът \lst{Base} може да се обръща към наследяващия го клас.
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Решение на проблема с \tt{operator++}}
-\begin{semiverbatim}
-template <typename T, \alert{typename ConcreteIterator}>
-class Iterator \{
+  \frametitle{Решение на проблема с \lst{operator++}}
+
+  \small
+\begin{lstlisting}
+template <typename T, @\alert{typename ConcreteIterator}@>
+class Iterator {
   ...
-  \alert{ConcreteIterator} operator++(int) \{
+  @\alert{ConcreteIterator}@ operator++(int) {
     ConcreteIterator save = (ConcreteIterator&)*this;
     ++(*this);
     return save;
-  \}
-\};
-
+  }
+};
 template <typename T>
 class LinkedListIterator :
-         public Iterator<T, \alert{LinkedListIterator<T>} > \{
+         public Iterator<T, @\alert{LinkedListIterator<T>}@ > {
   ...
-\};
-\end{semiverbatim}
+};
+\end{lstlisting}
 \pause
-Експлицитното преобразуване на типа се налага, понеже \tt{*this} е от тип \tt{Iterator\&}, а конструкторът за копиране на \tt{ConcreteIterator} очаква тип \tt{ConcreteIterator\&}.
+Експлицитното преобразуване на типа се налага, понеже \lst{*this} е от тип \lst{Iterator&}, а конструкторът за копиране на \lst{ConcreteIterator} очаква тип \lst{ConcreteIterator&}.
 \end{frame}
+\end{comment}
 
 \section{Приложения на списъци}
 
@@ -199,22 +196,21 @@ class LinkedListIterator :
 \begin{frame}
   \frametitle{Функции от по-висок ред за списъци}
 
-  Нека е даден списък $l = (a_1\,a_2\,a_3\,\ldots\,a_n)$.
-
+  Нека е даден списък $l = (a_1\,a_2\,a_3\,\ldots\,a_n)$.\\
   \begin{itemize}[<+->]
-  \item \tt{foldr} --- свиване надясно
+  \item \lst{foldr} --- свиване надясно
     \begin{equation*}
       a_1 \oplus \Big(a_2 \oplus \big(\ldots \oplus (a_n \oplus \bot) \ldots\big)\Big),
     \end{equation*}
-  \item \tt{foldl} --- свиване наляво
+  \item \lst{foldl} --- свиване наляво
     \begin{equation*}
       \Big(\ldots\big((\bot \oplus a_1) \oplus a_2\big) \oplus \ldots\Big) \oplus a_n
     \end{equation*}
-  \item \tt{map} --- изобразяване
+  \item \lst{map} --- изобразяване
     \begin{equation*}
       f(a_1), f(a_2), \ldots, f(a_n)
     \end{equation*}
-  \item \tt{filter} --- филтриране
+  \item \lst{filter} --- филтриране
     \begin{equation*}
       a_{k_1}, a_{k_2}, \ldots, a_{k_m},\text{ където }\left\{
       \begin{array}{l}
@@ -228,10 +224,8 @@ class LinkedListIterator :
 \begin{frame}
   \frametitle{Задачи за функции от по-висок ред}
 
-  \textbf{Задача.} Да се намери сумата от нечетните квадрати на числата в даден списък.
-  \vspace{3em}
+  \textbf{Задача.} Да се намери сумата от нечетните квадрати на числата в даден списък.\\[3em]
   \pause
-
   \textbf{Задача.} Да се намери произведението от най-малките положителни елементи на списък от списъци от числа.
 \end{frame}
 
@@ -243,9 +237,9 @@ class LinkedListIterator :
     <тип> $\lambda$\tt(<параметри>\tt{) \{}<тяло>\tt\}
   \item типът на израза е специален системен клас \tt{ClosureType}, който има операция за преобразуване на типа до указател към функция с горната сигнатура, т.е.\\
     <тип> \tt{(*)(}<параметри>\tt{);}
-  \item Примери:
-  \item \verb|map([](int x) -> int { return x * x; }, l)|
-  \item \verb|foldr([](int x, int y) -> int { return x + y; }, 0, l)|
+  \item \textbf{Примери:}
+  \item \lst!map([](int x) -> int { return x * x; }, l)!
+  \item \lst!foldr([](int x, int y) -> int { return x + y; }, 0, l)!
   \end{itemize}
 \end{frame}
 
@@ -262,9 +256,9 @@ class LinkedListIterator :
 \end{frame}
 
 \begin{frame}
-  \frametitle{\tt{std::list}}
+  \frametitle{\lst{std::list}}
   \small
-  Реализацията на \tt{std::list} в STL е двусвързана.
+  Реализацията на \lst{std::list} в STL е двусвързана.
   \begin{itemize}
   \item \tt{front()}, \tt{back()} --- първи и последен елемент
   \item \tt{begin()}, \tt{end()} --- итератори към началото и края
