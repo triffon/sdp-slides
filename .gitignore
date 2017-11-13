@@ -3,7 +3,7 @@
 *.log
 *.nav
 *.out
-*.pdf
+/*.pdf
 *.snm
 *.toc
 *.vrb
