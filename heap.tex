@@ -3,7 +3,7 @@
 
 \title{Пирамида}
 
-\date{4 декември 2015 г.}
+\date{12 декември 2017 г.}
 
 \titlegraphic{\includegraphics[height=0.35\textheight]{images/heap.jpg}}
 
@@ -28,10 +28,9 @@
 
 \begin{frame}
   \frametitle{АТД: приоритетна опашка}
-  
+
   Опашка, в която елементите са наредени по приоритет и първи се обработва най-приоритетният елемент.\\[1em]
-  Операции
-  \vspace{0.5em}
+  Операции:\\[0.5em]
   \begin{itemize}
   \item \tt{create()} --- създаване на празна приоритетна опашка
   \item \tt{build(l)} --- създаване на приоритетна опашка по списък \tt l от елементи с приоритет
@@ -44,7 +43,7 @@
 
 \begin{frame}
   \frametitle{Сортиран списък като приоритетна опашка}
-  
+
   Списък, в който елементите са сортирани низходящо по приоритет.\\
   Сложност на операциите:
   \begin{itemize}[<+->]
@@ -77,6 +76,7 @@
 
 \begin{frame}
   \frametitle{Пирамида}
+
   \begin{definition}[Пирамида]
     Дърво, в което всеки родител е с по-висок приоритет от децата си.
   \end{definition}
@@ -88,6 +88,7 @@
 
 \begin{frame}
   \frametitle{Пресяване надолу (sift down)}
+
   \begin{itemize}[<+->]
   \item Да разгледаме елемент, който нарушава пирамидалното свойство
     \begin{itemize}
@@ -130,7 +131,7 @@
           default [18 [12 [10 [4] [7]] [5] [11]] [15
           [10] [8]] [9 [3]]]
         \end{forest}
-      \end{onlyenv}      
+      \end{onlyenv}
     \end{overprint}
   \end{center}
   \pause
@@ -139,6 +140,7 @@
 
 \begin{frame}
   \frametitle{Пресяване нагоре (sift up)}
+
   \begin{itemize}[<+->]
   \item Да разгледаме елемент, който нарушава пирамидалното свойство
     \begin{itemize}
@@ -185,7 +187,7 @@
 \begin{frame}
   \frametitle{Пирамидата като приоритетна опашка}
 
-  Операции
+  Операции:
   \begin{itemize}[<+->]
   \item \tt{create()}, \tt{empty()} --- $O(1)$
     \begin{itemize}
@@ -217,6 +219,7 @@
 
 \begin{frame}
   \frametitle{Пълно двоично дърво}
+
   \begin{definition}[Пълно двоично дърво]
     Двоично дърво, за което:
     \begin{itemize}
@@ -240,7 +243,7 @@
       \end{equation*}
       \pause
       \begin{equation*}
-        \log_2(n+1) \leq h \leq \log_2 n + 1 
+        \log_2(n+1) \leq h \leq \log_2 n + 1
       \end{equation*}
     \end{column}
   \end{columns}
@@ -248,7 +251,7 @@
 
 \begin{frame}
   \frametitle{Двоична пирамида}
-  
+
   Можем да представим пълните двоични дървета чрез масив \tt a, така че
   \begin{itemize}[<+->]
   \item \tt{a[0]} е корен
@@ -267,6 +270,7 @@
 
 \begin{frame}
   \frametitle{Пирамидално сортиране}
+
   Можем да сортираме масив като го превърнем в двоична пирамида.\\
   \pause
   Алгоритъм:
@@ -291,8 +295,3 @@
 \end{frame}
 
 \end{document}
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: t
-%%% End:
