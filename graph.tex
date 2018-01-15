@@ -3,7 +3,7 @@
 
 \title{Графи}
 
-\date{14--15 януари 2016 г.}
+\date{9--16 януари 2017 г.}
 
 \titlegraphic{\includegraphics[height=0.35\textheight]{images/graph.png}}
 
@@ -83,8 +83,8 @@
 
 \begin{frame}
   \frametitle{АТД: граф}
-  Нелинейна структура, описваща обекти и връзките между тях.\\
-  Операции
+  Нелинейна структура, описваща обекти и връзките между тях.\\[1em]
+  Операции:
   \begin{itemize}
   \item \tt{vertices()} --- списък на върховете
   \item \tt{successors(u)} --- списък на наследниците на даден връх
@@ -188,21 +188,23 @@
   \end{equation*}
   \begin{columns}[onlytextwidth]
     \begin{column}{0.7\textwidth}
-      \alt<1>{%
-      \begin{itemize}
-      \item $A_{i,j} = 1 \leftrightarrow \exists v \in V\, e_j = (v_i, v) \leftrightarrow e_j\text{ е \textbf{изходящо} ребро за }v_i$
-      \item $A_{i,j} = -1 \leftrightarrow \exists v \in V\, e_j = (v, v_i) \leftrightarrow e_j\text{ е \textbf{входящо} ребро за }v_i$
-      \end{itemize}
-    }{%
-      \begin{itemize}[<+->]
-      \item памет --- \rvl{$O(|V||E|)$}
-      \item \tt{successors} --- \rvl{$O(|V||E|)$}
-      \item \tt{isEdge} --- \rvl{$O(|E|)$}
-      \item \tt{addVertex} --- \rvl{$O(|E|)$}
-      \item \tt{addEdge} --- \rvl{$O(|V|)$}
-      \item \tt{removeVertex, removeEdge} --- \rvl{$O(|V||E|)$, ако се налага разместване}
-      \end{itemize}
-    }
+      \begin{overlayarea}{.7\textwidth}{.5\textheight}
+        \alt<1>{%
+          \begin{itemize}
+          \item $A_{i,j} = 1 \leftrightarrow \exists v \in V\, e_j = (v_i, v) \leftrightarrow e_j\text{ е \textbf{изходящо} ребро за }v_i$
+          \item $A_{i,j} = -1 \leftrightarrow \exists v \in V\, e_j = (v, v_i) \leftrightarrow e_j\text{ е \textbf{входящо} ребро за }v_i$
+          \end{itemize}
+        }{%
+          \begin{itemize}[<+->]
+          \item памет --- \rvl{$O(|V||E|)$}
+          \item \tt{successors} --- \rvl{$O(|V||E|)$}
+          \item \tt{isEdge} --- \rvl{$O(|E|)$}
+          \item \tt{addVertex} --- \rvl{$O(|E|)$}
+          \item \tt{addEdge} --- \rvl{$O(|V|)$}
+          \item \tt{removeVertex, removeEdge} --- \rvl{$O(|V||E|)$, ако се налага разместване}
+          \end{itemize}
+        }
+      \end{overlayarea}
     \end{column}
     \begin{column}{0.3\textwidth}
       \samplegraph[1]
@@ -241,6 +243,7 @@
   \item \tt{removeEdge} --- \rvl{$O(|V|)$ (ако е множество --- $O(1)$)}
   \end{itemize}
 \end{frame}
+\end{document}
 
 \begin{frame}
   \frametitle{Списък на инцидентност}
