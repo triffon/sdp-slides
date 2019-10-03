@@ -93,6 +93,8 @@
 % син цвят по подразбиране
 \colorlet{diagramblue}{blue!60!green!40}
 
+\usepackage[type={CC}, modifier={by-nc-sa}, version={4.0}, imagemodifier={-eu}]{doclicense}
+
 %%% настройки общи за всички слайдове
 \mode<presentation>
 {
@@ -100,9 +102,15 @@
   \usecolortheme{dolphin}
 }
 \author{Трифон Трифонов}
-\institute[СДП-КН 17/18]{\small Структури от данни и програмиране,\\
-спец. Компютърни науки, 1 поток, 2017/18 г.}
+\institute[СДП-КН 19/20]{\scriptsize Структури от данни и програмиране, спец. Компютърни науки, 1 поток, 2019/20 г.}
 \subject{LectureSlides}
+
+% инжектиране на специфична графика за слайда
+\def\@titlegraphicx{}
+\newcommand{\titlegraphicx}[1]{\def\@titlegraphicx{#1}}
+
+\titlegraphic{\scalebox{.45}{\textcolor{gray}{Тази презентация е достъпна под лиценза Creative Commons Признание-Некомерсиално-Споделяне на споделеното 4.0 Международен \doclicenseIcon}}\\[1ex]
+\@titlegraphicx}
 
 %%% среди
 
@@ -182,3 +190,8 @@
 
 % откриване на въпрос
 \newcommand{\rvl}[1]{\alt<+->{#1}?}
+
+% creative commons признание
+\newcommand{\imageUntitledAttr}[3]{\scalebox{.4}{\textcolor{gray}{От #1 (\url{#2}), #3}}}
+\newcommand{\imageAttr}[4]{\scalebox{.4}{\textcolor{gray}{``#1'' от #2 (\url{#3}), #4}}}
+\newcommand{\imageBased}[4]{\scalebox{.4}{\textcolor{gray}{Базирано на ``#1'' от #2 (\url{#3}), #4}}}
