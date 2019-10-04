@@ -1,9 +1,9 @@
-\documentclass{beamer}
+\documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
 
 \title{Стек}
 
-\date{24--25 октомври 2017 г.}
+\date{3 октомври 2019 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/stack.jpg}\\
   \imageAttr{Stack of Rocks, Cattle Point, San Juan Island}{Ryan Harvey}{https://flic.kr/p/aojd1Q}{CC BY-SA 2.0}}
@@ -56,11 +56,11 @@
       \rowcolor{white}
       \multicolumn 4c{}&
       \multicolumn 1c{\onslide<1,3>{\bua}}&
-      \multicolumn 1c{\onslide<2 |handout:0>{\bua}}&
+      \multicolumn 1c{\onslide<2 |trans:0>{\bua}}&
       \multicolumn 5c{}\\
       \multicolumn 4c{}&
       \multicolumn 1c{\onslide<1,3>{top}}&
-      \multicolumn 1c{\onslide<2 |handout:0>{top}}&
+      \multicolumn 1c{\onslide<2 |trans:0>{top}}&
       \multicolumn 5c{}
     \end{tabular}
   \end{center}
@@ -78,9 +78,9 @@
   \begin{center}
     \scriptsize
     \begin{tabular}{cccc@{}c@{}cc}
-      \onslide<2-4 |handout:0>{\nextcell{a_{n+1}}}&\nextcell{a_n}&\nextcell{a_{n-1}}&\hspace{1ex}\ldots&$\nextarrow$&\nextcell{a_1}&\nilcell{a_0}\\
-      \onslide<2-4 |handout:0>{\bua}&\onslide<1,4-5>{\bua}&\multicolumn 5c{}\\
-      \onslide<2-4>{\only<3-4 |handout:0>p\only<3 |handout:0>,\only<2-3 |handout:0>{top}}&\onslide<1,4-5>{top}&\multicolumn 5c{}
+      \onslide<2-4 |trans:0>{\nextcell{a_{n+1}}}&\nextcell{a_n}&\nextcell{a_{n-1}}&\hspace{1ex}\ldots&$\nextarrow$&\nextcell{a_1}&\nilcell{a_0}\\
+      \onslide<2-4 |trans:0>{\bua}&\onslide<1,4-5>{\bua}&\multicolumn 5c{}\\
+      \onslide<2-4>{\only<3-4 |trans:0>p\only<3 |trans:0>,\only<2-3 |trans:0>{top}}&\onslide<1,4-5>{top}&\multicolumn 5c{}
     \end{tabular}
   \end{center}
 
@@ -135,7 +135,7 @@
   \end{center}
 \end{frame}
 
-\begin{frame}<handout:0>
+\begin{frame}<trans:0>
   \frametitle{Пример: Пресмятане на израз в обратен полски запис}
 
   % TODO: да се реализира с TikZ
@@ -178,7 +178,7 @@
 
 % TODO: общ слайд за преобразуване в обратен полски запис
 
-\begin{frame}<handout:0>
+\begin{frame}<trans:0>
   \frametitle{Пример: Преобразуване в обратен полски запис}
 
   % TODO: да се реализира с TiKZ
@@ -234,7 +234,7 @@
 
 % TODO: Слайд за проблема с приоритетите
 
-\begin{frame}<handout:0>
+\begin{frame}<trans:0>
   \frametitle{Пример 2: Преобразуване в обратен полски запис}
 
   % TODO: да се реализира с TiKZ
@@ -293,7 +293,7 @@
 
   % TODO: да се реализира с TiKZ  
   \begin{center}
-    \begin{tabular}{|p{20ex}p{5ex}p{20ex}p{20ex}@{}m{0pt}@{}}
+    \begin{tabular}{|p{18ex}p{5ex}p{18ex}p{18ex}@{}m{0pt}@{}}
       \hline
       \cellcolor{diagramblue}&\cellcolor{diagramblue}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}инфиксен запис}&\\[3em]
       \cline{2-2} \cline{4-4}
@@ -303,13 +303,13 @@
   \end{center}
 \end{frame}
 
-\begin{frame}<handout:0>
+\begin{frame}<trans:0>
   \frametitle{Пример: Директно пресмятане на израз}
 
   % TODO: да се реализира с TiKZ
   % TODO: да се опише алгоритъма в текстов вид
   \begin{center}
-    \begin{tabular}{|p{20ex}p{5ex}p{20ex}p{20ex}@{}m{0pt}@{}}
+    \begin{tabular}{|p{18ex}p{5ex}p{18ex}p{18ex}@{}m{0pt}@{}}
       \hline
       \cellcolor{diagramblue}&\cellcolor{diagramblue}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}\tt{%
       \onslide<-1>(%
@@ -382,7 +382,7 @@
   % TODO: да се нарисува с TikZ
   \begin{columns}[t,onlytextwidth]
     \begin{column}{.5\textwidth}
-      \begin{chessboard}4{1ex}
+      \begin{chessboard}4{4.5ex}
         \hline\bks1&\ws&\bks9&\ws&\\[1ex]
         \hline\bks{10,11}&\ws&\bks2&\bks5&\\[1ex]
         \hline\bks3&\safetemporal6\ws\bk{\alt<8>\bk\wk}&\ws&\ws&\\[1ex]
