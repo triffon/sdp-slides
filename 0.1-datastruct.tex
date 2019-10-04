@@ -1,16 +1,29 @@
-\documentclass{beamer}
+\documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
+
+\begin{filecontents*}{datastruct.bib}
+@book{wirth1984data,
+  title={Algorithms + data structures = programs},
+  author={Niklaus Wirth},
+  year={1976},
+  publisher={Englewood Cliffs, N.J. : Prentice-Hall}
+}
+\end{filecontents*}
 
 \title[СД+А=П]{Структури от данни\\+\\алгоритми\\=\\програми}
 
-% TODO: Цитат на книгата на Н. Вирт
-
-\date{10 октомври 2017 г.}
+\date{7 октомври 2019 г.}
 
 \begin{document}
 
 \begin{frame}
   \titlepage
+\end{frame}
+
+\begin{frame}
+  \nocite{*}
+  \bibliographystyle{plain}
+  \bibliography{datastruct}
 \end{frame}
 
 \section{Типове и структури}
@@ -23,7 +36,7 @@
   \item множество от стойности
   \item операции над стойностите
   \end{itemize}
-  \vspace{1em}
+  \vspace{2ex}
   \pause
   \alert{За какво служат типовете?}
 \end{frame}
@@ -236,19 +249,21 @@
   \frametitle{$O$-нотация}
 
   \textbf{Проблем:} искаме да категоризираме функциите относно поведението им при големи стойности, т.е. техния ``порядък''\\
-  \textbf{Решение:} дефинираме класове от функции\\[1em]
+  \textbf{Решение:} дефинираме класове от функции.
   \pause
   Нека $f, g : \mathbb N \to \mathbb N$.
   \begin{eqnarray*}
-    &f \in O(g) \Leftrightarrow \exists C \exists k \forall n \geq k (0 \leq f(n) \leq C\cdot g(n))& (\text{\small $f$ расте по-бавно от $g$})\\
+    f \in O(g) &\Longleftrightarrow& \exists C \exists k \forall n \geq k\;(0 \leq f(n) \leq C\cdot g(n))\\
+    && (\text{\small $f$ расте \textbf{по-бавно} от $g$})\\
     \pause
-    &f \in \Omega(g) \Leftrightarrow \exists C \exists k \forall n \geq k (0 \leq C\cdot g(n) \leq f(n))& (\text{\small $f$ расте по-бързо от $g$})
+    f \in \Omega(g) &\Longleftrightarrow & \exists C \exists k \forall n \geq k\;(0 \leq C\cdot g(n) \leq f(n))\\
+    && (\text{\small $f$ расте \textbf{по-бързо} от $g$})
   \end{eqnarray*}
   \pause
   Лесно се вижда, че $f\in O(g) \Leftrightarrow g\in \Omega(f)$.
   \pause
   \begin{equation*}
-    f\in \theta(g) \Leftrightarrow \exists C_1 \exists C_2 \exists k \forall n \geq k (0 \leq C_1\cdot g(n) \leq f(n) \leq C_2\cdot g(n))
+    f\in \theta(g) \Longleftrightarrow \exists C_1 \exists C_2 \exists k \forall n \geq k\;(0 \leq C_1\cdot g(n) \leq f(n) \leq C_2\cdot g(n))
   \end{equation*}
   \pause
   Лесно се вижда, че $\Theta(g) = O(g) \cap \Omega(g)$.
@@ -263,7 +278,7 @@
   \item $1000n^2 \in O(n^3)$ \onslide<+-> (при $C = 1000$ е вярно, че $1000n^2 \leq 1000n^3$)
   \item $3n^2 + 100 \in \Theta(n^2)$ \onslide<+->, защото при $C_1 = 1, C_2 = 4, k = 10$ е вярно, че
     \begin{equation*}
-      \forall n \geq 10 (0 \leq n^2 \leq 3n^2 + 100 \leq 4n^2)
+      \forall n \geq 10\;(0 \leq n^2 \leq 3n^2 + 100 \leq 4n^2)
     \end{equation*}
   \item $2^n \in O(3^n)$, $\log_2 (n) \in \Theta(log_{10}(n))$
     \begin{itemize}
