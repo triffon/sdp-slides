@@ -22,10 +22,25 @@
         showstringspaces=false,
         keepspaces=true}
 
-% декларативна графика
+%%% декларативна графика
 \usepackage{tikz}
+
+% стилове за стрелки, например Stealth
+\usetikzlibrary{arrows.meta}
+
+% геометрични фигури
+\usetikzlibrary{shapes.geometric}
+
+% нужно за ключа cross out за задраскване
+\usetikzlibrary{shapes.misc}
+
+% матрици
 \usetikzlibrary{matrix}
+
+% релативно позициониране
 \usetikzlibrary{positioning}
+
+% поддръжка на beamer overlays
 \usetikzlibrary{overlay-beamer-styles}
 
 % указател към #1 с име #2 на позиция #3
@@ -50,6 +65,57 @@
 % зачертана кутия, означаваща NULL указател
 \newcommand{\nullptr}[1]{
   \draw (#1.north east) to (#1.south west);
+}
+
+
+% стилове за диаграми
+\tikzset{
+  % стил за стрелка
+  pointer/.style={-{Stealth[length=1.5ex]}},
+  % стил за правоъгълна клетка на матрица
+  mtxnode/.style={
+    rectangle,
+    minimum width=1.5em,
+    minimum height=2ex,
+    text height=1.5ex,
+    text depth=0.25ex,
+    fill=diagramblue,
+    draw,
+  },
+  % базов стил за матрица
+  basematrix/.style={
+    ampersand replacement=\&,
+    nodes in empty cells,
+    % избягване на двойно дебели разделителни линии
+    column sep=-\pgflinewidth,
+    row sep=-\pgflinewidth,
+  },
+  % стил за клетка на масив от формули
+  arraynode/.style={
+    mtxnode,
+    minimum width=3.5ex,
+    minimum height=1.5em,
+  },
+  % стил за масив от формули
+  array/.style={
+    basematrix,
+    matrix of math nodes,
+    nodes=arraynode,
+    inner sep=0pt,
+  },
+  % стил за широк масив от формули
+  widearray/.style={
+    array,
+    nodes={minimum width=3em},
+  },
+  % стил за зачеркната клетка
+  cross/.style={
+    cross out,
+    draw=red,
+    thick,
+    minimum width=5em,
+    minimum height=3em
+  },
 }
 
 % правене на нови команди
