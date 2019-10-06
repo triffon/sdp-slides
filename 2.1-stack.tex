@@ -1,5 +1,7 @@
-\documentclass[alsotrans]{beamerswitch}
+\documentclass{beamerswitch}
 \usepackage{sdp}
+
+\crronly
 
 \title{Стек}
 
@@ -167,43 +169,35 @@ struct StackElement {
 \begin{frame}
   \frametitle{Пресмятане на израз в обратен полски запис}
 
-  %TODO: да се реализира с TikZ
   \begin{center}
-    \begin{tabular}{|p{20ex}p{25ex}@{}m{0pt}@{}}
-      \hline
-      \cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}обратен полски запис}&\\[3em]
-      \cline{2-3}
-      \multicolumn 1{|c|}{\cellcolor{diagramblue}резултати}&\multicolumn 1c{}&\\[7em]
-      \cline{1-1}
-    \end{tabular}
+    \begin{tikzpicture}[scale=1.3]
+      \filldraw[fill=diagramblue,draw=black] (0, 0) -- (4, 0) -- (4, -2) -- (2, -2) -- (2, -4) -- (0, -4) -- (0, 0);
+      \node[align=center] at (3, -1) {обратен\\полски\\запис};
+      \node at (1, -3) {резултати};
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
 \begin{frame}<trans:0>
   \frametitle{Пример: Пресмятане на израз в обратен полски запис}
 
-  % TODO: да се реализира с TikZ
   % TODO: да се опише алгоритъма в текстов вид
   \begin{center}
-    \begin{tabular}{|p{20ex}p{15ex}@{}m{0pt}@{}}
-      \hline
-      \cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}
-      \tt{
-      \onslide<-+>1%
-      \onslide<-+>2%
-      \onslide<-+>+%
-      \onslide<-+>3%
-      \onslide<-+>4%
-      \onslide<-+>5%
-      \onslide<-+>/%
-      \onslide<-+>-%
-      \onslide<-+>*%
-      \onslide<-+>\phantom
-      }}
-      &\\[3em]
-      \cline{2-3}
-      \multicolumn 1{|c|}{\cellcolor{diagramblue}
-      \begin{tabular}{c}
+    \begin{tikzpicture}[scale=1.3]
+      \filldraw[fill=diagramblue,draw=black] (0, 0) -- (4, 0) -- (4, -2) -- (2, -2) -- (2, -4) -- (0, -4) -- (0, 0);
+      \node[anchor=base east,align=right] at (3.8, -1.1) {%
+        \tt{%
+          \only<-+>1%
+          \only<-+>2%
+          \only<-+>+%
+          \only<-+>3%
+          \only<-+>4%
+          \only<-+>5%
+          \only<-+>/%
+          \only<-+>-%
+          \only<-+>*%
+        }};
+      \node[anchor=south,align=center] at (1, -3.8) {%
         \only<10>{\\\tt{6.6}}%
         \only<9>{\\\tt{2.2}}%
         \only<8>{\\\tt{0.8}}%
@@ -213,66 +207,72 @@ struct StackElement {
         \only<4-9>{\\\tt 3}%
         \only<3>{\\\tt 2}%
         \only<2-3>{\\\tt 1}%
-      \end{tabular}
-      }&\multicolumn 1c{}&\\[7em]
-      \cline{1-1}
-    \end{tabular}
+      };
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
-% TODO: общ слайд за преобразуване в обратен полски запис
+\begin{frame}<trans:0>
+  \frametitle{Преобразуване в обратен полски запис}
+
+  % TODO: да се опише алгоритъма в текстов вид
+  \begin{center}
+    \begin{tikzpicture}[scale=1.3]
+      \filldraw[fill=diagramblue,draw=black]
+      (-2, 0) -- (4, 0) -- (4, -2) -- (2, -2) -- (2, -4) -- (0, -4) -- (0, -2) -- (-2, -2) -- (-2, 0);
+      \node[align=center] at (3, -1) {инфиксен\\запис};
+      \node[align=center] at (-1, -1) {обратен\\полски\\запис};
+      \node[align=center] at (1, -3) {операции};
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
 
 \begin{frame}<trans:0>
   \frametitle{Пример: Преобразуване в обратен полски запис}
 
-  % TODO: да се реализира с TiKZ
-  % TODO: да се опише алгоритъма в текстов вид
   \begin{center}
-    \begin{tabular}{p{25ex}p{20ex}p{20ex}@{}m{0pt}@{}}
-      \hline
-      \multicolumn 1{|c}{\cellcolor{diagramblue}%
-      \tt{%
-      \only<3->1%
-      \only<5->2%
-      \only<8->+%
-      \only<12->3%
-      \only<14->4%
-      \only<16->5%
-      \only<19->/%
-      \only<20->-%
-      \only<22->*%
-      }}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}%
-      \tt{%
-      \onslide<-1>(%
-      \onslide<-2>1%
-      \onslide<-3>+%
-      \onslide<-4>2%
-      \onslide<-5>)%
-      \onslide<-9>*%
-      \onslide<-10>(%
-      \onslide<-11>3%
-      \onslide<-12>-%
-      \onslide<-13>4%
-      \onslide<-14>/%
-      \onslide<-15>5%
-      \onslide<-16>)%
-      \onslide<-22>\phantom
-      }}&\\[3em]
-      \cline{1-1} \cline{3-3}
-      \multicolumn 1{p{20ex}}{}&\multicolumn 1{|c|}{\cellcolor{diagramblue}%
-      \begin{tabular}{c}
-      \only<17>{\\\tt)}%
-      \only<15-18>{\\\tt/}%
-      \only<13-19>{\\\tt-}%
-      \only<11-20>{\\\tt(}%
-      \only<10-21>{\\\tt*}%
-      \only<6>{\\\tt)}%
-      \only<4-7>{\\\tt+}%
-      \only<2-8>{\\\tt(}%
-      \end{tabular}
-      }&\multicolumn 1c{}&\\[7em]
-      \cline{2-2}
-    \end{tabular}
+    \begin{tikzpicture}[scale=1.3]
+      \filldraw[fill=diagramblue,draw=black]
+      (-2, 0) -- (4, 0) -- (4, -2) -- (2, -2) -- (2, -4) -- (0, -4) -- (0, -2) -- (-2, -2) -- (-2, 0);
+      \node[anchor=west,align=left] at (-1.8, -1) {%
+        \tt{%
+          \only<3->1%
+          \only<5->2%
+          \only<8->+%
+          \only<12->3%
+          \only<14->4%
+          \only<16->5%
+          \only<19->/%
+          \only<20->-%
+          \only<22->*%
+        }};
+      \node[anchor=east,align=right] at (3.8, -1) {%
+        \tt{%
+          \only<-1>(%
+          \only<-2>1%
+          \only<-3>+%
+          \only<-4>2%
+          \only<-5>)%
+          \only<-9>*%
+          \only<-10>(%
+          \only<-11>3%
+          \only<-12>-%
+          \only<-13>4%
+          \only<-14>/%
+          \only<-15>5%
+          \only<-16>)%
+        }};
+      \node[anchor=south,align=center] at (1, -3.8) {%
+        \only<17>{\\\tt)}%
+        \only<15-18>{\\\tt/}%
+        \only<13-19>{\\\tt-}%
+        \only<11-20>{\\\tt(}%
+        \only<10-21>{\\\tt*}%
+        \only<6>{\\\tt)}%
+        \only<4-7>{\\\tt+}%
+        \only<2-8>{\\\tt(}%
+      };
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
@@ -281,100 +281,93 @@ struct StackElement {
 \begin{frame}<trans:0>
   \frametitle{Пример 2: Преобразуване в обратен полски запис}
 
-  % TODO: да се реализира с TiKZ
   \begin{center}
-    \begin{tabular}{p{25ex}p{20ex}p{20ex}@{}m{0pt}@{}}
-      \hline
-      \multicolumn 1{|c}{\cellcolor{diagramblue}%
-      \tt{%
-      \only<3->1%
-      \only<5->2%
-      \only<8->+%
-      \only<12->3%
-      \only<14->4%
-      \only<15->/%
-      \only<16->5%
-      \only<19->-%
-      \only<21->*%
-      }}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}%
-      \tt{%
-      \onslide<-1>(%
-      \onslide<-2>1%
-      \onslide<-3>+%
-      \onslide<-4>2%
-      \onslide<-5>)%
-      \onslide<-9>*%
-      \onslide<-10>(%
-      \onslide<-11>3%
-      \onslide<-12>/%
-      \onslide<-13>4%
-      \onslide<-14>-%
-      \onslide<-15>5%
-      \onslide<-16>)%
-      \onslide<-21>\phantom
-      }}&\\[3em]
-      \cline{1-1} \cline{3-3}
-      \multicolumn 1{p{20ex}}{}&\multicolumn 1{|c|}{\cellcolor{diagramblue}%
-      \begin{tabular}{c}
-      \only<17>{\\\tt)}%
-      \only<15-18>{\\\tt-}%
-      \only<13-14>{\\\tt/}%
-      \only<11-19>{\\\tt(}%
-      \only<10-20>{\\\tt*}%
-      \only<6>{\\\tt)}%
-      \only<4-7>{\\\tt+}%
-      \only<2-8>{\\\tt(}%
-      \end{tabular}
-      }&\multicolumn 1c{}&\\[7em]
-      \cline{2-2}
-    \end{tabular}
+    \begin{tikzpicture}[scale=1.3]
+      \filldraw[fill=diagramblue,draw=black]
+      (-2, 0) -- (4, 0) -- (4, -2) -- (2, -2) -- (2, -4) -- (0, -4) -- (0, -2) -- (-2, -2) -- (-2, 0);
+      \node[anchor=west,align=left] at (-1.8, -1) {%
+        \tt{%
+          \only<3->1%
+          \only<5->2%
+          \only<8->+%
+          \only<12->3%
+          \only<14->4%
+          \only<15->/%
+          \only<16->5%
+          \only<19->-%
+          \only<21->*%
+        }};
+      \node[anchor=east,align=right] at (3.8, -1) {%
+        \tt{%
+          \only<-1>(%
+          \only<-2>1%
+          \only<-3>+%
+          \only<-4>2%
+          \only<-5>)%
+          \only<-9>*%
+          \only<-10>(%
+          \only<-11>3%
+          \only<-12>/%
+          \only<-13>4%
+          \only<-14>-%
+          \only<-15>5%
+          \only<-16>)%
+        }};
+      \node[anchor=south,align=center] at (1, -3.8) {%
+        \only<17>{\\\tt)}%
+        \only<15-18>{\\\tt-}%
+        \only<13-14>{\\\tt/}%
+        \only<11-19>{\\\tt(}%
+        \only<10-20>{\\\tt*}%
+        \only<6>{\\\tt)}%
+        \only<4-7>{\\\tt+}%
+        \only<2-8>{\\\tt(}%
+      };
+    \end{tikzpicture}
   \end{center}
 \end{frame}
-
 
 \begin{frame}
   \frametitle{Директно пресмятане на израз}
 
-  % TODO: да се реализира с TiKZ
   \begin{center}
-    \begin{tabular}{|p{18ex}p{5ex}p{18ex}p{18ex}@{}m{0pt}@{}}
-      \hline
-      \cellcolor{diagramblue}&\cellcolor{diagramblue}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}инфиксен запис}&\\[3em]
-      \cline{2-2} \cline{4-4}
-      \multicolumn 1{|c|}{\cellcolor{diagramblue}резултати}&\multicolumn 1c{}&\multicolumn 1{|c|}{\cellcolor{diagramblue}операции}&\multicolumn 1c{}&\\[7em]
-      \cline{1-1} \cline{3-3}
-    \end{tabular}
+    \begin{tikzpicture}[scale=1.3]
+      \filldraw[fill=diagramblue,draw=black]
+      (-4, 0)  -- (4, 0)   -- (4, -2) -- (2, -2) -- (2, -4) -- (0, -4) -- (0, -2) -- (-2, -2) --
+      (-2, -4) -- (-4, -4) -- (-4, 0);
+      \node[align=center] at (3, -1) {инфиксен\\запис};
+      \node at (-3, -3) {резултати};
+      \node at (1, -3) {операции};
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
-\begin{frame}<trans:0>
+\begin{frame}<trans:0>[label=current]
   \frametitle{Пример: Директно пресмятане на израз}
 
-  % TODO: да се реализира с TiKZ
   % TODO: да се опише алгоритъма в текстов вид
   \begin{center}
-    \begin{tabular}{|p{18ex}p{5ex}p{18ex}p{18ex}@{}m{0pt}@{}}
-      \hline
-      \cellcolor{diagramblue}&\cellcolor{diagramblue}&\cellcolor{diagramblue}&\multicolumn 1{c|}{\cellcolor{diagramblue}\tt{%
-      \onslide<-1>(%
-      \onslide<-2>1%
-      \onslide<-3>+%
-      \onslide<-4>2%
-      \onslide<-5>)%
-      \onslide<-9>*%
-      \onslide<-10>(%
-      \onslide<-11>3%
-      \onslide<-12>-%
-      \onslide<-13>4%
-      \onslide<-14>/%
-      \onslide<-15>5%
-      \onslide<-16>)%
-      \phantom !%
-      \onslide<-22>\phantom
-      }}&\\[3em]
-      \cline{2-2} \cline{4-4}
-      \multicolumn 1{|c|}{\cellcolor{diagramblue}
-      \begin{tabular}{c}
+    \begin{tikzpicture}[scale=1.3]
+      \filldraw[fill=diagramblue,draw=black]
+      (-4, 0)  -- (4, 0)   -- (4, -2) -- (2, -2) -- (2, -4) -- (0, -4) -- (0, -2) -- (-2, -2) --
+      (-2, -4) -- (-4, -4) -- (-4, 0);
+      \node[anchor=base east,align=right] at (4, -1) {%
+        \tt{%
+          \only<-1>(%
+          \only<-2>1%
+          \only<-3>+%
+          \only<-4>2%
+          \only<-5>)%
+          \only<-9>*%
+          \only<-10>(%
+          \only<-11>3%
+          \only<-12>-%
+          \only<-13>4%
+          \only<-14>/%
+          \only<-15>5%
+          \only<-16>)%
+        }};
+      \node[anchor=south,align=center] at (-3, -3.8) {%
         \only<22>{\\\tt{6.6}}%
         \only<20-21>{\\\tt{2.2}}%
         \only<19>{\\\tt{0.8}}%
@@ -384,21 +377,18 @@ struct StackElement {
         \only<8-21>{\\\tt3}%
         \only<5-7>{\\\tt2}%
         \only<3-7>{\\\tt1}%
-      \end{tabular}
-      }&\multicolumn 1c{}&\multicolumn 1{|c|}{\cellcolor{diagramblue}
-      \begin{tabular}{c}
-      \only<17>{\\\tt)}%
-      \only<15-18>{\\\tt/}%
-      \only<13-19>{\\\tt-}%
-      \only<11-20>{\\\tt(}%
-      \only<10-21>{\\\tt*}%
-      \only<6>{\\\tt)}%
-      \only<4-7>{\\\tt+}%
-      \only<2-8>{\\\tt(}%
-      \end{tabular}
-      }&\multicolumn 1c{}&\\[7em]
-      \cline{1-1} \cline{3-3}
-    \end{tabular}
+      };
+      \node[anchor=south,align=center] at (1, -3.8) {%
+        \only<17>{\\\tt)}%
+        \only<15-18>{\\\tt/}%
+        \only<13-19>{\\\tt-}%
+        \only<11-20>{\\\tt(}%
+        \only<10-21>{\\\tt*}%
+        \only<6>{\\\tt)}%
+        \only<4-7>{\\\tt+}%
+        \only<2-8>{\\\tt(}%
+      };
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
