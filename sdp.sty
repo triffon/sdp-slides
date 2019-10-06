@@ -90,6 +90,27 @@
     column sep=-\pgflinewidth,
     row sep=-\pgflinewidth,
   },
+  % стил за матрица
+  % ключът matrix е запазен в TikZ, затова използваме mtx
+  mtx/.style={
+    basematrix,
+    matrix of nodes,
+    nodes=mtxnode,
+  },
+  % стил за квадратче на дъска за шах
+  chessnode/.style={
+    rectangle,
+    minimum width=3em,
+    minimum height=3em,
+    draw,
+    fill=white,
+    text height=2em,    
+  },
+  % стил за дъска на шах
+  chessboard/.style={
+    mtx,
+    nodes=chessnode,
+  },
   % стил за клетка на масив от формули
   arraynode/.style={
     mtxnode,
@@ -212,14 +233,8 @@
 % двойна кутия без указател към следващата
 \newcommand{\nilcell}[1]{\dualcell{#1}{\cellcolor{lightgray}\hspace{2ex}}}
 
-% шахматна дъска 4x4
-\newenvironment{chessboard}[2]{\begin{tabular}{|*{#1}{m{#2}|}@{}c@{}}}{\end{tabular}}
-
 % безопасен temporal, който работи и вътре в таблици
 \newcommand{\safetemporal}[4]{\alt<#1>{#3}{\alt<#1->{#4}{#2}}}
-
-% бяло квадратче на шахматна дъска
-\newcommand{\ws}{\phantom\BlackKnightOnWhite}
 
 % черен кон
 \newcommand{\bk}{\BlackKnightOnWhite}
@@ -227,11 +242,14 @@
 % бял кон
 \newcommand{\wk}{\WhiteKnightOnWhite}
 
+% червен кон
+\newcommand{\rk}{\textcolor{red}{\WhiteKnightOnWhite}}
+
 % черен кон на слайд с даден номер
-\newcommand{\bks}[1]{\safetemporal{#1}\ws\bk\wk}
+\newcommand{\bks}[1]{\safetemporal{#1}{}\bk\wk}
 
 % черен кон на слайд с даден номер и с индекс на пореден ход
-\newcommand{\bkn}[1]{\safetemporal{#1}\ws\bk{\wk\hspace{-0.55em}{\scriptsize$^{#1}$}}}
+\newcommand{\bkn}[1]{\safetemporal{#1}{}\bk{\wk\hspace{-0.55em}{\scriptsize$^{#1}$}}}
 
 % покажи засивен текст
 \newcommand{\gc}[2]{\onslide<#1>{\textcolor{gray}{#2}}}

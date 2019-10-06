@@ -1,7 +1,5 @@
-\documentclass{beamerswitch}
+\documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
-
-\crronly
 
 \title{Стек}
 
@@ -342,7 +340,7 @@ struct StackElement {
   \end{center}
 \end{frame}
 
-\begin{frame}<trans:0>[label=current]
+\begin{frame}<trans:0>
   \frametitle{Пример: Директно пресмятане на израз}
 
   % TODO: да се опише алгоритъма в текстов вид
@@ -413,19 +411,18 @@ struct StackElement {
 \begin{frame}
   \frametitle{Пример: ход на коня}
 
-  % TODO: да се нарисува с TikZ
-  \begin{columns}[t,onlytextwidth]
+  \begin{columns}[T,onlytextwidth]
     \begin{column}{.5\textwidth}
-      \begin{chessboard}4{4.5ex}
-        \hline\bks1&\ws&\bks9&\ws&\\[1ex]
-        \hline\bks{10,11}&\ws&\bks2&\bks5&\\[1ex]
-        \hline\bks3&\safetemporal6\ws\bk{\alt<8>\bk\wk}&\ws&\ws&\\[1ex]
-        \hline\ws&\ws&\bks4&\bks7&\\[1ex]
-        \hline
-      \end{chessboard}
+      \begin{tikzpicture}
+        \matrix[chessboard] {%
+          \bks1\&\&\bks9\&\\
+          \bks{10,11}\&\&\bks2\&\bks5\\
+          \bks3\&\safetemporal6{}\bk{\alt<8>\bk\wk}\&\&\\
+          \&\&\bks4\&\safetemporal7{}\bk\rk\\
+        };
+      \end{tikzpicture}
     \end{column}
 
-    % TODO: различен цвят за коня на обратния ход
     \begin{column}{.5\textwidth}
       \begin{tabular}{|c|cc}
         \cline{1-1}
