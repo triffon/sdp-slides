@@ -234,7 +234,7 @@
 \newcommand{\nilcell}[1]{\dualcell{#1}{\cellcolor{lightgray}\hspace{2ex}}}
 
 % безопасен temporal, който работи и вътре в таблици
-\newcommand{\safetemporal}[4]{\alt<#1>{#3}{\alt<#1->{#4}{#2}}}
+\newcommand{\safetemporal}[4]{\alt<#1| trans:0>{#3}{\alt<#1-| trans:1>{#4}{#2}}}
 
 % черен кон
 \newcommand{\bk}{\BlackKnightOnWhite}

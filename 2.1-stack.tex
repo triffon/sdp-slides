@@ -67,8 +67,8 @@
   \end{center}
 
   \begin{itemize}
-    \item<2-> включване на елемент (push)
-    \item<3-> изключване на елемент (pop)
+  \item<2-> включване на елемент (push)
+  \item<3-> изключване на елемент (pop)
   \end{itemize}
 \end{frame}
 
@@ -128,8 +128,8 @@ struct StackElement {
 \end{lstlisting}
 
   \begin{itemize}
-    \item<2-> включване на елемент (push)
-    \item<3-> изключване на елемент (pop)
+  \item<2-> включване на елемент (push)
+  \item<3-> изключване на елемент (pop)
   \end{itemize}
 
 \end{frame}
@@ -141,7 +141,7 @@ struct StackElement {
 \begin{frame}
   \frametitle{Обратен полски запис}
 
-  %TODO: анимация на обхожданията
+  % TODO: анимация на обхожданията
   \begin{columns}[t,onlytextwidth]
     \begin{column}{.6\textwidth}
       \begin{itemize}
@@ -176,10 +176,25 @@ struct StackElement {
   \end{center}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Алгоритъм за пресмятане на обратен полски запис}
+  За всеки пореден символ \tt c от израза в обратен полски запис:\pause
+  \begin{itemize}[<+->]
+  \item Ако \tt c е цифра, добавяме стойността ѝ в стека за резултати
+  \item Ако \tt c е (двуместна) операция:
+    \begin{itemize}
+    \item изваждаме най-горните два елемента от стека
+    \item прилагаме операцията над тях
+    \item добавяме резултата в стека
+    \end{itemize}
+  \end{itemize}
+  \onslide<+->
+  В стека остава единствен елемент: крайният резултат.
+\end{frame}
+
 \begin{frame}<trans:0>
   \frametitle{Пример: Пресмятане на израз в обратен полски запис}
 
-  % TODO: да се опише алгоритъма в текстов вид
   \begin{center}
     \begin{tikzpicture}[scale=1.3]
       \filldraw[fill=diagramblue,draw=black] (0, 0) -- (4, 0) -- (4, -2) -- (2, -2) -- (2, -4) -- (0, -4) -- (0, 0);
@@ -210,10 +225,9 @@ struct StackElement {
   \end{center}
 \end{frame}
 
-\begin{frame}<trans:0>
+\begin{frame}
   \frametitle{Преобразуване в обратен полски запис}
 
-  % TODO: да се опише алгоритъма в текстов вид
   \begin{center}
     \begin{tikzpicture}[scale=1.3]
       \filldraw[fill=diagramblue,draw=black]
@@ -223,6 +237,30 @@ struct StackElement {
       \node[align=center] at (1, -3) {операции};
     \end{tikzpicture}
   \end{center}
+\end{frame}
+
+\begin{frame}<1-6| trans:1>[label=shunting]
+  \frametitle{Алгоритъм на разпределителната гара (shunting yard)}
+  \begin{overlayarea}{\textwidth}{.8\textheight}
+    За преобразуване от инфиксен в обратен полски запис, за всеки пореден символ \tt c:\\\pause
+    \begin{itemize}[<+->]
+    \item Ако \tt c е цифра, прехвърляме я в \alt<-9| trans:1-2>{\alert<9| trans:0>{крайния резултат}}{стека с резултати}
+    \item Ако \tt c е отваряща скоба, поставяме я в стека с операции
+    \item Ако \tt c е операция\alt<-7| trans:1>{\alert<7| trans:0>{, поставяме я в стека с операции}}:
+      \only<8-| trans:2-3>{%
+        \begin{itemize}
+        \item изваждаме от стека \alt<-11| trans:1-2>{\alert<11| trans:0>{и записваме в резултата}}{и прилагаме} всички операции с приоритет по-висок или равен на \tt c
+        \item поставяме \tt c в стека
+        \end{itemize}
+        }%
+    \item Ако \tt c е затваряща скоба, последователно изваждаме от стека \alt<-11| trans:1-2>{\alert<11| trans:0>{и записваме в резултата}}{и прилагаме} всички операции до достигане на отваряща скоба
+    \end{itemize}
+    \onslide<6->
+    След приключване на входния низ, последователно изваждаме от стека и \alt<-11| trans:1-2>{\alert<11| trans:0>{и записваме в резултата}}{и прилагаме} всички останали операции.
+
+    \onslide<12-| trans:3>
+    \alert<trans:0>{Крайният резултат е единственият елемент в стека с резултати}.
+  \end{overlayarea}
 \end{frame}
 
 \begin{frame}<trans:0>
@@ -274,7 +312,20 @@ struct StackElement {
   \end{center}
 \end{frame}
 
-% TODO: Слайд за проблема с приоритетите
+\begin{frame}
+  \frametitle{Приоритети на операциите}
+  Какъв е обратния полски запис на израза \tt{(1+2)*(3/4-5)}?
+  \begin{itemize}[<+->]
+  \item Ако следваме алгоритъма, описан по-рано, резултатът би трябвало да е \tt{12+345-/*}\ldots
+  \item \ldots \alert{но резултатът от този израз е \tt{-9}, а не \tt{-12.75}!}
+  \item На обратния полски запис \tt{12+345-/*} съответсва инфиксен запис \tt{(1+2)*(3/(4-5))}!
+  \item \alert{Не сме взели предвид по-високия приоритет на операцията \tt/}
+  \item Правилният обратен полски запис на \tt{(1+2)*(3/4-5)} е \tt{12+34/5-*}.
+  \item \alert{Необходимо е да променим алгоритъма, така че да взема предвид приоритета на операциите!}
+  \end{itemize}
+\end{frame}
+
+\againframe<7-8| trans:2>{shunting}
 
 \begin{frame}<trans:0>
   \frametitle{Пример 2: Преобразуване в обратен полски запис}
@@ -328,6 +379,7 @@ struct StackElement {
 \begin{frame}
   \frametitle{Директно пресмятане на израз}
 
+  Ако комбинираме двата алгоритъма, можем да пресмятаме инфиксен израз директно, без използването на обратен полски запис:
   \begin{center}
     \begin{tikzpicture}[scale=1.3]
       \filldraw[fill=diagramblue,draw=black]
@@ -340,10 +392,11 @@ struct StackElement {
   \end{center}
 \end{frame}
 
+\againframe<9-13| trans:3>{shunting}
+
 \begin{frame}<trans:0>
   \frametitle{Пример: Директно пресмятане на израз}
 
-  % TODO: да се опише алгоритъма в текстов вид
   \begin{center}
     \begin{tikzpicture}[scale=1.3]
       \filldraw[fill=diagramblue,draw=black]
@@ -390,7 +443,82 @@ struct StackElement {
   \end{center}
 \end{frame}
 
-%TODO: слайд за поточна обработка
+\begin{frame}<trans:0>
+  \frametitle{Пример 2: Директно пресмятане на израз}
+
+  \begin{center}
+    \begin{tikzpicture}[scale=1.3]
+      \filldraw[fill=diagramblue,draw=black]
+      (-4, 0)  -- (4, 0)   -- (4, -2) -- (2, -2) -- (2, -4) -- (0, -4) -- (0, -2) -- (-2, -2) --
+      (-2, -4) -- (-4, -4) -- (-4, 0);
+      \node[anchor=base east,align=right] at (4, -1) {%
+        \tt{%
+          \only<-1>(%
+          \only<-2>1%
+          \only<-3>+%
+          \only<-4>2%
+          \only<-5>)%
+          \only<-9>*%
+          \only<-10>(%
+          \only<-11>3%
+          \only<-12>/%
+          \only<-13>4%
+          \only<-16>{\alert<15>-}%
+          \only<-17>5%
+          \only<-18>)%
+        }};
+      \node[anchor=south,align=center] at (-3, -4) {%
+        \only<23>{\\\tt{-12.75}}%
+        \only<21-22>{\\\tt{-4.25}}%
+        \only<18-20>{\\\tt5}%
+        \only<16-20>{\\\tt{0.75}}%
+        \only<14-15>{\\\tt4}%
+        \only<12-15>{\\\tt3}%
+        \only<8-22>{\\\tt3}%
+        \only<5-7>{\\\tt2}%
+        \only<3-7>{\\\tt1}%
+      };
+      \node[anchor=south,align=center] at (1, -4) {%
+        \only<19>{\\\tt)}%
+        \only<17-20>{\\\tt-}%
+        \only<13-15>{\\\alert<15>{\tt/}}%
+        \only<11-21>{\\\tt(}%
+        \only<10-22>{\\\tt*}%
+        \only<6>{\\\tt)}%
+        \only<4-7>{\\\tt+}%
+        \only<2-8>{\\\tt(}%
+      };
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Поточна обработка на израз}
+  Комбинирането на двата алгоритъма може да се получи по естествен начин при използване на \alert{поточна обработка}:\pause
+  \begin{itemize}[<+->]
+  \item Алгоритъм 1 (разпределителна гара)
+    \begin{itemize}
+    \item консумира поток от символи на израз в инфиксен запис
+    \item произвежда поток от символи на израз в обратен полски запис
+    \end{itemize}
+  \item Алгоритъм 2 (пресмятане на обратен полски запис):
+    \begin{itemize}
+    \item консумира поток от символи на израз в обратен полски запис
+    \item произвежда поток от числа (върховете на стека с резултати)
+    \end{itemize}
+  \item Алгоритъм 3 = Алгоритъм 1 | Алгоритъм 2:
+    \begin{itemize}
+    \item консумира поток от символи на израз в инфиксен запис
+    \item произвежда поток от числа (върховете на стека с резултати)
+    \end{itemize}
+  \item Предимства на поточната обработка:
+    \begin{itemize}
+    \item позволява гъвкаво комбиниране на различни алгоритми
+    \item показва частични резултати
+    \item може да работи потенциално безкрайно
+    \end{itemize}
+  \end{itemize}
+\end{frame}
 
 \subsection{Симулиране на рекурсия}
 
