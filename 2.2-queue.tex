@@ -8,6 +8,7 @@
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/queue.jpg}\\
   \imageAttr{Queue}{Xiaojun Deng}{https://flic.kr/p/7sY2kp}{CC BY 2.0}}
 
+% декорация за метода на вълната
 \usetikzlibrary{decorations.pathmorphing}
 
 \begin{document}
@@ -197,24 +198,19 @@
 
 \begin{frame}<1-9>
   \frametitle{Минимален елемент на опашка}
-  \newcommand{}{ntom{8}}
-  \newcommand{\sent}{\alert s}
 
   \textbf{Задача.} Дадена е опашка $q$. Да се изключи от $q$ най-малкият ѝ елемент, като всички останали елементи останат в опашката (не непременно в първоначалния ред).\\[1em]
   \begin{onlyenv}<trans:0>
     \pause
     \textbf{Решение:}
-    % TODO: да се нарисува с TikZ
     \begin{center}
-      \begin{tabular}{|*{11}{c|}}
-        \hline
-        \rowcolor{diagramblue}
-        \alt<4->5&\alt<5->3&\alt<6->6&\alt<7->1&\alt<8->2&\alt<3-8>\sent&\alt<5->5&\alt<6->6&\alt<7->3&\alt<8->2&\\
-
-        \hline
-      \end{tabular}
+      \begin{tikzpicture}
+        \matrix[mtx] (a) {
+          \only<1-3>5\&\only<1-4>3\&\only<1-5>6\&\only<1-6>1\&\only<1-7>2\&\only<3-8>{\alert s}\&\only<5->5\&\only<6->6\&\only<7->3\&\only<8->2\&\\
+        };
+        \node[right=1em of a,visible on=<4->] {min = \temporal<5-6>531};
+      \end{tikzpicture}
       \vspace{1em}
-      \onslide<4->{min = \temporal<5-6>531}
     \end{center}
   \end{onlyenv}
 \end{frame}
