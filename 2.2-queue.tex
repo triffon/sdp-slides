@@ -146,8 +146,6 @@
 
 \begin{frame}
   \frametitle{Числа на Hamming}
-  \newcommand{\pha}{\phantom{00}}
-  \newcommand{\pho}{\phantom{0}}
 
   \begin{definition}
     Казваме, че $k$ е число на Hamming, ако простите делители на $k$ са сред 2, 3 и 5, т.е. $k = 2^x3^y5^z$ за $x,y,z\geq 0$.
@@ -155,27 +153,19 @@
 
   \textbf{Задача.} Да се изведат в нарастващ ред първите $n$ числа на Hamming.\\
   \pause
-  % TODO: да се нарисува с TikZ
   \textbf{Решение:}
   \begin{center}
-    \begin{tabular}{r@{\hskip 1ex}|*{11}{c|}}
-      \hhline{~*{11}{-}}
-      \rowcolor{diagramblue}
-      \cellcolor{white}q$_2$&\alt<3-4>{\alert<4>2}\pho&\alt<4-6>{\alert<6>4}\pha&\alt<5-8>{\alert<8>6}\pha&\alt<6->8\pha&\alt<7->{10}\pha&\alt<8->{12}\pha&\pha&\pha&\pha&\pha&\pha\\
-      \hhline{~*{11}{-}}
-      \rowcolor{white}
-      \multicolumn{12}c{}\\[0.5em]
-      \hhline{~*{11}{-}}
-      \rowcolor{diagramblue}
-      \cellcolor{white}q$_3$&\alt<3-5>{\alert<5>3}\pho&\alt<4-8>{\alert<8>6}\pha&\alt<5->9\pha&\alt<6->{12}\pha&\alt<7->{15}\pha&\alt<8->{18}\pha&\pha&\pha&\pha&\pha&\pha\\
-      \hhline{~*{11}{-}}
-      \rowcolor{white}
-      \multicolumn{12}c{}\\[0.5em]
-      \hhline{~*{11}{-}}
-      \rowcolor{diagramblue}
-      \cellcolor{white}q$_5$&\alt<3-7>{\alert<7>5}\pho&\alt<4->{10}\pha&\alt<5->{15}\pha&\alt<6->{20}\pha&\alt<7->{25}\pha&\alt<8->{30}\pha&\pha&\pha&\pha&\pha&\pha\\
-      \hhline{~*{11}{-}}
-    \end{tabular}\\[1em]
+    \begin{tikzpicture}[hmtx/.style={mtx,nodes={minimum width=2em}}]
+      \matrix[hmtx,label=left:$q_2$] (q2) {
+        \only<3-4>{\alert<4>2}\&\only<4-6>{\alert<6>4}\&\only<5-8>{\alert<8>6}\&\only<6->8\&\only<7->{10}\&\only<8->{12}\&\&\&\&\&\\
+      };
+      \matrix[hmtx,label=left:$q_3$,below=1ex of q2] (q3) {
+        \only<3-5>{\alert<5>3}\&\only<4-8>{\alert<8>6}\&\only<5->9\&\only<6->{12}\&\only<7->{15}\&\only<8->{18}\&\&\&\&\&\\
+      };
+      \matrix[hmtx,label=left:$q_5$,below=1ex of q3] (q5) {
+        \only<3-7>{\alert<7>5}\&\only<4->{10}\&\only<5->{15}\&\only<6->{20}\&\only<7->{25}\&\only<8->{30}\&\&\&\&\&\\
+      };
+    \end{tikzpicture}\\[1em]
     1%
     \onslide<5->{, 2}%
     \onslide<6->{, 3}%
@@ -207,7 +197,7 @@
 
 \begin{frame}<1-9>
   \frametitle{Минимален елемент на опашка}
-  \newcommand{\pha}{\phantom{8}}
+  \newcommand{}{ntom{8}}
   \newcommand{\sent}{\alert s}
 
   \textbf{Задача.} Дадена е опашка $q$. Да се изключи от $q$ най-малкият ѝ елемент, като всички останали елементи останат в опашката (не непременно в първоначалния ред).\\[1em]
@@ -219,7 +209,7 @@
       \begin{tabular}{|*{11}{c|}}
         \hline
         \rowcolor{diagramblue}
-        \alt<4->\pha5&\alt<5->\pha3&\alt<6->\pha6&\alt<7->\pha1&\alt<8->\pha2&\alt<3-8>\sent\pha&\alt<5->5\pha&\alt<6->6\pha&\alt<7->3\pha&\alt<8->2\pha&\pha\\
+        \alt<4->5&\alt<5->3&\alt<6->6&\alt<7->1&\alt<8->2&\alt<3-8>\sent&\alt<5->5&\alt<6->6&\alt<7->3&\alt<8->2&\\
 
         \hline
       \end{tabular}
