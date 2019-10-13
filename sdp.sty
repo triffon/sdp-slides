@@ -54,20 +54,20 @@
 
 % начална двойна клетка с данни
 \newcommand{\doublecell}[3][]{
-  \matrix (#2) [array,nodes={minimum width=6ex},#1] {
+  \matrix (#2) [array,nodes={minimum width=2.5em},#1] {
     |(#2data)| #3 \& |(#2next)|\\
   };
 }
 
 % следваща двойна клетка с данни
 \newcommand{\nextdoublecell}[3]{
-  \doublecell[right=4ex of #3next]{#1}{#2}
+  \doublecell[right=2em of #3next]{#1}{#2}
   \draw[pointer] (#3next.center) to (#1data);
 }
 
 % зачертана кутия, означаваща NULL указател
-\newcommand{\nullptr}[1]{
-  \draw (#1.north east) to (#1.south west);
+\newcommand{\nullptr}[2][]{
+  \draw [#1] (#2.north east) to (#2.south west);
 }
 
 

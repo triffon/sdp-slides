@@ -90,9 +90,7 @@
       \nullptr{a0next}
 
       % указател към върха
-      \begin{scope}[visible on=<{1,4-}>]
-        \pointerto{an.south}{\tt{top}}{below}
-      \end{scope}
+      \pointerto[visible on=<{1,4-}>]{an.south}{\tt{top}}{below}
 
       % новата клетка
       \begin{scope}[visible on=<2-5>]
@@ -101,14 +99,10 @@
       \end{scope}
 
       % преместване на указателя към върха
-      \begin{scope}[visible on=<2-3>]
-        \pointerto{an+1.south}{\tt{top}}{below}
-      \end{scope}
+      \pointerto[visible on=<2-3>]{an+1.south}{\tt{top}}{below}
 
       % нов указател
-      \begin{scope}[visible on=<3-5>]
-        \pointerto{an+1data.south}{\tt{p}}{below left}
-      \end{scope}
+      \pointerto[visible on=<3-5>]{an+1data.south}{\tt{p}}{below left}
 
       % изтриване на новата клетка
       \draw (an+1) node[cross,visible on=<5>] {};
