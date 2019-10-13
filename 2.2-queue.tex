@@ -1,9 +1,9 @@
-\documentclass{beamer}
+\documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
 
 \title{Опашка}
 
-\date{7 ноември 2017 г.}
+\date{14 октомври 2019 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/queue.jpg}\\
   \imageAttr{Queue}{Xiaojun Deng}{https://flic.kr/p/7sY2kp}{CC BY 2.0}}
@@ -55,29 +55,29 @@
     \begin{tabular}{|*{11}{c|}}
       \hline
       \rowcolor{diagramblue}
-      \alt<7-| handout:0>{$a_{n+5}$}\pha&\pha&\alt<1>{$a_0$}\pha&$a_1$&$a_2$&\ldots&$a_n$&\alt<3-| handout:0>{$a_{n+1}$}\pha&\alt<4-| handout:0>{$a_{n+2}$}\pha&\alt<5-| handout:0>{$a_{n+3}$}\pha&\alt<6-| handout:0>{$a_{n+4}$}\pha\\
+      \alt<7-| trans:0>{$a_{n+5}$}\pha&\pha&\alt<1>{$a_0$}\pha&$a_1$&$a_2$&\ldots&$a_n$&\alt<3-| trans:0>{$a_{n+1}$}\pha&\alt<4-| trans:0>{$a_{n+2}$}\pha&\alt<5-| trans:0>{$a_{n+3}$}\pha&\alt<6-| trans:0>{$a_{n+4}$}\pha\\
       \hline
       \rowcolor{white}
-      \multicolumn 1c{\onslide<7| handout:0>{\bua}}&
+      \multicolumn 1c{\onslide<7| trans:0>{\bua}}&
       \multicolumn 1c{}&
       \multicolumn 1c{\onslide<1>{\bua}}&
-      \multicolumn 1c{\onslide<2-| handout:0>{\bua}}&
+      \multicolumn 1c{\onslide<2-| trans:0>{\bua}}&
       \multicolumn 2c{}&
-      \multicolumn 1c{\onslide<1-2| handout:1>{\bua}}&
-      \multicolumn 1c{\onslide<3| handout:0>{\bua}}&
-      \multicolumn 1c{\onslide<4| handout:0>{\bua}}&
-      \multicolumn 1c{\onslide<5| handout:0>{\bua}}&
-      \multicolumn 1c{\onslide<6| handout:0>{\bua}}\\
-      \multicolumn 1c{\onslide<7| handout:0>{back}}&
+      \multicolumn 1c{\onslide<1-2| trans:1>{\bua}}&
+      \multicolumn 1c{\onslide<3| trans:0>{\bua}}&
+      \multicolumn 1c{\onslide<4| trans:0>{\bua}}&
+      \multicolumn 1c{\onslide<5| trans:0>{\bua}}&
+      \multicolumn 1c{\onslide<6| trans:0>{\bua}}\\
+      \multicolumn 1c{\onslide<7| trans:0>{back}}&
       \multicolumn 1c{}&
       \multicolumn 1c{\onslide<1>{front}}&
-      \multicolumn 1c{\onslide<2-| handout:0>{front}}&
+      \multicolumn 1c{\onslide<2-| trans:0>{front}}&
       \multicolumn 2c{}&
-      \multicolumn 1c{\onslide<1-2| handout:1>{back}}&
-      \multicolumn 1c{\onslide<3| handout:0>{back}}&
-      \multicolumn 1c{\onslide<4| handout:0>{back}}&
-      \multicolumn 1c{\onslide<5| handout:0>{back}}&
-      \multicolumn 1c{\onslide<6| handout:0>{back}}
+      \multicolumn 1c{\onslide<1-2| trans:1>{back}}&
+      \multicolumn 1c{\onslide<3| trans:0>{back}}&
+      \multicolumn 1c{\onslide<4| trans:0>{back}}&
+      \multicolumn 1c{\onslide<5| trans:0>{back}}&
+      \multicolumn 1c{\onslide<6| trans:0>{back}}
     \end{tabular}
   \end{center}
   \begin{itemize}
@@ -93,9 +93,9 @@
   \begin{center}
     \scriptsize
     \begin{tabular}{cccc@{}c@{}cc}
-      \onslide<1-6| handout:1>{\nextcell{a_0}}&\nextcell{a_1}&\nextcell{a_3}&\hspace{1ex}\ldots&$\nextarrow$&\alt<1,2| handout:1>{\nilcell{a_n}}{\nextcell{a_n}}&\onslide<2-| handout:0>{\nilcell{a_{n+1}}}\\
-      \onslide<1-6| handout:1>{\bua}&\onslide<6-| handout:0>{\bua}&\multicolumn 3c{}&\onslide<1-3| handout:1>{\bua}&\onslide<2-| handout:0>{\bua}\\
-      \only<5-6| handout:0>p\only<5| handout:0>,\only<1-5| handout:1>{front}&\onslide<6-| handout:0>{front}&\multicolumn 3c{}&\onslide<1-3| handout:1>{back}&\only<2-| handout:0>{\alt<2-3| handout:0>p{back}}
+      \onslide<1-6| trans:1>{\nextcell{a_0}}&\nextcell{a_1}&\nextcell{a_3}&\hspace{1ex}\ldots&$\nextarrow$&\alt<1,2| trans:1>{\nilcell{a_n}}{\nextcell{a_n}}&\onslide<2-| trans:0>{\nilcell{a_{n+1}}}\\
+      \onslide<1-6| trans:1>{\bua}&\onslide<6-| trans:0>{\bua}&\multicolumn 3c{}&\onslide<1-3| trans:1>{\bua}&\onslide<2-| trans:0>{\bua}\\
+      \only<5-6| trans:0>p\only<5| trans:0>,\only<1-5| trans:1>{front}&\onslide<6-| trans:0>{front}&\multicolumn 3c{}&\onslide<1-3| trans:1>{back}&\only<2-| trans:0>{\alt<2-3| trans:0>p{back}}
     \end{tabular}
   \end{center}
   \begin{itemize}
@@ -173,7 +173,7 @@
   \newcommand{\sent}{\alert s}
 
   \textbf{Задача.} Дадена е опашка $q$. Да се изключи от $q$ най-малкият ѝ елемент, като всички останали елементи останат в опашката (не непременно в първоначалния ред).\\[1em]
-  \begin{onlyenv}<handout:0>
+  \begin{onlyenv}<trans:0>
     \pause
     \textbf{Решение:}
     % TODO: да се нарисува с TikZ
@@ -205,71 +205,79 @@
   \frametitle{Метод на вълната}
 
   \scriptsize
-  % TODO: дъската да се нарисува с TiKZ
   \begin{center}
-    \begin{chessboard}{10}{0.5ex}
-      \hline
-      \blank&\blank&\blank&\blank&\wave8&\wave7&\wave6&\wave7&\wave8&\blank&\\
-      \hline
-      \blank&\blank&\noway&\blank&\blank&\noway&\wave5&\wave6&\wave7&\wave8&\\
-      \hline
-      \blank&\blank&\noway&\blank&\blank&\noway&\wave4&\wave5&\wave6&\noway&\\
-      \hline
-      \blank&\blank&\blank&\blank&\noway&\wave2&\wave3&\wave4&\noway&\blank&\\
-      \hline
-      \blank&\blank&\blank&\noway&\wave2&\wave1&\wave2&\noway&\blank&\blank&\\
-      \hline
-      \noway&\blank&\blank&\noway&\wave3&\wave2&\noway&\blank&\blank&\noway&\\
-      \hline
-      \noway&\noway&\blank&\noway&\noway&\wave3&\noway&\noway&\blank&\blank&\\
-      \hline
-      \blank&\blank&\noway&\wave6&\wave5&\wave4&\noway&\blank&\blank&\noway&\\
-      \hline
-      \blank&\blank&\wave8&\wave7&\wave6&\wave5&\noway&\blank&\blank&\blank&\\
-      \hline
-      \blank&\blank&\blank&\noway&\wave7&\wave6&\wave7&\wave8&\noway&\blank&\\
-      \hline
-      \multicolumn 1c\blank&\multicolumn 1c\blank&\multicolumn 1c\blank&\multicolumn 1c\blank&\multicolumn 1c\blank&\multicolumn 1c\blank&\multicolumn 1c\blank&\multicolumn 1c\blank&\multicolumn 1c\blank&\multicolumn 1c\blank&
-    \end{chessboard}
+    \begin{tikzpicture}
+      % разпространяващите се вълни
+      \tikzmath{
+        \textsize = 1.2;
+        % в дефиницията на стила chessnode квадратчето има minimum width/height = 1.5 * височината на текста в него
+        \squaresize = 1.5 * \textsize;
+        % тъй като ще имаме четен брой квадратчета, центърът на координатната система трябва да е изместен с
+        % половин квадратче
+        \shift = 0.5 * \squaresize;
+        % радиусът на на квадратчето, което ще описва гребен на вълната ще е равна на половината диагонал на
+        % квадратчето на дъската
+        % добавяме 0.1, за да компенсираме грешката при смятане с числа с плаваща запетая
+        \slantedsize = sqrt(2) * \squaresize / 2 + 0.1;
+      }
+      \matrix[chessboard=\textsize em] {%
+        \blank\&\blank\&\blank\&\blank\&\wave8\&\wave7\&\wave6\&\wave7\&\wave8\&\blank\\
+        \blank\&\blank\&\noway\&\blank\&\blank\&\noway\&\wave5\&\wave6\&\wave7\&\wave8\\
+        \blank\&\blank\&\noway\&\blank\&\blank\&\noway\&\wave4\&\wave5\&\wave6\&\noway\\
+        \blank\&\blank\&\blank\&\blank\&\noway\&\wave2\&\wave3\&\wave4\&\noway\&\blank\\
+        \blank\&\blank\&\blank\&\noway\&\wave2\&\wave1\&\wave2\&\noway\&\blank\&\blank\\
+        \noway\&\blank\&\blank\&\noway\&\wave3\&\wave2\&\noway\&\blank\&\blank\&\noway\\
+        \noway\&\noway\&\blank\&\noway\&\noway\&\wave3\&\noway\&\noway\&\blank\&\blank\\
+        \blank\&\blank\&\noway\&\wave6\&\wave5\&\wave4\&\noway\&\blank\&\blank\&\noway\\
+        \blank\&\blank\&\wave8\&\wave7\&\wave6\&\wave5\&\noway\&\blank\&\blank\&\blank\\
+        \blank\&\blank\&\blank\&\noway\&\wave7\&\wave6\&\wave7\&\wave8\&\noway\&\blank\\
+      };
+      \begin{scope}[
+        visible on=<9>,
+        overlay,
+        wave/.style={
+          decoration={
+            snake,
+            segment length=1em,
+            amplitude=.1em,
+          },
+        }]
+        \foreach \r in {\slantedsize, 2 * \slantedsize, ..., 10} {
+          \draw[
+          rounded corners=1em,
+          decorate,
+          wave,
+          red,
+          thick,
+          xshift=\shift em,
+          yshift=\shift em,
+          anchor=center,
+          rotate=45]
+          % https://tex.stackexchange.com/questions/38989/how-to-draw-a-decorated-rectangle-with-rounded-corners/38995#38995
+          (-\r em,-\r em) rectangle (\r em, \r em) [sharp corners];
+         };
+       \end{scope}
+    \end{tikzpicture}
   \end{center}
-  \only<9>{
-  \begin{tikzpicture}[remember picture,overlay]
-    \foreach \r in {1.5,3.2,...,12}{
-      \draw[red,decorate,decoration={coil,segment length=4ex,amplitude=0.3ex},thick,xshift=21.2em,yshift=14.4em,rotate=45] (-\r em,-\r em) rectangle (\r em, \r em);
-    }
-  \end{tikzpicture}}
 \end{frame}
 
-\begin{frame}<handout:0>
+\begin{frame}<trans:0>
   \frametitle{Ход на коня --- най-кратък път}
-  \setboardfontsize{16pt}
-
-  \def\arraystretch{0}
-  % TODO: да се нарисува с TikZ
+  \setboardfontsize{1.35em}
   \begin{center}
-    \begin{tabular}{|*{10}{@{}c@{}|}@{}c@{}}
-      \hline
-      \bkn1&\bkn4&\bkn3&\bkn4&\bkn3&\bkn4&\bkn5&\ws  &\bkn5&\ws  &\\
-      \hline
-      \bkn4&\bkn5&\bkn2&\bkn3&\bkn4&\bkn5&\bkn4&\bkn5&\ws  &\ws  &\\
-      \hline
-      \bkn3&\bkn2&\bkn5&\bkn4&\bkn3&\bkn4&\bkn5&\ws  &\bkn5&\ws  &\\
-      \hline
-      \bkn4&\bkn3&\bkn4&\bkn3&\bkn4&\bkn5&\bkn4&\bkn5&\ws  &\ws  &\\
-      \hline
-      \bkn3&\bkn4&\bkn3&\bkn4&\bkn5&\bkn4&\bkn5&\ws  &\bkn5&\ws  &\\
-      \hline
-      \bkn4&\bkn5&\bkn4&\bkn5&\bkn4&\bkn5&\ws  &\bkn5&\ws  &\ws  &\\
-      \hline
-      \bkn5&\bkn4&\bkn5&\bkn4&\bkn5&\ws  &\bkn5&\ws  &\ws  &\ws  &\\
-      \hline
-      \ws  &\bkn5&\ws  &\bkn5&\ws  &\bkn5&\ws  &\ws  &\ws  &\ws  &\\
-      \hline
-      \bkn5&\ws  &\bkn5&\ws  &\bkn5&\ws  &\ws  &\ws  &\ws  &\ws  &\\
-      \hline
-      \ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\ws  &\\
-      \hline
-    \end{tabular}
+    \begin{tikzpicture}
+      \matrix[chessboard=1.35em] {%
+        \bkn1\&\bkn4\&\bkn3\&\bkn4\&\bkn3\&\bkn4\&\bkn5\&     \&\bkn5\\
+        \bkn4\&\bkn5\&\bkn2\&\bkn3\&\bkn4\&\bkn5\&\bkn4\&\bkn5\&     \\
+        \bkn3\&\bkn2\&\bkn5\&\bkn4\&\bkn3\&\bkn4\&\bkn5\&     \&\bkn5\\
+        \bkn4\&\bkn3\&\bkn4\&\bkn3\&\bkn4\&\bkn5\&\bkn4\&\bkn5\&     \\
+        \bkn3\&\bkn4\&\bkn3\&\bkn4\&\bkn5\&\bkn4\&\bkn5\&     \&\bkn5\\
+        \bkn4\&\bkn5\&\bkn4\&\bkn5\&\bkn4\&\bkn5\&     \&\bkn5\&     \\
+        \bkn5\&\bkn4\&\bkn5\&\bkn4\&\bkn5\&     \&\bkn5\&     \&     \\
+             \&\bkn5\&     \&\bkn5\&     \&\bkn5\&     \&     \&     \\
+        \bkn5\&     \&\bkn5\&     \&\bkn5\&     \&     \&     \&     \\
+      };
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 

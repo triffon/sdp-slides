@@ -43,6 +43,9 @@
 % поддръжка на beamer overlays
 \usetikzlibrary{overlay-beamer-styles}
 
+% математически изчисления
+\usetikzlibrary{math}
+
 % указател към #1 с име #2 на позиция #3
 \newcommand{\pointerto}[3]{
   \node (x) [#3=of #1] {#2};
@@ -100,16 +103,17 @@
   % стил за квадратче на дъска за шах
   chessnode/.style={
     rectangle,
-    minimum width=3em,
-    minimum height=3em,
+    minimum width=1.5*#1,
+    minimum height=1.5*#1,
     draw,
     fill=white,
-    text height=2em,    
+    text height=#1,
+    inner sep=0pt,
   },
   % стил за дъска на шах
   chessboard/.style={
     mtx,
-    nodes=chessnode,
+    nodes={chessnode=#1},
   },
   % стил за клетка на масив от формули
   arraynode/.style={
@@ -260,14 +264,11 @@
 % голяма стрелка надолу (указател)
 \newcommand{\bda}{\bigg\downarrow}
 
-% непроходимо квадратче
-\newcommand{\noway}{$\bigotimes$}
-
-% проходимо квадратче
-\newcommand{\blank}{\phantom{$\bigotimes$}}
-
 % пореден гребен на вълната
 \newcommand{\wave}[1]{\alt<#1->{#1}\empty}
+
+% непроходимо квадратче
+\newcommand{\noway}{|[fill=gray]|}
 
 % разпъвач
 \def\mystrut(#1,#2){\vrule height #1 depth #2 width 0pt}
