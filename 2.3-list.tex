@@ -3,6 +3,10 @@
 
 \title{Списък}
 
+% флаг дали да се включват слайдовете за CRTP
+\def\crtp{0}
+%\def\crtp{1-}
+
 \date{28 октомври 2019 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/list.jpg}\\
@@ -89,8 +93,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{comment}
-\begin{frame}
+\begin{frame}<\crtp>
   \frametitle{Достъп до производен клас на шаблон}
 
   \textbf{Проблем:} Какъв резултат трябва да връщат операциите \tt{++}, преместващи итераторите?\\[2ex]
@@ -111,7 +114,7 @@
   \alert{Да! Базовият клас трябва да е \textbf{шаблон, приемащ производния си клас за параметър}}
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}<\crtp>[fragile]
   \frametitle{Curiously Recurring Template Pattern (CRTP)}
 
 \begin{lstlisting}
@@ -127,7 +130,7 @@ class Derived : public Base<Derived> {
   По този начин шаблонът \lst{Base} може да се обръща към наследяващия го клас.
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}<\crtp>[fragile]
   \frametitle{Решение на проблема с \lst{operator++}}
 
   \small
@@ -150,7 +153,6 @@ class LinkedListIterator :
 \pause
 Експлицитното преобразуване на типа се налага, понеже \lst{*this} е от тип \lst{Iterator&}, а конструкторът за копиране на \lst{ConcreteIterator} очаква тип \lst{ConcreteIterator&}.
 \end{frame}
-\end{comment}
 
 \section{Приложения на списъци}
 
