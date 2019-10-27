@@ -3,7 +3,7 @@
 
 \title{Опашка}
 
-\date{14 октомври 2019 г.}
+\date{21--28 октомври 2019 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/queue.jpg}\\
   \imageAttr{Queue}{Xiaojun Deng}{https://flic.kr/p/7sY2kp}{CC BY 2.0}}
@@ -243,6 +243,7 @@
         % квадратчето на дъската
         % добавяме 0.1, за да компенсираме грешката при смятане с числа с плаваща запетая
         \slantedsize = sqrt(2) * \squaresize / 2 + 0.1;
+        \twiceslantedsize = 2 * \slantedsize;
       }
       \matrix[chessboard=\textsize em] {%
               \&      \&      \&      \&\wave8\&\wave7\&\wave6\&\wave7\&\wave8\&      \\
@@ -266,7 +267,7 @@
             amplitude=.1em,
           },
         }]
-        \foreach \r in {\slantedsize, 2 * \slantedsize, ..., 10} {
+        \foreach \r in {\slantedsize, \twiceslantedsize, ..., 10} {
           \draw[
           rounded corners=1em,
           decorate,
