@@ -38,7 +38,27 @@
   \frametitle{Едносвързано представяне}
 
   \begin{center}
-    \includegraphics[width=\textwidth]{images/linked_list.pdf}
+    \begin{tikzpicture}
+      % веригата
+      \doublecell{a0}{a_0}
+      \doublecell[right=2em of a0next]{a1}{a_1}
+      \draw[pointer] (a0next.center) to (a1data);
+
+      \node (dots) [right=1em of a1] {...\hspace{1em}};
+      \draw[pointer] (a1next.center) to (dots.west);
+
+      \doublecell[right=1em of dots]{an-1}{a_{n-1}}
+      \draw[pointer] (dots.east) to (an-1data);
+
+      \nextdoublecell{an}{a_n}{an-1}
+      \nullptr{annext}
+
+      % указател към началото
+      \pointerto{a0.south}{\tt{front}}{below}
+
+      % указател към края
+      \pointerto{an.south}{\tt{back}}{below}
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
@@ -46,7 +66,24 @@
   \frametitle{Едносвързано циклично представяне}
 
   \begin{center}
-    \includegraphics[width=\textwidth]{images/linked_cyclic_list.pdf}
+    \begin{tikzpicture}
+      % веригата
+      \doublecell{a0}{a_0}
+      \doublecell[right=2em of a0next]{a1}{a_1}
+      \draw[pointer] (a0next.center) to (a1data);
+
+      \node (dots) [right=1em of a1] {...\hspace{1em}};
+      \draw[pointer] (a1next.center) to (dots.west);
+
+      \doublecell[right=1em of dots]{an-1}{a_{n-1}}
+      \draw[pointer] (dots.east) to (an-1data);
+
+      \nextdoublecell{an}{a_n}{an-1}
+      \draw[pointer] (annext.center) -| ++(3em,2em)  -| ($(a0data.west) - (2em,0)$) |- (a0data.west);
+
+      % указател към началото
+      \pointerto{a0.south}{\tt{start}}{below}
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
