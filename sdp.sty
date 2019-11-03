@@ -70,22 +70,44 @@
 
 % начална тройна клетка с данни
 \newcommand{\triplecell}[3][]{
-  \matrix (#2) [array,nodes={minimum width=2.5em},#1] {
+  \matrix (#2) [array,nodes={minimum width=2em},#1] {
     |(#2prev)| \& |(#2data)| #3 \& |(#2next)|\\
   };
+}
+
+% вертикално изместен указател
+\newcommand{\shiftedpointer}[3]{
+  \draw[pointer] ([yshift=#1]#2) to (\tikztostart -| #3);
+}
+
+% указател напред в двойносвързан списък
+\newcommand{\pointerforward}{
+  \shiftedpointer{-.8ex}
+}
+
+% указател назад в двойносвързан списък
+\newcommand{\pointerbackward}{
+  \shiftedpointer{.8ex}
 }
 
 % следваща тройна клетка с данни
 \newcommand{\nexttriplecell}[3]{
   \triplecell[right=2em of #3next]{#1}{#2}
-  \draw[pointer] (#3next.center) to (#1);
-  \draw[pointer] (#1prev.center) to (#3);
+  \pointerforward{#3next.center}{#1.west}
+  \pointerbackward{#1prev.center}{#3.east}
 }
 
 % многоточие в свързана верига
 \newcommand{\nextdots}[1]{
   \node (dots) [right=1em of #1] {\ldots\hspace{1em}};
   \draw[pointer] (#1next.center) to (dots);
+}
+
+% многоточие в свързана верига
+\newcommand{\triplenextdots}[1]{
+  \node (dots) [right=2em of #1] {\ldots\hspace{1em}};
+  \pointerforward{#1next.center}{dots.west}
+  \pointerbackward{dots.west}{#1.east}
 }
 
 % следваща двойна клетка след многоточие
@@ -96,9 +118,9 @@
 
 % следваща тройна клетка след многоточие
 \newcommand{\dotsnexttriplecell}[3][]{
-  \triplecellell[right=2em of dots,#1]{#2}{#3}
-  \draw[pointer] (dots.east) to (#2);
-  \draw[pointer] (#2prev) to (dots.east);
+  \triplecell[right=2em of dots,#1]{#2}{#3}
+  \pointerforward{dots.east}{#2.west}
+  \pointerbackward{#2prev.center}{dots.east}
 }
 
 % зачертана кутия, означаваща NULL указател
@@ -110,7 +132,7 @@
 % стилове за диаграми
 \tikzset{
   % стил за стрелка
-  pointer/.style={-{Stealth[length=1.5ex]}},
+  pointer/.style={-{Stealth[length=1.2ex]}},
   % стил за правоъгълна клетка на матрица
   mtxnode/.style={
     rectangle,

@@ -15,11 +15,20 @@
 % едносвързана верига
 \newcommand{\linkedchain}{
   % веригата
-  \doublecell{a0}{a_0}
-  \nextdoublecell{a1}{a_1}{a0}
-  \nextdots{a1}
+  \doublecell{a1}{a_1}
+  \nextdoublecell{a2}{a_2}{a1}
+  \nextdots{a2}
   \dotsnextdoublecell{an-1}{a_{n-1}}
   \nextdoublecell{an}{a_n}{an-1}
+}
+
+% двусвързана верига
+\newcommand{\doublelinkedchain}{
+  % веригата
+  \triplecell{a1}{a_1}
+  \nexttriplecell{a2}{a_2}{a1}
+  \triplenextdots{a2}
+  \dotsnexttriplecell{an}{a_n}
 }
 
 \begin{document}
@@ -55,7 +64,7 @@
       \nullptr{annext}
 
       % указател към началото
-      \pointerto{a0.south}{\tt{front}}{below}
+      \pointerto{a1.south}{\tt{front}}{below}
 
       % указател към края
       \pointerto{an.south}{\tt{back}}{below}
@@ -63,7 +72,7 @@
   \end{center}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[label=current]
   \frametitle{Едносвързано циклично представяне}
 
   \begin{center}
@@ -73,10 +82,10 @@
       \linkedchain
 
       % обратен указател
-      \draw[pointer] (annext.center) -| ++(3em,2em)  -| ($(a0data.west) - (2em,0)$) |- (a0data.west);
+      \draw[pointer] (annext.center) -| ++(3em,-2em)  -| ($(a1data.west) - (2em,0)$) |- (a1data.west);
 
       % указател към началото
-      \pointerto{a0.south}{\tt{start}}{below}
+      \pointerto{a1.south}{\tt{start}}{below}
     \end{tikzpicture}
   \end{center}
 \end{frame}
@@ -85,16 +94,38 @@
   \frametitle{Двусвързано представяне}
 
   \begin{center}
-    \includegraphics[width=\textwidth]{images/double_linked_list.pdf}
+    \begin{tikzpicture}
+      \doublelinkedchain
+      \nullptr{a1prev}
+      \nullptr{annext}
+
+      % указател към началото
+      \pointerto{a1.south}{\tt{front}}{below}
+
+      % указател към края
+      \pointerto{an.south}{\tt{back}}{below}
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
-% TODO: да се нарисува с TikZ
 \begin{frame}
   \frametitle{Двусвързано циклично представяне}
 
   \begin{center}
-    \includegraphics[width=\textwidth]{images/double_linked_cyclic_list.pdf}
+    \begin{tikzpicture}
+      \doublelinkedchain
+
+      % обратен указател
+      \draw[pointer] ([yshift=-.8ex]annext.center) -| ++( 3em,-2em)
+      -| ($([yshift=-.8ex]a1.west) - ( 2em,0)$) to  (\tikztostart -| a1.west);
+
+      % преден указател
+      \draw[pointer] ([yshift= .8ex]a1prev.center) -| ++(-3em, 2em)
+      -| ($([yshift= .8ex]an.east) - (-2em,0)$) to (\tikztostart -| an.east);
+
+      % указател към началото
+      \pointerto{a1.south}{\tt{start}}{below}
+    \end{tikzpicture}
   \end{center}
   % изкуствено повторение на слайда, за да няма предупреждения при againframe
 \end{frame}
