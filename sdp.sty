@@ -68,6 +68,39 @@
   \draw[pointer] (#3next.center) to (#1data);
 }
 
+% начална тройна клетка с данни
+\newcommand{\triplecell}[3][]{
+  \matrix (#2) [array,nodes={minimum width=2.5em},#1] {
+    |(#2prev)| \& |(#2data)| #3 \& |(#2next)|\\
+  };
+}
+
+% следваща тройна клетка с данни
+\newcommand{\nexttriplecell}[3]{
+  \triplecell[right=2em of #3next]{#1}{#2}
+  \draw[pointer] (#3next.center) to (#1);
+  \draw[pointer] (#1prev.center) to (#3);
+}
+
+% многоточие в свързана верига
+\newcommand{\nextdots}[1]{
+  \node (dots) [right=1em of #1] {\ldots\hspace{1em}};
+  \draw[pointer] (#1next.center) to (dots);
+}
+
+% следваща двойна клетка след многоточие
+\newcommand{\dotsnextdoublecell}[3][]{
+  \doublecell[right=2em of dots,#1]{#2}{#3}
+  \draw[pointer] (dots.east) to (#2);
+}
+
+% следваща тройна клетка след многоточие
+\newcommand{\dotsnexttriplecell}[3][]{
+  \triplecellell[right=2em of dots,#1]{#2}{#3}
+  \draw[pointer] (dots.east) to (#2);
+  \draw[pointer] (#2prev) to (dots.east);
+}
+
 % зачертана кутия, означаваща NULL указател
 \newcommand{\nullptr}[2][]{
   \draw [#1] (#2.north east) to (#2.south west);

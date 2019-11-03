@@ -7,10 +7,20 @@
 \def\crtp{0}
 %\def\crtp{1-}
 
-\date{28 октомври 2019 г.}
+\date[28.10--3.11.2019 г.]{28 октомври -- 3 ноември 2019 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/list.jpg}\\
- \imageUntitledAttr{Prettysleepy2}{https://pixabay.com/images/id-3517582/}{Pixabay License}}
+  \imageUntitledAttr{Prettysleepy2}{https://pixabay.com/images/id-3517582/}{Pixabay License}}
+
+% едносвързана верига
+\newcommand{\linkedchain}{
+  % веригата
+  \doublecell{a0}{a_0}
+  \nextdoublecell{a1}{a_1}{a0}
+  \nextdots{a1}
+  \dotsnextdoublecell{an-1}{a_{n-1}}
+  \nextdoublecell{an}{a_n}{an-1}
+}
 
 \begin{document}
 
@@ -41,18 +51,7 @@
 
   \begin{center}
     \begin{tikzpicture}
-      % веригата
-      \doublecell{a0}{a_0}
-      \doublecell[right=2em of a0next]{a1}{a_1}
-      \draw[pointer] (a0next.center) to (a1data);
-
-      \node (dots) [right=1em of a1] {...\hspace{1em}};
-      \draw[pointer] (a1next.center) to (dots.west);
-
-      \doublecell[right=1em of dots]{an-1}{a_{n-1}}
-      \draw[pointer] (dots.east) to (an-1data);
-
-      \nextdoublecell{an}{a_n}{an-1}
+      \linkedchain
       \nullptr{annext}
 
       % указател към началото
@@ -68,19 +67,12 @@
   \frametitle{Едносвързано циклично представяне}
 
   \begin{center}
+    \small
     \begin{tikzpicture}
       % веригата
-      \doublecell{a0}{a_0}
-      \doublecell[right=2em of a0next]{a1}{a_1}
-      \draw[pointer] (a0next.center) to (a1data);
+      \linkedchain
 
-      \node (dots) [right=1em of a1] {...\hspace{1em}};
-      \draw[pointer] (a1next.center) to (dots.west);
-
-      \doublecell[right=1em of dots]{an-1}{a_{n-1}}
-      \draw[pointer] (dots.east) to (an-1data);
-
-      \nextdoublecell{an}{a_n}{an-1}
+      % обратен указател
       \draw[pointer] (annext.center) -| ++(3em,2em)  -| ($(a0data.west) - (2em,0)$) |- (a0data.west);
 
       % указател към началото
@@ -89,7 +81,6 @@
   \end{center}
 \end{frame}
 
-% TODO: да се нарисува с TikZ
 \begin{frame}<1>[label=doublelinked]
   \frametitle{Двусвързано представяне}
 
