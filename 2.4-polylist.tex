@@ -1,12 +1,16 @@
-\documentclass{beamer}
+\documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
 
 \title{Хетерогенни контейнери}
 
-\date{6 декември 2017 г.}
+\date{9 ноември 2019 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/polylist.jpg}\\
   \imageUntitledAttr{Clker-Free-Vector-Images}{https://pixabay.com/images/id-312107/}{Pixabay License}}
+
+\forestset{
+  classdiagram/.style={fill=diagramblue,baseline,draw,ellipse,edge={pointer},grow=90}
+}
 
 \begin{document}
 
@@ -18,7 +22,7 @@
 
 \begin{frame}
   \frametitle{Логическо описание}
-  Контейнер, чиито елементи може да са от различен тип\\[1em]
+  Контейнер, чиито елементи може да са от различен тип\\[2ex]
   Операции:
   \begin{itemize}
   \item всички операции на конкретната СД (напр. стек, опашка списък)
@@ -36,15 +40,34 @@
 
 \begin{frame}
   \frametitle{Физическо представяне}
-  \newcommand{\pha}{\hspace{2ex}}
-  \newcommand{\classA}{\cbox{red}{\mystrut(2.5em,2em)Клас A}}
-  \newcommand{\classB}{\cbox{green}{\mystrut(1.5em,1em)Клас B}}
-  \newcommand{\classC}{\cbox{yellow}{\mystrut(2em,1.5em)Клас C}}
-  \begin{tabular}{*6l}
-    \nextcell\pha&\nextcell\pha&\nextcell\pha&\ldots&\nextcell\pha&\nilcell\pha\\
-    \bda&\bda&\bda&&\bda&\bda\\[-9pt]
-    \classA&\classB&\classC&&\classB&\classA
-  \end{tabular}
+  \begin{center}
+    \scriptsize
+    \begin{tikzpicture}
+      \doublecell{a1}{}
+      \nextdoublecell{a2}{}{a1}
+      \nextdoublecell{a3}{}{a2}
+      \nextdots{a3}
+      \dotsnextdoublecell{a4}{}
+      \nextdoublecell{a5}{}{a4}
+      \nullptr{a5next}
+
+      \tikzset{
+        classA/.style={rectangle, draw, fill=red},
+        classB/.style={circle,    draw, fill=green},
+        classC/.style={diamond,   draw, fill=yellow},
+      }
+
+      \node[classA,below=of a1data] (c1) {клас A};
+      \node[classB,below=of a2data] (c2) {клас B};
+      \node[classC,below=of a3data] (c3) {клас C};
+      \node[classB,below=of a4data] (c4) {клас B};
+      \node[classA,below=of a5data] (c5) {клас A};
+
+      \foreach \i in {1,...,5} {
+        \draw[pointer] (a\i data.center) to (c\i);
+      }
+    \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 \begin{frame}
@@ -54,18 +77,19 @@
   \item \tt{Object} обикновено е интерфейс
   \item декларира се чиста виртуална функция за всяка обща операция
   \end{itemize}
-  \vspace{1em}
+  \vspace{2ex}
   \begin{columns}[t,onlytextwidth]
     \begin{column}{0.7\textwidth}
-      Дефинира се производен клас \tt{TypeObject} за всеки от тип \tt{Type}, от който искаме да сложим елементи в хетерогенния контейнер\\[1em]
+      Дефинира се производен клас \tt{TypeObject} за всеки от тип \tt{Type}, от който искаме да сложим елементи в хетерогенния контейнер\\[2ex]
     \end{column}
     \begin{column}{0.3\textwidth}
-      \begin{forest} for tree={fill=diagramblue,baseline,draw,ellipse,edge=->,grow=90}
-        [\tt{TypeObject} [\tt{Object}] [\tt{Type}]]
+      \ttfamily
+      \begin{forest} for tree=classdiagram
+        [TypeObject [Object] [Type]]
       \end{forest}
     \end{column}
   \end{columns}
-  \vspace{1em}
+  \vspace{2ex}
   \begin{itemize}
   \item \tt{TypeObject} множествено наследява \tt{Object} и \tt{Type}
   \item реализира се всяка от общите операции
@@ -77,30 +101,32 @@
 
 \begin{frame}
   \frametitle{Списък от стекове и опашки}
-  \textbf{Задача.} Да се реализира хетерогенен списък от стекове и опашки, който може да изпълнява операциите включване и изключване на елемент.\\[1em]
+  \textbf{Задача.} Да се реализира хетерогенен списък от стекове и опашки, който може да изпълнява операциите включване и изключване на елемент.\\[2ex]
   \pause
-  \textbf{Решение:}\\[2em]
+  \textbf{Решение:}\\[4ex]
   \begin{center}
-    \begin{forest} for tree={fill=diagramblue,baseline,draw,ellipse,edge=->,grow=90}
-      [,phantom [\tt{StackObject} [\tt{Stack}] [\tt{Object},name=o]] [\tt{QueueObject},name=qo [,phantom] [\tt{Queue}]]]
-      \draw[->] (qo) to (o);
+    \ttfamily
+    \begin{forest} for tree=classdiagram
+      [,phantom [StackObject [Stack] [Object,name=o]] [QueueObject,name=qo [,phantom] [Queue]]]
+      \draw[pointer] (qo) to (o);
     \end{forest}
   \end{center}
 \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Вложени списъци}
-  \textbf{Задача.} Да се реализира хетерогенен списък, който може да съдържа числа или хетерогенни списъци от същия вид. Да се поддържат операциите извеждане (\tt{print}) и събиране на всички числа (\tt{flatten}).\\[1em]
+  \textbf{Задача.} Да се реализира хетерогенен списък, който може да съдържа числа или хетерогенни списъци от същия вид. Да се поддържат операциите извеждане (\tt{print}) и събиране на всички числа (\tt{flatten}).\\[2ex]
   \textbf{Пример:}
 \begin{verbatim}
 ((1 (2)) (((3) 4) (5 (6)) () (7)) 8)
 \end{verbatim}
   \pause
-  \textbf{Решение:}\\[2em]
+  \textbf{Решение:}\\[4ex]
   \begin{center}
-    \begin{forest} for tree={fill=diagramblue,baseline,draw,ellipse,edge=->,grow=90}
-      [,phantom [\tt{IntElement} [,phantom] [\tt{Element},name=e]] [\tt{ListElement},name=le [,phantom] [\tt{LinkedList<Element*>}]]]
-      \draw[->] (le) to (e);
+    \ttfamily
+    \begin{forest} for tree=classdiagram
+      [,phantom [IntElement [,phantom] [Element,name=e]] [ListElement,name=le [,phantom] [LinkedList<Element*>]]]
+      \draw[pointer] (le) to (e);
     \end{forest}
   \end{center}
 \end{frame}
