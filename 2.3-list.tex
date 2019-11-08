@@ -7,7 +7,7 @@
 \def\crtp{0}
 %\def\crtp{1-}
 
-\date[28.10--3.11.2019 г.]{28 октомври -- 3 ноември 2019 г.}
+\date[28.10--9.11.2019 г.]{28 октомври -- 9 ноември 2019 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/list.jpg}\\
   \imageUntitledAttr{Prettysleepy2}{https://pixabay.com/images/id-3517582/}{Pixabay License}}
@@ -53,8 +53,6 @@
   \end{itemize}
 \end{frame}
 
-% TODO: анимация на insertAfter
-% TODO: анимация на deleteAfter
 \begin{frame}
   \frametitle{Едносвързано представяне}
 
@@ -72,7 +70,7 @@
   \end{center}
 \end{frame}
 
-\begin{frame}[label=current]
+\begin{frame}
   \frametitle{Едносвързано циклично представяне}
 
   \begin{center}
@@ -147,9 +145,6 @@
   \end{itemize}
 \end{frame}
 
-% TODO: слайд за for each
-% TODO: слайд за list initialization
-
 \begin{frame}
   \frametitle{Итератор: физическо представяне}
 
@@ -157,6 +152,28 @@
   \item при свързано представяне --- указател към двойна или тройна кутия
   \item при последователно представяне --- индекс на пореден елемент
   \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Цикъл върху контейнери}
+  В C++11 имаме възможност да итерираме по елементите в даден контейнер със следния синтаксис:\\
+  \tta{for(}<тип> <елемент> \tta: <израз>\tta) <оператор>
+  \pause
+  \begin{itemize}[<+->]
+  \item{} <израз> трябва да се оценява до контейнер
+  \item{} <тип> трябва съвпада с типа на елементите в контейнера
+  \item{} <оператор> е тялото на цикъла, в което може да се използва <eлемент>
+  \item ако <тип> е препратка, то <елемент> може да се използва за промяна на стойността на съответната позиция в контейнера
+  \end{itemize}
+  \onslide<+->
+  Превежда се до:
+\begin{lstlisting}
+@\textsf{<подходящ тип>}@ const& c = @\textsf{<израз>}@;
+for(@\textsf{<подходящ тип>}@ it = c.begin(); it != c.end(); ++it) {
+  @\textsf{<тип>}@ @\textsf{<елемент>}@ = *it;
+  @\textsf{<оператор>}@
+}
+\end{lstlisting}
 \end{frame}
 
 \begin{frame}<\crtp>
@@ -218,6 +235,33 @@ class LinkedListIterator :
 \end{lstlisting}
 \pause
 Експлицитното преобразуване на типа се налага, понеже \lst{*this} е от тип \lst{Iterator&}, а конструкторът за копиране на \lst{ConcreteIterator} очаква тип \lst{ConcreteIterator&}.
+\end{frame}
+
+\begin{frame}<1-7| trans:3,6>
+  \frametitle{\alt<1-3>{Включване}{Изключване} на елемент \alt<1-3>{в}{от} едносвързан списък}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \dotsnode
+      \dotsnextdoublecell{ai}{a_i}
+      \doublecell[right=4em of ai]{ai+1}{a_{i+1}}{ai}
+      \draw[pointer,visible on=<{all:1-2,5-}>] (ainext.center) to (ai+1);
+      \nextdots{ai+1}
+
+      % указател към елемента след който вмъкваме
+      \pointerto{ai.south}{\tt{it.ptr}}{below}
+
+      \begin{scope}[visible on=<all:2-6>]
+        \doublecell[above right=6ex of ai.north]{new}x
+        \pointerto{new}{\tt p}{above}
+        \draw[pointer] (newnext.center) to (ai+1);
+      \end{scope}
+
+      \draw[pointer,visible on=<all:3-4>] (ainext.center) to (new);
+
+      \draw (new) node[cross,visible on=<all:6>] {};
+    \end{tikzpicture}
+  \end{center}
 \end{frame}
 
 \section{Приложения на списъци}
@@ -319,8 +363,36 @@ class LinkedListIterator :
 
 \againframe<2>{doublelinked}
 
-% TODO: анимация на insertAfter
-% TODO: анимация на deleteAt
+\begin{frame}<1-10| trans:4,9>
+  \frametitle{\alt<1-4>{Включване}{Изключване} на елемент \alt<1-4>{в}{от} двусвързан списък}
+
+  \begin{center}
+    \begin{tikzpicture}
+      \dotsnode
+      \dotsnexttriplecell{ai}{a_i}
+      \triplecell[right=4em of ai]{ai+1}{a_{i+1}}{ai}
+      \pointerforward[visible on=<{all:1-3,6-}>]{ainext.center}{ai+1.west};
+      \pointerbackward[visible on=<{all:1-2,7-}>]{ai+1prev.center}{ai.east};
+      \triplenextdots{ai+1}
+
+      % указател към елемента след който вмъкваме
+      \pointerto[visible on=<all:{1-4,8-}>]{ai.south}{\tt{it.ptr}}{below}
+
+      \begin{scope}[visible on=<all:2-9>]
+        \triplecell[above right=6ex of ai.north]{new}x
+        % minimum height предодвратява подскачането
+        \pointerto[minimum height=4ex]{new}{\tt{\alt<2-4,8->p{it.ptr}}}{above}
+        \draw[pointer] (newnext.center) to (ai+1);
+        \draw[pointer] (newprev.center) to (ai);
+      \end{scope}
+
+      \draw[pointer,visible on=<all:4-5>] (ainext.center) to (new);
+      \draw[pointer,visible on=<all:3-6>]  (ai+1prev.center) to (new);
+
+      \draw (new) node[cross,visible on=<all:9>] {};
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
 
 \begin{frame}
   \frametitle{Задачи за двусвързан списък}

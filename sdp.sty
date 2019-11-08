@@ -63,9 +63,9 @@
 }
 
 % следваща двойна клетка с данни
-\newcommand{\nextdoublecell}[3]{
-  \doublecell[right=2em of #3next]{#1}{#2}
-  \draw[pointer] (#3next.center) to (#1data);
+\newcommand{\nextdoublecell}[4][]{
+  \doublecell[right=2em of #4next,#1]{#2}{#3}
+  \draw[pointer] (#4next.center) to (#2data);
 }
 
 % начална тройна клетка с данни
@@ -76,18 +76,18 @@
 }
 
 % вертикално изместен указател
-\newcommand{\shiftedpointer}[3]{
-  \draw[pointer] ([yshift=#1]#2) to (\tikztostart -| #3);
+\newcommand{\shiftedpointer}[4][]{
+  \draw[pointer,#1] ([yshift=#2]#3) to (\tikztostart -| #4);
 }
 
 % указател напред в двойносвързан списък
-\newcommand{\pointerforward}{
-  \shiftedpointer{-.8ex}
+\newcommand{\pointerforward}[1][]{
+  \shiftedpointer[#1]{-.8ex}
 }
 
 % указател назад в двойносвързан списък
-\newcommand{\pointerbackward}{
-  \shiftedpointer{.8ex}
+\newcommand{\pointerbackward}[1][]{
+  \shiftedpointer[#1]{.8ex}
 }
 
 % следваща тройна клетка с данни
@@ -97,15 +97,18 @@
   \pointerbackward{#1prev.center}{#3.east}
 }
 
+% многоточие
+\newcommand{\dotsnode}[1][]{\node (dots) [#1] {\hspace{1em}\ldots\hspace{1em}};}
+
 % многоточие в свързана верига
 \newcommand{\nextdots}[1]{
-  \node (dots) [right=1em of #1] {\ldots\hspace{1em}};
+  \dotsnode[right=1em of #1]
   \draw[pointer] (#1next.center) to (dots);
 }
 
 % многоточие в свързана верига
 \newcommand{\triplenextdots}[1]{
-  \node (dots) [right=2em of #1] {\ldots\hspace{1em}};
+  \dotsnode[right=2em of #1]
   \pointerforward{#1next.center}{dots.west}
   \pointerbackward{dots.west}{#1.east}
 }
