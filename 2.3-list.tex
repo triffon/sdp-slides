@@ -264,6 +264,42 @@ class LinkedListIterator :
   \end{center}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Сложност на операции за едносвързан списък}
+  Бързи операции (сложност $O(1)$ по време и памет):
+  \begin{itemize}
+  \item \tt{insertAfter}
+  \item \tt{deleteAfter}
+  \item \tt{insertFirst}
+  \item \tt{insertLast}
+  \item \tt{deleteFirst}
+  \end{itemize}
+  \pause
+  Бавни операции (сложност $O(n)$ по време и $O(1)$ по памет):
+  \begin{itemize}
+  \item \tt{insertBefore}
+  \item \tt{deleteLast}
+  \item \tt{deleteAt}
+  \item \tt{deleteBefore}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Гранични случаи}
+  Случаи, които изискват особено внимание:
+  \begin{itemize}[<+->]
+  \item Включване на елемент в празен списък
+  \item Включване на елемент преди първия
+  \item Включване на елемент след последния
+  \item Изключване на единствения елемент на списък
+  \item Изключване на първия елемент
+  \item Изключване на последния елемент
+  \item Опит за изключване на елемент от празен списък
+  \item Опит за изключване преди първия елемент
+  \item Опит за изключване след последния елемент
+  \end{itemize}
+\end{frame}
+
 \section{Приложения на списъци}
 
 \begin{frame}
