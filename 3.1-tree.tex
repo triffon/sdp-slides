@@ -1,9 +1,9 @@
-\documentclass{beamer}
+\documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
 
 \title{Дървета}
 
-\date{6--12 декември 2017 г.}
+\date{2 декември 2019 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/tree.jpg}\\
   \imageUntitledAttr{bluebudgie}{https://www.needpix.com/photo/1269899/wordcloud-trees-knowledge-tagcloud-text-cloud-word-info-design}{CC0}}
@@ -71,13 +71,13 @@
   \end{itemize}
   % TODO: да се нарисува с TikZ
   \begin{center}
-    \includegraphics[height=0.75\textheight]{images/mtree.pdf}
+    \includegraphics[height=0.65\textheight]{images/mtree.pdf}
   \end{center}
 \end{frame}
 
 \begin{frame}
   \frametitle{Последователно представяне}
-  Последователност от тройки (корен, най-ляво дете, десен брат)\\[1em]
+  Последователност от тройки (корен, най-ляво дете, десен брат)\\[2ex]
   \begin{center}
     \begin{tabular}{|r*{10}{|c}|}
       \cline{2-11}
@@ -175,8 +175,8 @@
 
 \begin{frame}
   \frametitle{Наредба на поддърветата}
-  Дефинициите за коренови дървета и $n$-арни дървета не са еквивалентни!\\[1em]
-  \textbf{Пример:} троични дървета\\[1em]
+  Дефинициите за коренови дървета и $n$-арни дървета не са еквивалентни!\\[2ex]
+  \textbf{Пример:} троични дървета\\[2ex]
   \begin{center}
     \begin{forest}
       default [1 [2] [,phantom] [3]]
@@ -210,7 +210,7 @@
       \end{definition}
     \end{column}
     \begin{column}{0.45\textwidth}
-      \vspace{2em}
+      \vspace{4ex}
       \samplebintree
     \end{column}
   \end{columns}
@@ -218,13 +218,16 @@
 
 \begin{frame}
   \frametitle{Свързано представяне}
-  Свързана структура от тройни кутии\\[1em]
-  \includegraphics[width=\textwidth]{images/bintree.pdf}
+  Свързана структура от тройни кутии\\[2ex]
+  % TODO: да се нарисува с TikZ
+  \begin{center}
+    \includegraphics[height=.75\textheight]{images/bintree.pdf}
+  \end{center}
 \end{frame}
 
 \begin{frame}
   \frametitle{Последователно представяне}
-  Последователност от тройки (корен, ляво, дясно)\\[1em]
+  Последователност от тройки (корен, ляво, дясно)\\[2ex]
   \begin{center}
     \begin{tabular}{|r*{10}{|c}|}
       \cline{2-11}
@@ -270,7 +273,7 @@
 
 \begin{frame}
   \frametitle{Позиция в двоично дърво}
-  Ще въведем абстракция за позиция в двоичното дърво.\\[1em]
+  Ще въведем абстракция за позиция в двоичното дърво.\\[2ex]
   Операции:
   \begin{itemize}
   \item \tt{root()} --- инициализация в корена на дървото
@@ -331,9 +334,9 @@
 
 \begin{frame}
   \frametitle{Задачи за двоично дърво}
-  \textbf{Задача.} Да се намери дълбочината на дадено дърво.\\[2em]\pause
-  \textbf{Задача.} Да се провери дали две дадени дървета съвпадат.\\[2em]\pause
-  \textbf{Задача.} Да се построи дърво на аритметичен израз със скоби.\\[2em]\pause
-  \textbf{Задача.} Да се премсетне аритметичен израз, записан в дърво.\\[2em]
+  \textbf{Задача.} Да се намери дълбочината на дадено дърво.\\[4ex]\pause
+  \textbf{Задача.} Да се провери дали две дадени дървета съвпадат.\\[4ex]\pause
+  \textbf{Задача.} Да се построи дърво на аритметичен израз със скоби.\\[4ex]\pause
+  \textbf{Задача.} Да се премсетне аритметичен израз, записан в дърво.\\[4ex]
 \end{frame}
 \end{document}
