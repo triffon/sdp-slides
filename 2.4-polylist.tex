@@ -83,7 +83,7 @@
       Дефинира се производен клас \tt{TypeObject} за всеки от тип \tt{Type}, от който искаме да сложим елементи в хетерогенния контейнер\\[2ex]
     \end{column}
     \begin{column}{0.3\textwidth}
-      \ttfamily
+      \ttfamily\small
       \begin{forest} for tree=classdiagram
         [TypeObject [Object] [Type]]
       \end{forest}
@@ -105,16 +105,16 @@
   \pause
   \textbf{Решение:}\\[4ex]
   \begin{center}
-    \ttfamily
+    \ttfamily\small
     \begin{forest} for tree=classdiagram
-      [,phantom [StackObject [Stack] [Object,name=o]] [QueueObject,name=qo [,phantom] [Queue]]]
+      [,phantom [SimpleStack [LinkedStack] [SimpleContainer,name=o]] [SimpleQueue,name=qo [,phantom] [LinkedQueue]]]
       \draw[pointer] (qo) to (o);
     \end{forest}
   \end{center}
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Вложени списъци}
+  \frametitle{Дълбоки списъци}
   \textbf{Задача.} Да се реализира хетерогенен списък, който може да съдържа числа или хетерогенни списъци от същия вид. Да се поддържат операциите извеждане (\tt{print}) и събиране на всички числа (\tt{flatten}).\\[2ex]
   \textbf{Пример:}
 \begin{verbatim}
@@ -125,7 +125,7 @@
   \begin{center}
     \ttfamily
     \begin{forest} for tree=classdiagram
-      [,phantom [IntElement [,phantom] [Element,name=e]] [ListElement,name=le [,phantom] [LinkedList<Element*>]]]
+      [,phantom [SInt [,phantom] [SElement,name=e]] [SList,name=le [,phantom] [LinkedList<SElement*>]]]
       \draw[pointer] (le) to (e);
     \end{forest}
   \end{center}
