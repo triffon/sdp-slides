@@ -3,7 +3,7 @@
 
 \title{Дървета}
 
-\date{2 декември 2019 г.}
+\date{12 декември 2019 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/tree.jpg}\\
   \imageUntitledAttr{bluebudgie}{https://www.needpix.com/photo/1269899/wordcloud-trees-knowledge-tagcloud-text-cloud-word-info-design}{CC0}}
@@ -69,9 +69,48 @@
   \item стойността на корена
   \item свързан списък от възли, представящи поддърветата (деца)
   \end{itemize}
-  % TODO: да се нарисува с TikZ
   \begin{center}
-    \includegraphics[height=0.65\textheight]{images/mtree.pdf}
+    \scriptsize
+    \begin{tikzpicture}
+      \doublecell{a}{a}
+      \newcommand{\vs}{4ex}
+      
+      \doublecell[below=\vs of a]{p1}{}
+      \draw[pointer] (anext.center) to (p1next);
+      \nextdoublecell{p2}{}{p1}
+      \nextdoublecell{p3}{}{p2}
+      \nextdots{p3}
+      \dotsnextdoublecell[right=5em of dots]{pn-1}{}
+      \nextdoublecell{pn}{}{pn-1}
+
+      \foreach \i in {1,2,3,n-1,n} {
+        \doublecell[below=\vs of p\i]{a\i}{a_{\i}}
+        \draw[pointer] (p\i data.center) to (a\i data);
+      }
+
+      \nullptr{a2next}
+      \nullptr{an-1next}
+
+      \foreach \i in {1,3,n} {
+        \doublecell[below=\vs of a\i]{p\i 1}{}
+        \draw[pointer] (a\i next.center) to (p\i 1next);
+      }
+
+      \nextdoublecell{p12}{}{p11}
+      \nullptr{p12next}
+
+      \nextdoublecell{p32}{}{p31}
+      \nextdoublecell{p33}{}{p32}
+      \nullptr{p33next}
+
+      \nullptr{pn1next}
+
+      \foreach \i in {11,12,31,32,33,n1} {
+        \doublecell[below=\vs of p\i]{a\i}{a_{\i}}
+        \nullptr{a\i next}
+        \draw[pointer] (p\i data.center) to (a\i data);
+      }      
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
@@ -218,10 +257,27 @@
 
 \begin{frame}
   \frametitle{Свързано представяне}
-  Свързана структура от тройни кутии\\[2ex]
-  % TODO: да се нарисува с TikZ
+  Свързана структура от тройни кутии\\[6ex]
   \begin{center}
-    \includegraphics[height=.75\textheight]{images/bintree.pdf}
+    \small
+    \begin{tikzpicture}
+      \triplecell{a}{a}
+
+      \foreach \i in {,0,00} {
+        \triplecell[below left=3ex and -3.5ex of a\i]{a\i 0}{a_{\i 0}}
+        \draw[pointer] (a\i prev.center) to (a\i 0);
+      }
+      \foreach \i in {,0,01,1,11} {
+        \triplecell[below right=3ex and -3.5ex of a\i]{a\i 1}{a_{\i 1}}
+        \draw[pointer] (a\i next.center) to (a\i 1);
+      }
+      \foreach \i in {01,011,11,111} {
+        \nullptr{a\i prev}
+      }
+      \foreach \i in {00,011,111} {
+        \nullptr{a\i next}
+      }
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
@@ -249,9 +305,9 @@
 
 
 \begin{frame}[fragile]
-  \frametitle{Псевдоними на стойности в C++11}
+  \frametitle{Препратки към стойности в C++11}
   \begin{itemize}[<+->]
-  \item \verb|T&&| --- псевдоним на \textbf{стойност} от тип \tt T
+  \item \verb|T&&| --- препратка \textbf{стойност} от тип \tt T
     \begin{itemize}
     \item rvalue reference
     \end{itemize}
