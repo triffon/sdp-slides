@@ -1,26 +1,52 @@
-\documentclass{beamer}
+\documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
 
 \title{Дървета за търсене}
 
-\date[19.12.2017--9.01.2018]{19 декември 2017 г. -- 9 януари 2018 г.}
+\date{12 декември 2019 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/searchtree.jpg}\\
   \imageAttr{Appletree}{User:MKFF}{https://commons.wikimedia.org/wiki/File:Appletree_2.jpg}{CC0}}
 
-\forestset{default/.style={baseline,for tree={fill=diagramblue,draw,circle,inner
-      sep=0pt,minimum size=4ex,edge=->}}}
+\forestset{
+  % стил по подразбиране за дървета
+  default/.style={
+    baseline,
+    for tree={
+      fill=diagramblue,
+      draw,circle,
+      inner sep=0pt,
+      minimum size=3.5ex,
+      edge=->}},
+  % схематични дървета, с по-големи възли
+  scheme/.style={
+    default,
+    for tree={minimum size=6ex}},
+  % поддърво
+  tri/.style={
+    shape=isosceles triangle,
+    shape border rotate=90,
+    minimum height=12ex,
+    child anchor=north,
+    anchor=north},
+  % малко поддърво
+  trismall/.style={
+    tri,
+    minimum height=8ex},
+  % задраскване на възел
+  remove/.style={
+    tikz={
+      \draw[thick,red] (!.north west) -- (!.south east);
+      \draw[thick,red] (!.north east) -- (!.south west);}},
+  % задраскване на малък възел
+  removesmall/.style={
+    tikz={
+      \draw[thick,red] (!.north west)++(1.5ex,1.5ex) -- ++(3ex,-3ex);
+      \draw[thick,red] (!.north west)++(4.5ex,1.5ex) -- ++(-3ex,-3ex);
+      \node at (!.north west) [xshift=3ex,circle,draw,inner sep=0.2ex]{Y};}},
+}
 
-\forestset{scheme/.style={default,for tree={minimum size=6ex}}}
-
-\forestset{tri/.style={shape=isosceles triangle,shape border rotate=90,minimum height=6em,child anchor=north,anchor=north}}
-
-\forestset{trismall/.style={tri,minimum height=4em}}
-
-\forestset{remove/.style={tikz={\draw[thick,red] (!.north west) -- (!.south east); \draw[thick,red] (!.north east) -- (!.south west);}}}
-
-\forestset{removesmall/.style={tikz={\draw[thick,red] (!.north west)++(1.5ex,1.5ex) -- ++(3ex,-3ex); \draw[thick,red] (!.north west)++(4.5ex,1.5ex) -- ++(-3ex,-3ex); \node at (!.north west) [xshift=3ex,circle,draw,inner sep=0.2ex]{Y};}}}
-
+% примерно двоично дърво
 \newcommand{\samplebinordtree}{%
   \begin{forest}
     default [5 [3 [2 [1] [,phantom]] [4]] [8 [6 [,phantom] [7] ] [10]]]
@@ -68,7 +94,7 @@
   \end{definition}
   \pause
   \textbf{Пример:}
-  \vspace{-1em}
+  \vspace{-2ex}
   \begin{center}
     \small
     \samplebinordtree
@@ -164,7 +190,7 @@
 
 \begin{frame}
   \frametitle{Оптимална височина на дърво}
-  Сложността на всички операции за двоично дърво до търсене е $O(h)$, където $h$ е височината на дървото.\\[1em]
+  Сложността на всички операции за двоично дърво до търсене е $O(h)$, където $h$ е височината на дървото.\\[2ex]
   Знаем, че $\log_2 (n+1) \leq h \leq n$.
   \begin{itemize}
   \item $h = n \leftrightarrow $ дървото е изродено до списък
@@ -213,7 +239,7 @@
     За балансирани дървета височината е възможно най-малка\pause, т.е. $h = \lceil log_2 (n+1) \rceil$.
   \end{theorem}
   \pause
-  \alert{Обратното вярно ли е?}\\[1em]
+  \alert{Обратното вярно ли е?}\\[2ex]
   \pause
   Не!
   \begin{forest}
@@ -265,7 +291,7 @@
 
 \begin{frame}
   \frametitle{Построяване на идеално балансирано дърво}
-  По даден сортиран списък можем да построим идеално балансирано двоично дърво за търсене.\\[1em]
+  По даден сортиран списък можем да построим идеално балансирано двоично дърво за търсене.\\[2ex]
   Строим рекурсивно:
   \begin{itemize}
   \item Избираме за корен $X$ ``средния'' елемент на списъка
@@ -290,9 +316,9 @@
 
 \begin{frame}
   \frametitle{Самобалансиращи се дървета за търсене}
-  Можем да постигнем сложност $O(\log n)$ на операциите търсене, включване и изключване, ако работим само с балансирани дървета.\\[1em]
+  Можем да постигнем сложност $O(\log n)$ на операциите търсене, включване и изключване, ако работим само с балансирани дървета.\\[2ex]
   \pause
-  \textbf{Идея:} ако дървото се разбалансира след включване или изключване, да го балансираме наново.\\[1em]
+  \textbf{Идея:} ако дървото се разбалансира след включване или изключване, да го балансираме наново.\\[2ex]
   \pause
   Има различни вариации на самобалансиращи се дървета:
   \begin{itemize}
@@ -307,7 +333,7 @@
 
 \begin{frame}
   \frametitle{AVL дърво}
-  Предложено от Адельсон-Велский и Ландис през 1962 г.\\[1em]
+  Предложено от Адельсон-Велский и Ландис през 1962 г.\\[2ex]
   \textbf{Основна идея:} Всяко поддърво $T = (X,L,R)$ поддържа коефициент на баланс:
   \begin{equation*}
     b(T) = h(R) - h(L)
@@ -354,8 +380,8 @@
     \begin{forest}
       default [X [A,trismall] [Y [B,trismall] [C,trismall]]]
     \end{forest}
-  \end{center} \pause \vspace{-1em}
-  \begin{overlayarea}{\textwidth}{10em}
+  \end{center} \pause \vspace{-2.5ex}
+  \begin{overlayarea}{\textwidth}{24ex}
     \onslide<+->
     \begin{onlyenv}<.-.(12)>
       $$ b'(Y) = ? $$
@@ -422,7 +448,7 @@
     \end{onlyenv}
     \onslide<+->
     \begin{onlyenv}<.>
-      \vspace{-0.5em}
+      \vspace{-2ex}
       \begin{equation*}
         b'(X) > b(X), \quad b'(Y) > b(Y)
       \end{equation*}
