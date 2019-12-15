@@ -1,9 +1,9 @@
-\documentclass{beamer}
+\documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
 
 \title{Речници}
 
-\date{9--16 януари 2017 г.}
+\date{16 декември 2019 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/hash.jpg}\\
   \imageBased{A Dictionary Of The English Language}{Jurriaan Persyn}{https://flic.kr/p/6ThMfe}{CC BY-NC 2.0}}
@@ -154,10 +154,21 @@
   \pause
   Нарича се още ``отворено хеширане'' или ``затворено адресиране''.\\
   \pause
-  \textbf{Пример:} Нека $h(\text{"Силвия"{}}) = 0$, $h(\text{"Иван"{}}) = h(\text{"Петър"{}}) = h(\text{"Дарина"{}}) = 5$, $h(\text{"Марина"{}}) = h(\text{"Андрей"{}}) = 10$.
-  % TODO: да се нарисува с TikZ
+  \textbf{Пример:} Нека $h(\text{"Sylvia"{}}) = 0$, $h(\text{"Ivan"{}}) = h(\text{"Peter"{}}) = h(\text{"Darina"{}}) = 5$, $h(\text{"Marina"{}}) = h(\text{"Andrey"{}}) = 10$.
   \begin{center}
-    \includegraphics[width=0.8\textwidth]{images/hash_chaining.pdf}
+    \small
+    \begin{tikzpicture}
+      \matrix (a) [mtx] { \&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\\};
+      \foreach \idx/\key in {1/Sylvia,6/Ivan,11/Marina} {
+        \doublecell[below=3ex of a-1-\idx,inner sep=.5ex]{\key}{\tt{\key}}
+        \draw[pointer] (a-1-\idx.center) to (\key);
+      }
+      \foreach \old/\new in {Ivan/Petar,Petar/Darina,Marina/Andrew} {
+        \doublecell[below=3ex of \old next,inner sep=.5ex]{\new}{\tt{\new}}
+        \draw[pointer] (\old next.center) to (\new);
+      }
+      \foreach \cell in {Sylvia,Darina,Andrew} { \nullptr{\cell next} }
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
@@ -168,10 +179,17 @@
   Нарича се още ``затворено хеширане''.\\[1em]
   \pause
   \textbf{Пример:} Нека сме фиксирали пермутацията 1, 4, 5, 2, 6, 7, 0, 3.
-  Нека $h(\text{"Иван"{}}) = h(\text{"Петър"{}}) = 1$, $h(\text{"Дарина"{}}) = 4$, $h(\text{"Силвия"{}}) = h(\text{"Андрей"{}}) = 7$
-  % TODO: да се нарисува с TikZ
+  Нека $h(\text{"Ivan"{}}) = h(\text{"Peter"{}}) = 1$, $h(\text{"Darina"{}}) = 4$, $h(\text{"Sylvia"{}}) = h(\text{"Andrew"{}}) = 7$
   \begin{center}
-    \includegraphics[width=\textwidth]{images/hash_open.pdf}
+    \small
+    \begin{tikzpicture}
+      \matrix [mtx,nodes={minimum width=4em}] {
+        |(s)| Sylvia \& |(i)| Ivan \& \& \& |(p)| Peter \& |(d)| Darina \& \& |(a)| Andrew\\
+      };
+      \draw[pointer,bend left=15] (i.north) to (p.north);
+      \draw[pointer,bend left=30] (p.north) to (d.north);
+      \draw[pointer,bend left=10] (a.south) to (s.south);
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
@@ -240,7 +258,7 @@
   \frametitle{Стандартни криптографски функции}
   \begin{itemize}[<+->]
   \item сред популярните съвременни криптографски функции са RIPEMD-160, SHA-256, Whirlpool
-  \item за някои доскоро популярни функции, като MD5 и SHA-1 вече има доказателства, че не са устойчиви към колизии и не се препоръчват за използване
+  \item за някои доскоро популярни функции, като MD5 и SHA-1 вече има доказателства, че не са устойчиви към колизии и не се препоръчват за използване в сценарии, където се разчита на това свойство
   \item популярни приложения:
     \begin{itemize}
     \item запазване на пароли и проверка за съвпадение без да се вижда самата парола
