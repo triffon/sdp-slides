@@ -3,7 +3,7 @@
 
 \title{Дървета за търсене}
 
-\date{12 декември 2019 г.}
+\date{12--16 декември 2019 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/searchtree.jpg}\\
   \imageAttr{Appletree}{User:MKFF}{https://commons.wikimedia.org/wiki/File:Appletree_2.jpg}{CC0}}
@@ -51,6 +51,29 @@
   \begin{forest}
     default [5 [3 [2 [1] [,phantom]] [4]] [8 [6 [,phantom] [7] ] [10]]]
   \end{forest}%
+}
+
+\tikzset{bnodemtx/.style={
+    basematrix,
+    matrix of nodes,
+    nodes={
+      fill=diagramblue,
+      draw,
+      inner sep=0pt,
+      align=center,
+      minimum height=3.5ex,
+      text height=2.5ex,
+      text depth=.5ex,
+    },
+    inner sep=0pt,
+  }
+}     
+
+\newcommand{\bnode}[5][]{
+  \matrix[bnodemtx,nodes={text width=1.6em},#1]
+  (#2data) { #3 \& #4 \& #5\\ };
+  \matrix[bnodemtx,nodes={text width=1.2em},below=-2*\pgflinewidth of #2data.south]
+  (#2next) { \&\&\& \\};
 }
 
 \begin{document}
@@ -672,9 +695,23 @@
 
 \begin{frame}
   \frametitle{Пример за B дърво от ред 4}
-  % TODO: да се нарисува с TikZ
   \begin{center}
-    \includegraphics[width=0.8\textwidth]{images/btree.pdf}
+    \ttfamily
+    \begin{tikzpicture}
+      \bnode{b1}38-
+      \bnode[below left =of b1next]{b2}12-
+      \bnode[below      =of b1next]{b3}4--
+      \bnode[below right=of b1next]{b4}{10}{12}{15}
+
+      \draw[pointer] (b1next-1-1.center) to (b2data);
+      \draw[pointer] (b1next-1-2.center) to (b3data);
+      \draw[pointer] (b1next-1-3.center) to (b4data);
+      \nullptr{b1next-1-4}
+      \foreach \node in {2,3,4} {
+        \foreach \idx in {1,2,3,4} {
+          \nullptr{b\node next-1-\idx}
+        }}
+    \end{tikzpicture}
   \end{center}
 \end{frame}
 
