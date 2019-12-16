@@ -18,9 +18,9 @@
 
 \begin{frame}
   \frametitle{АТД: Речник}
-  Структура, представяща функционална връзка между две множества от елементи (ключове и стойности).\\[1em]
+  Структура, представяща функционална връзка между две множества от елементи (ключове и стойности).\\[2ex]
   \pause
-  Още известна като: асоциативен списък (associative list) и карта (map)\\[1em]
+  Още известна като: асоциативен списък (associative list) и карта (map)\\[2ex]
   \pause
   Операции
   \begin{itemize}
@@ -139,7 +139,7 @@
 
 \begin{frame}
   \frametitle{Разрешаване на колизии}
-  В практическите случаи колизиите са неизбежни и трябва да имаме стратегия за справяне с тях.\\[2em]
+  В практическите случаи колизиите са неизбежни и трябва да имаме стратегия за справяне с тях.\\[4ex]
   \pause
   Има две основни стратегии за разрешаване на колизии:
   \begin{itemize}
@@ -160,31 +160,31 @@
     \begin{tikzpicture}
       \matrix (a) [mtx] { \&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\&\\};
       \foreach \idx/\key in {1/Sylvia,6/Ivan,11/Marina} {
-        \doublecell[below=3ex of a-1-\idx,inner sep=.5ex]{\key}{\tt{\key}}
+        \doublecell[below=3ex of a-1-\idx,nodes={inner sep=.5ex}]{\key}{\tt{\key}}
         \draw[pointer] (a-1-\idx.center) to (\key);
       }
-      \foreach \old/\new in {Ivan/Petar,Petar/Darina,Marina/Andrew} {
-        \doublecell[below=3ex of \old next,inner sep=.5ex]{\new}{\tt{\new}}
+      \foreach \old/\new in {Ivan/Peter,Peter/Darina,Marina/Andrey} {
+        \doublecell[below=3ex of \old next,nodes={inner sep=.5ex}]{\new}{\tt{\new}}
         \draw[pointer] (\old next.center) to (\new);
       }
-      \foreach \cell in {Sylvia,Darina,Andrew} { \nullptr{\cell next} }
+      \foreach \cell in {Sylvia,Darina,Andrey} { \nullptr{\cell next} }
     \end{tikzpicture}
   \end{center}
 \end{frame}
 
 \begin{frame}
   \frametitle{Разрешаване с отворено адресиране}
-  \textbf{Идея:} използваме предварително фиксирана пермутация на индексите. При колизия изпробваме последователно индексите в реда, зададен в пермутацията.\\[1em]
+  \textbf{Идея:} използваме предварително фиксирана пермутация на индексите. При колизия изпробваме последователно индексите в реда, зададен в пермутацията.\\[2ex]
   \pause
-  Нарича се още ``затворено хеширане''.\\[1em]
+  Нарича се още ``затворено хеширане''.\\[2ex]
   \pause
   \textbf{Пример:} Нека сме фиксирали пермутацията 1, 4, 5, 2, 6, 7, 0, 3.
-  Нека $h(\text{"Ivan"{}}) = h(\text{"Peter"{}}) = 1$, $h(\text{"Darina"{}}) = 4$, $h(\text{"Sylvia"{}}) = h(\text{"Andrew"{}}) = 7$
+  Нека $h(\text{"Ivan"{}}) = h(\text{"Peter"{}}) = 1$, $h(\text{"Darina"{}}) = 4$, $h(\text{"Sylvia"{}}) = h(\text{"Andrey"{}}) = 7$.
   \begin{center}
     \small
     \begin{tikzpicture}
       \matrix [mtx,nodes={minimum width=4em}] {
-        |(s)| Sylvia \& |(i)| Ivan \& \& \& |(p)| Peter \& |(d)| Darina \& \& |(a)| Andrew\\
+        |(s)| Sylvia \& |(i)| Ivan \& \& \& |(p)| Peter \& |(d)| Darina \& \& |(a)| Andrey\\
       };
       \draw[pointer,bend left=15] (i.north) to (p.north);
       \draw[pointer,bend left=30] (p.north) to (d.north);
