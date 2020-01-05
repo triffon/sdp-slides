@@ -202,6 +202,12 @@
     minimum width=5em,
     minimum height=3em
   },
+  % стил за връх на граф/дърво
+  graphnode/.style={
+    draw,
+    circle,
+    fill=diagramblue,
+  },
 }
 
 % правене на нови команди
@@ -348,3 +354,9 @@
 % съкратена команда за показване само на текущия слайд
 % слага се в преамбюла
 \newcommand{\crronly}{\includeonlyframes{current}}
+
+% overlayarea, която по подразбиране изпълва цялата област за текст за текущата тема
+% може да се зададе като опционален параметър друга част от височината
+\newenvironment{fixedarea}[1][.87]{%
+  \begin{overlayarea}\textwidth{#1\textheight}}{%
+  \end{overlayarea}}

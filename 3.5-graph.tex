@@ -1,36 +1,46 @@
-\documentclass{beamer}
+\documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
 
 \title{Графи}
 
-\date{9--16 януари 2017 г.}
+\date{6 януари 2019 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/graph.jpg}\\
   \imageBased{Socialized Energy (AKA Smart Grid)}{Zachary Veach}{https://flic.kr/p/6rTacN}{CC BY-NC-SA 2.0}}
 
-\usetikzlibrary{graphs,arrows.meta}
+\usetikzlibrary{graphs}
 
-% TODO: да се опростят стиловете
+\tikzset{defaultgraph/.style={>=stealth,every node/.style=graphnode,scale=#1}}
+
 \newcommand{\samplegraph}[1][1.2]{%
-\begin{tikzpicture}[>=LaTeX,every node/.style={draw,circle,fill=diagramblue},scale=#1]
-  \node (1) at (1,2)     {1};
-  \node (2) at (3,2.2)   {2};
-  \node (3) at (2,1)     {3};
-  \node (4) at (0.8,0.2) {4};
-  \node (5) at (2.5,0)   {5};
-  \node (6) at (3.5,1.2)   {6};
-  \graph {
-    (1) -> {(2), (3)};
-    (2) -> {(3), (6)};
-    (3) -> {(4), (6)};
-    (4) -> {(1), (5)};
-    (5) -> (3);
-    (6) -> (5);
-  };
-\end{tikzpicture}}
+  \begin{tikzpicture}[defaultgraph=#1]
+    \node (1) at (1,2) {1};
+    \node (2) at (3,2.2)   {2};
+    \node (3) at (1.9,1.2)     {3};
+    \node (4) at (0.8,0.3) {4};
+    \node (5) at (2.5,0)   {5};
+    \node (6) at (3.5,1.2) {6};
+    \graph {
+      (1) -> {(2), (3)};
+      (2) -> (3);
+      (3) -> {(4), (5)};
+      (5) -> {(2), (4) ,(6)};
+      (6) -> (2);
+    };
+  \end{tikzpicture}}
+
+% изисквания към графа:
+% да не е силно свързан (т.е. да има недостижим връх)
+%% 1
+% да има път, който се намира само след backtracking
+%% 1 -> 2 -> 3 -> 4 <- 3 -> 5
+% да има път, който минава през цикъл при първо минаване и пътят се намира едва след backtracking
+%% 1 -> 2 -> 3 -> 5 -> 2 -> ... <- 5 -> 6
+% да има път, който минава през цикъл, но в цикъла се влиза чак след backtracking, при първо минаване се намира пътя
+%% 1 -> 2 -> 3 -> 4 <- 3 -> 5 -> 2 -> ...
 
 \newcommand{\emptygraph}{%
-\begin{tikzpicture}[>=LaTeX,every node/.style={draw,circle,fill=diagramblue},scale=0.8]
+\begin{tikzpicture}[defaultgraph=.8]
   \node (1) at (1,2)     {1};
   \node (2) at (3,2.2)   {2};
   \node (3) at (0.8,0.2) {3};
@@ -38,7 +48,7 @@
 \end{tikzpicture}}
 
 \newcommand{\fullgraph}{%
-\begin{tikzpicture}[>=LaTeX,every node/.style={draw,circle,fill=diagramblue},scale=0.8]
+\begin{tikzpicture}[defaultgraph=.8]
   \node (1) at (1,2)     {1};
   \node (2) at (3,2.2)   {2};
   \node (3) at (0.8,0.2) {3};
@@ -140,11 +150,11 @@
         \left(
           \begin{array}{*6c}
             0 & 1 & 1 & 0 & 0 & 0\\
-            0 & 0 & 1 & 0 & 0 & 1\\
-            0 & 0 & 0 & 1 & 0 & 1\\
-            1 & 0 & 0 & 0 & 1 & 0\\
             0 & 0 & 1 & 0 & 0 & 0\\
-            0 & 0 & 0 & 0 & 1 & 0
+            0 & 0 & 0 & 1 & 1 & 0\\
+            0 & 0 & 0 & 0 & 0 & 0\\
+            0 & 1 & 0 & 1 & 0 & 1\\
+            0 & 1 & 0 & 0 & 0 & 0
           \end{array}
           \right)
       \end{equation*}
@@ -154,23 +164,25 @@
     \end{column}
   \end{columns}
   \pause
-  \alt<-14>{
-  \begin{itemize}[<+->]
-  \item $A_{i,j} = 1 \leftrightarrow (v_i,v_j) \in E$
-  \item памет --- \rvl{$O(|V|^2)$}
-  \item \tt{successors} --- \rvl{$O(|V|)$}
-  \item \tt{isEdge} --- \rvl{$O(1)$}
-  \item \tt{addVertex} --- \rvl{$O(|V|)$}
-  \item \tt{removeVertex} --- \rvl{$O(|V|^2)$, ако се налага разместване}
-  \item \tt{addEdge, removeEdge} --- \rvl{$O(1)$}
-  \end{itemize}}{
-  \begin{itemize}[<+(13)->]
-  \item $A_{i,j} = 1 \leftrightarrow (v_i,v_j) \in E$
-  \item $A^2_{i,j} > 0 \leftrightarrow \sum_{k=1}^n A_{i,k}A_{k,j} > 0 \leftrightarrow $ има път с дължина 2 от $v_i$ до $v_j$
-  \item по индукция: $A^n_{i,j} > 0 \leftrightarrow $ има път с дължина $n$ от $v_i$ до $v_j$
-  \item нещо повече: $A^n_{i,j}$ = броят на пътищата с дължина $n$ от $v_i$ до $v_j$
-  \item ако $B = \sum_{k=1}^{|V|} A^k$, то $B_{i,j} > 0 \leftrightarrow$ има път от $v_i$ до $v_j$
-  \end{itemize}}
+  \begin{fixedarea}[.485]
+    \alt<-14>{
+      \begin{itemize}[<+->]
+      \item $A_{i,j} = 1 \leftrightarrow (v_i,v_j) \in E$
+      \item памет --- \rvl{$O(|V|^2)$}
+      \item \tt{successors} --- \rvl{$O(|V|)$}
+      \item \tt{isEdge} --- \rvl{$O(1)$}
+      \item \tt{addVertex} --- \rvl{$O(|V|)$}
+      \item \tt{removeVertex} --- \rvl{$O(|V|^2)$, ако се налага разместване}
+      \item \tt{addEdge, removeEdge} --- \rvl{$O(1)$}
+      \end{itemize}}{
+      \begin{itemize}[<+(13)->]
+      \item $A_{i,j} = 1 \leftrightarrow (v_i,v_j) \in E$
+      \item $A^2_{i,j} > 0 \leftrightarrow \sum_{k=1}^n A_{i,k}A_{k,j} > 0 \leftrightarrow $ има път с дължина 2 от $v_i$ до $v_j$
+      \item по индукция: $A^n_{i,j} > 0 \leftrightarrow $ има път с дължина $n$ от $v_i$ до $v_j$
+      \item нещо повече: $A^n_{i,j}$ = броят на пътищата с дължина $n$ от $v_i$ до $v_j$
+      \item ако $B = \sum_{k=1}^{|V|} A^k$, то $B_{i,j} > 0 \leftrightarrow$ има път от $v_i$ до $v_j$
+      \end{itemize}}
+  \end{fixedarea}
 \end{frame}
 
 \begin{frame}<1-12>
@@ -178,19 +190,19 @@
   \begin{equation*}
     A =
     \left(
-      \begin{array}{*{10}c}
-        -1 &  1 &  1 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
-        0 & -1 &  0 &  0 &  0 &  1 &  0 &  1 &  0 &  0\\
-        0 &  0 & -1 &  1 &  0 & -1 & -1 &  0 &  1 &  0\\
-        1 &  0 &  0 & -1 &  1 &  0 &  0 &  0 &  0 &  0\\
-        0 &  0 &  0 &  0 & -1 &  0 &  1 &  0 &  0 & -1\\
-        0 &  0 &  0 &  0 &  0 &  0 &  0 & -1 & -1 &  1
+      \begin{array}{*9r}
+         1 &  1 &  0 &  0 &  0 &  0 &  0 &  0 &  0\\
+        -1 &  0 &  1 &  0 &  0 &  0 & -1 &  0 & -1\\
+         0 & -1 & -1 &  1 &  1 &  0 &  0 &  0 &  0\\
+         0 &  0 &  0 & -1 &  0 & -1 &  0 &  0 &  0\\
+         0 &  0 &  0 &  0 & -1 &  1 &  1 &  1 &  0\\
+         0 &  0 &  0 &  0 &  0 &  0 &  0 & -1 &  1
       \end{array}
     \right)
   \end{equation*}
   \begin{columns}[onlytextwidth]
     \begin{column}{0.7\textwidth}
-      \begin{overlayarea}{.7\textwidth}{.5\textheight}
+      \begin{fixedarea}[.465]
         \alt<1>{%
           \begin{itemize}
           \item $A_{i,j} = 1 \leftrightarrow \exists v \in V\, e_j = (v_i, v) \leftrightarrow e_j\text{ е \textbf{изходящо} ребро за }v_i$
@@ -206,7 +218,7 @@
           \item \tt{removeVertex, removeEdge} --- \rvl{$O(|V||E|)$, ако се налага разместване}
           \end{itemize}
         }
-      \end{overlayarea}
+      \end{fixedarea}
     \end{column}
     \begin{column}{0.3\textwidth}
       \samplegraph[1]
@@ -222,28 +234,31 @@
       D = \left\{
       \begin{array}{rcl}
         1 &\rightarrow& (2, 3)\\
-        2 &\rightarrow& (3, 6)\\
-        3 &\rightarrow& (4, 6)\\
-        4 &\rightarrow& (1, 5)\\
-        5 &\rightarrow& (3)\\
-        6 &\rightarrow& (5)
+        2 &\rightarrow& (3)\\
+        3 &\rightarrow& (4, 5)\\
+        4 &\rightarrow& ()\\
+        5 &\rightarrow& (2, 4, 6)\\
+        6 &\rightarrow& (2)
       \end{array}\right\}
   \end{equation*}
     \end{column}
     \begin{column}{0.5\textwidth}
-      \samplegraph
+      \samplegraph[1]
     \end{column}
   \end{columns}
-  \begin{itemize}[<+->]
-  \item $D_i = \{v\;|\;(v_i,v) \in E \}$, може да е множество или списък
-  \item памет --- \rvl{$O(|V|+|E|)$}
-  \item \tt{successors} --- \rvl{$O(1)$}
-  \item \tt{isEdge} --- \rvl{$O(|V|)$ (ако е множество --- $O(1)$)} 
-  \item \tt{addVertex} --- \rvl{$O(1)$}
-  \item \tt{removeVertex} --- \rvl{$O(|E|)$, трябва да се премахнат входящите ребра}
-  \item \tt{addEdge} --- \rvl{$O(1)$}
-  \item \tt{removeEdge} --- \rvl{$O(|V|)$ (ако е множество --- $O(1)$)}
-  \end{itemize}
+  \vspace{-1ex}
+  \begin{fixedarea}[.548]
+    \begin{itemize}[<+->]
+    \item $D_i = \{v\;|\;(v_i,v) \in E \}$, може да е множество или списък
+    \item памет --- \rvl{$O(|V|+|E|)$}
+    \item \tt{successors} --- \rvl{$O(1)$}
+    \item \tt{isEdge} --- \rvl{$O(|V|)$ (ако е множество --- $O(1)$)}
+    \item \tt{addVertex} --- \rvl{$O(1)$}
+    \item \tt{removeVertex} --- \rvl{$O(|E|)$, трябва да се премахнат входящите ребра}
+    \item \tt{addEdge} --- \rvl{$O(1)$}
+    \item \tt{removeEdge} --- \rvl{$O(|V|)$ (ако е множество --- $O(1)$)}
+    \end{itemize}
+  \end{fixedarea}
 \end{frame}
 
 \begin{frame}
@@ -252,27 +267,27 @@
     \begin{column}{0.5\textwidth}
       \begin{equation*}
         \begin{array}{rll}
-          E = ((1,2),&(2,3),&(3,6),\\
-          (1,3),&(4,1),&(3,4),\\
-          (5,3),&(6,5),&(4,5),\\
-          (2,6))
+          E = ((1,2),&(2,3),&(5,6),\\
+          (1,3),&(3,5),&(3,4),\\
+          (5,2),&(5,4),&(6,2))
         \end{array}
       \end{equation*}
     \end{column}
     \begin{column}{0.5\textwidth}
-      \samplegraph
+      \samplegraph[1]
     \end{column}
   \end{columns}
-  \begin{itemize}[<+->]
-  \item може да е представено като списък или множество
-  \item памет --- \rvl{$O(|E|)$}
-  \item \tt{successors} --- \rvl{$O(|E|)$}
-  \item \tt{isEdge} --- \rvl{$O(|E|)$ (ако е множество --- $O(1)$)}
-  \item \tt{addVertex} --- \rvl{$O(1)$}
-  \item \tt{removeVertex} --- \rvl{$O(|E|)$}
-  \item \tt{addEdge} --- \rvl{$O(1)$}
-  \item \tt{removeEdge} --- \rvl{$O(|E|)$ (ако е множество --- $O(1)$)}
-  \end{itemize}
+  \begin{fixedarea}[.5]
+    \begin{itemize}[<+->]
+    \item може да е представено като списък или множество
+    \item памет --- \rvl{$O(|E|)$}
+    \item \tt{successors} --- \rvl{$O(|E|)$}
+    \item \tt{isEdge} --- \rvl{$O(|E|)$ (ако е множество --- $O(1)$)}
+    \item \tt{addVertex, addEdge} --- \rvl{$O(1)$}
+    \item \tt{removeVertex} --- \rvl{$O(|E|)$}
+    \item \tt{removeEdge} --- \rvl{$O(|E|)$ (ако е множество --- $O(1)$)}
+    \end{itemize}
+  \end{fixedarea}
 \end{frame}
 
 \begin{frame}
