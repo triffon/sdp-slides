@@ -10,4 +10,5 @@
 auto/
 out/
 *.xoj
+*.xopp
 _region_.tex
