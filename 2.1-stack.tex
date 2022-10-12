@@ -1,9 +1,10 @@
+\PassOptionsToClass{aspectratio=169}{beamer}
 \documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
 
 \title{Стек}
 
-\date{6 октомври 2022 г.}
+\date{13 октомври 2022 г.}
 
 \titlegraphicx{\imageWithAttr{10em}{images/stack.jpg}{Stack of Rocks, Cattle Point, San Juan Island}{Ryan Harvey}{https://flic.kr/p/aojd1Q}{\CCBYSA{2.0}}}
 
@@ -18,8 +19,8 @@
 \begin{frame}
   \frametitle{АТД: стек}
 
-  Хомогенна линейна структура с организация ``последен влязъл --- пръв излязъл'' (LIFO)\\[1em]
-  Операции\\[0.5em]
+  Хомогенна линейна структура с организация ``последен влязъл --- пръв излязъл'' (LIFO)\\[2ex]
+  Операции\\[1ex]
   \begin{itemize}
   \item \lst{create()} --- създаване на празен стек
   \item \lst{empty()} --- проверка за празнота на стек
@@ -32,7 +33,7 @@
 \begin{frame}
   \frametitle{АТД: стек}
 
-  Свойства на операциите\\[0.5em]
+  Свойства на операциите\\[1ex]
   \begin{itemize}
   \item \lst{create().empty()} = \lst{true}
   \item \lst{s.push(x).empty()} = \lst{false}
@@ -319,7 +320,7 @@ struct StackElement {
   \begin{itemize}[<+->]
   \item Ако следваме алгоритъма, описан по-рано, резултатът би трябвало да е \tt{12+345-/*}\ldots
   \item \ldots \alert{но резултатът от този израз е \tt{-9}, а не \tt{-12.75}!}
-  \item На обратния полски запис \tt{12+345-/*} съответсва инфиксен запис \tt{(1+2)*(3/(4-5))}!
+  \item На обратния полски запис \tt{12+345-/*} съответства инфиксен запис \tt{(1+2)*(3/(4-5))}!
   \item \alert{Не сме взели предвид по-високия приоритет на операцията \tt/}
   \item Правилният обратен полски запис на \tt{(1+2)*(3/4-5)} е \tt{12+34/5-*}.
   \item \alert{Необходимо е да променим алгоритъма, така че да взема предвид приоритета на операциите!}
@@ -587,7 +588,7 @@ struct StackElement {
   \item \lst{pop()} --- изключване на елемент от стек
   \item \lst{top()} --- последен елемент на стека
   \item \lst{size()} --- дължина на стека
-  \item \lst{==,!=,<,>,<=,>=} --- лексикорафско сравнение на два стека
+  \item \lst{==,!=,<,>,<=,>=} --- лексикографско сравнение на два стека
   \end{itemize}
 \end{frame}
 

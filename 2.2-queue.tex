@@ -1,12 +1,12 @@
+\PassOptionsToClass{aspectratio=169}{beamer}
 \documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
 
 \title{Опашка}
 
-\date{21--28 октомври 2019 г.}
+\date{13 октомври 2022 г.}
 
-\titlegraphicx{\includegraphics[height=0.25\textheight]{images/queue.jpg}\\
-  \imageAttr{Queue}{Xiaojun Deng}{https://flic.kr/p/7sY2kp}{CC BY 2.0}}
+\titlegraphicx{\imageWithAttr{10em}{images/queue.jpg}{Queue}{Xiaojun Deng}{https://flic.kr/p/7sY2kp}{\CCBY{2.0}}}
 
 % декорация за метода на вълната
 \usetikzlibrary{decorations.pathmorphing}
@@ -22,8 +22,8 @@
 \begin{frame}
   \frametitle{АТД: опашка}
 
-  Хомогенна линейна структура с организация ``пръв влязъл --- пръв излязъл'' (FIFO)\\[1em]
-  Операции:\\[0.5em]
+  Хомогенна линейна структура с организация ``пръв влязъл --- пръв излязъл'' (FIFO)\\[2ex]
+  Операции:\\[1ex]
   \begin{itemize}
   \item \lst{create()} --- създаване на празна опашка
   \item \lst{empty()} --- проверка за празнота на опашка
@@ -36,7 +36,7 @@
 \begin{frame}
   \frametitle{АТД: опашка}
 
-  Свойства на операциите\\[0.5em]
+  Свойства на операциите\\[1ex]
   \small
   \begin{itemize}
   \item \lst{create().empty()} = \lst{true}
@@ -75,10 +75,10 @@
       \foreach \i in {1, ..., 5}{
         \tikzmath {
           int \j;
-          \j = 2 + \i;
+          \j = \i + 2;
         }
         \pointerto[visible on=<all:\j>]{an+\i}{\tt{back}}{below}
-      };
+      }
     \end{tikzpicture}
   \end{center}
   \begin{itemize}
@@ -92,7 +92,7 @@
 
   \begin{center}
     \scriptsize
-    \begin{overlayarea}{\textwidth}{.4\textheight}
+    \begin{overlayarea}{\textwidth}{.45\textheight}
       \begin{tikzpicture}
         % веригата
         \doublecell[visible on=<all:1-7>]{a0}{a_0}
@@ -166,7 +166,7 @@
       \matrix[hmtx,label=left:$q_5$,below=1ex of q3] (q5) {
         \only<3-7>{\alert<7>5}\&\only<4->{10}\&\only<5->{15}\&\only<6->{20}\&\only<7->{25}\&\only<8->{30}\&\&\&\&\&\\
       };
-    \end{tikzpicture}\\[1em]
+    \end{tikzpicture}\\[2ex]
     1%
     \onslide<5->{, 2}%
     \onslide<6->{, 3}%
@@ -181,15 +181,15 @@
 
   Да се докаже, че:
   \begin{enumerate}[<+->]
-  \item се извеждат \textbf{всички} числа на Hamming\\
+  \item се извеждат \textbf{всички} числа на Hamming\\[-.5ex]
     \begin{proof}<+->
        Индукция: $2^x3^y5^z$ се извежда, понеже $2^{x-1}3^y5^z$ се извежда.
     \end{proof}
-  \item се извеждат \textbf{само} числа на Hamming\\
+  \item се извеждат \textbf{само} числа на Hamming\\[-.5ex]
     \begin{proof}<+->
       Ако извадим $2^x3^y5^z$, в опашките се записват $2^{x+1}3^y5^z$, $2^x3^{y+1}5^z$, $2^x3^y5^{z+1}$.
     \end{proof}
-  \item числата на Hamming се извеждат във възходящ ред\\
+  \item числата на Hamming се извеждат във възходящ ред\\[-.5ex]
     \begin{proof}<+->
       Да допуснем, че на края на някоя опашка добавяме по-малко число. Тогава на предна стъпка трябва да сме добавили по-малко число!
     \end{proof}
@@ -267,7 +267,7 @@
             amplitude=.1em,
           },
         }]
-        \foreach \r in {\slantedsize, \twiceslantedsize, ..., 10} {
+        \foreach \r in {\slantedsize, \twiceslantedsize, ..., 10}
           \draw[
           rounded corners=1em,
           decorate,
@@ -280,7 +280,6 @@
           rotate=45]
           % https://tex.stackexchange.com/questions/38989/how-to-draw-a-decorated-rectangle-with-rounded-corners/38995#38995
           (-\r em,-\r em) rectangle (\r em, \r em) [sharp corners];
-         };
        \end{scope}
     \end{tikzpicture}
   \end{center}
@@ -290,10 +289,10 @@
 
 \begin{frame}
   \frametitle{Ход на коня --- най-кратък път}
-  \setboardfontsize{1.35em}
+  \setboardfontsize{1.25em}
   \begin{center}
     \begin{tikzpicture}
-      \matrix[chessboard=1.35em] {%
+      \matrix[chessboard=1.25em] {%
         \bkn1\&\bkn4\&\bkn3\&\bkn4\&\bkn3\&\bkn4\&\bkn5\&     \&\bkn5\\
         \bkn4\&\bkn5\&\bkn2\&\bkn3\&\bkn4\&\bkn5\&\bkn4\&\bkn5\&     \\
         \bkn3\&\bkn2\&\bkn5\&\bkn4\&\bkn3\&\bkn4\&\bkn5\&     \&\bkn5\\
@@ -321,7 +320,7 @@
   \item \lst{front()} --- първи елемент в опашката
   \item \lst{back()} --- последен елемент в опашката
   \item \lst{size()} --- дължина на опашката
-  \item \lst{==,!=,<,>,<=,>=} --- лексикорафско сравнение на две опашки
+  \item \lst{==,!=,<,>,<=,>=} --- лексикографско сравнение на две опашки
   \end{itemize}
 \end{frame}
 
