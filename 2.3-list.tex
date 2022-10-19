@@ -1,3 +1,4 @@
+\PassOptionsToClass{aspectratio=169}{beamer}
 \documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
 
@@ -7,10 +8,9 @@
 \def\crtp{article}
 %\def\crtp{all}
 
-\date[28.10--2.12.2019 г.]{28 октомври -- 2 декември 2019 г.}
+\date{20 октомври 2022 г.}
 
-\titlegraphicx{\includegraphics[height=0.25\textheight]{images/list.jpg}\\
-  \imageUntitledAttr{Prettysleepy2}{https://pixabay.com/images/id-3517582/}{Pixabay License}}
+\titlegraphicx{\untitledImageWithAttr{10em}{images/list.jpg}{Prettysleepy2}{https://pixabay.com/images/id-3517582/}{Pixabay License}}
 
 % едносвързана верига
 \newcommand{\linkedchain}{
@@ -131,7 +131,7 @@
 \section{Итератори}
 
 \begin{frame}
-  \frametitle{АТД итератор}
+  \frametitle{АТД: итератор}
 
   Абстракция на позиция, позволяваща обхождането на данни в дадена колекция\\[2ex]
   Операции:\\[1ex]
@@ -162,11 +162,12 @@
   \begin{itemize}[<+->]
   \item{} <израз> трябва да се оценява до контейнер
   \item{} <тип> трябва съвпада с типа на елементите в контейнера
-  \item{} <оператор> е тялото на цикъла, в което може да се използва <eлемент>
+  \item{} <оператор> е тялото на цикъла, в което може да се използва <елемент>
   \item ако <тип> е препратка, то <елемент> може да се използва за промяна на стойността на съответната позиция в контейнера
   \end{itemize}
   \onslide<+->
   Превежда се до:
+\vspace{-.5ex}
 \begin{lstlisting}
 @\textsf{<подходящ тип>}@ const& c = @\textsf{<израз>}@;
 for(@\textsf{<подходящ тип>}@ it = c.begin(); it != c.end(); ++it) {
@@ -248,7 +249,7 @@ class LinkedListIterator :
     \begin{tikzpicture}
       \dotsnode
       \dotsnextdoublecell{ai}{a_i}
-      \doublecell[right=4em of ai]{ai+1}{a_{i+1}}{ai}
+      \doublecell[right=4em of ai]{ai+1}{a_{i+1}}
       \draw[pointer,visible on=<{all:1-2,5-}>] (ainext.center) to (ai+1);
       \nextdots{ai+1}
 
@@ -332,7 +333,7 @@ class LinkedListIterator :
 
   \textbf{Задача.} Да се раздели даден списък на два други с приблизително равна дължина.\\[2ex]
   \pause
-  \textbf{Задача.} Да се слеят два възходящо подредени списъка в един.
+  \textbf{Задача.} Да се слеят два възходящо подредени списъка в един.\\
   \pause
   \textbf{Решение:} Винаги избираме по-малкия елемент от двата списъка.\\[2ex]
   \pause
@@ -411,9 +412,9 @@ class LinkedListIterator :
     \begin{tikzpicture}
       \dotsnode
       \dotsnexttriplecell{ai}{a_i}
-      \triplecell[right=4em of ai]{ai+1}{a_{i+1}}{ai}
-      \pointerforward[visible on=<{all:1-3,6-}>]{ainext.center}{ai+1.west};
-      \pointerbackward[visible on=<{all:1-2,7-}>]{ai+1prev.center}{ai.east};
+      \triplecell[right=4em of ai]{ai+1}{a_{i+1}}
+      \pointerforward[visible on=<{all:1-3,6-}>]{ainext.center}{ai+1.west}
+      \pointerbackward[visible on=<{all:1-2,7-}>]{ai+1prev.center}{ai.east}
       \triplenextdots{ai+1}
 
       % указател към елемента след който вмъкваме
@@ -444,8 +445,8 @@ class LinkedListIterator :
 \end{frame}
 
 \begin{frame}
-  \frametitle{\lst{std::list}}
-  \small
+  \frametitle{\lst{std::list<T>}}
+  \footnotesize
   Реализацията на \lst{std::list} в STL е двусвързана.
   \begin{itemize}
   \item \tt{front()}, \tt{back()} --- първи и последен елемент
@@ -464,3 +465,7 @@ class LinkedListIterator :
 \end{frame}
 
 \end{document}
+
+% LocalWords:  insertAfter deleteAfter insertFirst insertLast rbegin
+% LocalWords:  deleteFirst insertBefore deleteLast deleteAt prev
+% LocalWords:  deleteBefore ClosureType ConcreteIterator
