@@ -25,6 +25,7 @@ jobs:
                 1.4-array,
                 2.1-stack,
                 2.2-queue,
+                2.3-list,
               ]
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
