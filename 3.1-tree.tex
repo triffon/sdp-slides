@@ -4,7 +4,7 @@
 
 \title{Дървета}
 
-\date{1 декември 2022 г.}
+\date{15 декември 2022 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/tree.jpg}\\
   \imageUntitledAttr{bluebudgie}{https://www.needpix.com/photo/1269899/wordcloud-trees-knowledge-tagcloud-text-cloud-word-info-design}{CC0}}
@@ -139,28 +139,30 @@
 
 \begin{frame}
   \frametitle{Дефиниции за дърво}
-  \begin{columns}
+  \begin{columns}[c]
     \begin{column}{0.65\textwidth}
       \begin{itemize}
       \item \textbf{дете} --- коренов възел на поддърво
       \item \textbf{родител} --- възел, сред чиито деца е коренът
       \item \textbf{листо} --- възел без деца
       \item \textbf{път} --- редица от възли, в която всеки следващ дете на предходния
-      \item \textbf{разстояние} --- дължина на пътя от корена до даден възел
+      \item \textbf{разстояние} --- дължина на пътя от корена до възел
       \item \textbf{ниво} --- множество от възлите на еднакво разстояние
       \item \textbf{височина (дълбочина)} --- максималното разстояние в дървото
       \item \textbf{широчина (разклоненост)} --- максималният брой деца на възел
       \end{itemize}
     \end{column}
     \begin{column}{0.35\textwidth}
-      \sampletree
+      \begin{center}
+        \sampletree
+      \end{center}
     \end{column}
   \end{columns}
 \end{frame}
 
 \begin{frame}
   \frametitle{Схеми за обхождане}
-  \begin{columns}
+  \begin{columns}[c]
     \begin{column}{0.65\textwidth}
       \begin{itemize}
       \item префиксно обхождане
@@ -182,7 +184,9 @@
     \end{column}
     \onslide<1->
     \begin{column}{0.35\textwidth}
-      \sampletree
+      \begin{center}
+        \sampletree
+      \end{center}
     \end{column}
   \end{columns}
 \end{frame}
@@ -304,30 +308,6 @@
       \hline
     \end{tabular}
   \end{center}
-\end{frame}
-
-
-\begin{frame}[fragile]
-  \frametitle{Препратки към стойности в C++11}
-  \begin{itemize}[<+->]
-  \item \verb|T&&| --- препратка към \textbf{стойност} от тип \tt T
-    \begin{itemize}
-    \item rvalue reference
-    \end{itemize}
-  \item разлика с \verb|T&|: може да се свърза със стойности (rvalue)
-    \begin{itemize}
-    \item \verb|int&  x = 3;| --- \alert{грешка}
-    \item \verb|int&& x = 3;| --- ОК
-    \end{itemize}
-  \item разлика с \verb|T const&|: може да променя стойността
-    \begin{itemize}
-    \item \verb|Point p = Point(1,2); p.x = 3;| --- променя се копието
-    \item \tt{Point const\& p = Point(1,2); \alert{p.x = 3;}} --- \alert{грешка}
-    \item \tt{\alert{Point\& p = Point(1,2);} p.x = 3;} --- \alert{грешка}
-    \item \verb|Point&& p = Point(1,2); p.x = 3;| --- ОК
-    \end{itemize}
-  \item използва се за ефективност: вместо \alert{копиране} на данните от временна стойност, може да се извърши \alert{преместване}
-  \end{itemize}
 \end{frame}
 
 \begin{frame}
