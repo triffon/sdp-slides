@@ -377,6 +377,16 @@
 % слага се в преамбюла
 \newcommand{\crronly}{\includeonlyframes{current}}
 
+% смаляване на шрифта в листинг
+\newcommand{\lstsize}[1]{\lstset{basicstyle=#1\ttfamily}}
+\newcommand{\lstsmall}{\lstsize\small}
+\newcommand{\lstscriptsize}{\lstsize\scriptsize}
+\newcommand{\lstfootnotesize}{\lstsize\footnotesize}
+\newcommand{\lsttiny}{\lstsize\tiny}
+
+% едновременно смаляване на обикновения шрифт и на този в lstlisting
+\newcommand{\sizeboth}[1]{#1\lstsize{#1}}
+
 % overlayarea, която по подразбиране изпълва цялата област за текст за текущата тема
 % може да се зададе като опционален параметър друга част от височината
 \newenvironment{fixedarea}[1][.87]{%

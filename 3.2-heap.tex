@@ -1,3 +1,4 @@
+\PassOptionsToClass{aspectratio=169}{beamer}
 \documentclass{beamer}
 \usepackage{sdp}
 
@@ -90,54 +91,60 @@
 \begin{frame}
   \frametitle{Пресяване надолу (sift down)}
 
-  \begin{itemize}[<+->]
-  \item Да разгледаме елемент, който нарушава пирамидалното свойство
-    \begin{itemize}
-    \item т.е. някое от децата му е по-голямо от него.
-    \end{itemize}
-  \item Как да възстановим пирамидата?
-  \item Идея: разменяме ``нарушителя'' с \textbf{най-голямото} му дете (защо?)
-  \item Продължаваме докато има нарушение или не стигнем до листо
-  \item<8> Листата никога не нарушават пирамидалното свойство
-  \end{itemize}
-  \begin{center}
-    \small
-    % TODO: да се реализира с draw on и text on
-    \begin{overprint}
-      \begin{onlyenv}<1-3>
-        \begin{forest}
-          default [7,draw=red,text=red [18 [12 [4] [10]] [5] [11]] [15
-          [10] [8]] [9 [3]]]
-        \end{forest}
-      \end{onlyenv}
-      \begin{onlyenv}<4-5>
-        \begin{forest}
-          default [18 [7,draw=red,text=red [12 [4] [10]] [5] [11]] [15
-          [10] [8]] [9 [3]]]
-        \end{forest}
-      \end{onlyenv}
-      \begin{onlyenv}<6>
-        \begin{forest}
-          default [18 [12 [7,draw=red,text=red [4] [10]] [5] [11]] [15
-          [10] [8]] [9 [3]]]
-        \end{forest}
-      \end{onlyenv}
-      \begin{onlyenv}<7>
-        \begin{forest}
-          default [18 [12 [10 [4] [7,draw=red,text=red]] [5] [11]] [15
-          [10] [8]] [9 [3]]]
-        \end{forest}
-      \end{onlyenv}
-      \begin{onlyenv}<8->
-        \begin{forest}
-          default [18 [12 [10 [4] [7]] [5] [11]] [15
-          [10] [8]] [9 [3]]]
-        \end{forest}
-      \end{onlyenv}
-    \end{overprint}
-  \end{center}
-  \pause
-  Сложност: $O(h)$, където $h$ е височината на пирамидата.
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{.5\textwidth}
+      \begin{itemize}[<+->]
+      \item Да разгледаме елемент, който нарушава пирамидалното свойство
+        \begin{itemize}
+        \item т.е. някое от децата му е по-голямо от него.
+        \end{itemize}
+      \item Как да възстановим пирамидата?
+      \item Идея: разменяме ``нарушителя'' с \textbf{най-голямото} му дете (защо?)
+      \item Продължаваме докато има нарушение или не стигнем до листо
+      \item<8> Листата никога не нарушават пирамидалното свойство
+      \end{itemize}      
+      \pause
+      Сложност: $O(h)$, където $h$ е височината на пирамидата.
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{center}
+        \small
+        % TODO: да се реализира с draw on и text on
+        \begin{overprint}
+          \begin{onlyenv}<1-3>
+            \begin{forest}
+              default [7,draw=red,text=red [18 [12 [4] [10]] [5] [11]] [15
+              [10] [8]] [9 [3]]]
+            \end{forest}
+          \end{onlyenv}
+          \begin{onlyenv}<4-5>
+            \begin{forest}
+              default [18 [7,draw=red,text=red [12 [4] [10]] [5] [11]] [15
+              [10] [8]] [9 [3]]]
+            \end{forest}
+          \end{onlyenv}
+          \begin{onlyenv}<6>
+            \begin{forest}
+              default [18 [12 [7,draw=red,text=red [4] [10]] [5] [11]] [15
+              [10] [8]] [9 [3]]]
+            \end{forest}
+          \end{onlyenv}
+          \begin{onlyenv}<7>
+            \begin{forest}
+              default [18 [12 [10 [4] [7,draw=red,text=red]] [5] [11]] [15
+              [10] [8]] [9 [3]]]
+            \end{forest}
+          \end{onlyenv}
+          \begin{onlyenv}<8->
+            \begin{forest}
+              default [18 [12 [10 [4] [7]] [5] [11]] [15
+              [10] [8]] [9 [3]]]
+            \end{forest}
+          \end{onlyenv}
+        \end{overprint}
+      \end{center}      
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
@@ -233,7 +240,8 @@
   \pause
   \begin{columns}[t,onlytextwidth]
     \begin{column}{0.5\textwidth}
-      Пример:
+      Пример:\vspace{-3ex}
+      \small
       \begin{center}
         \samplebinheap
       \end{center}
@@ -255,6 +263,7 @@
 \begin{frame}
   \frametitle{Двоична пирамида}
 
+  \footnotesize
   Можем да представим пълните двоични дървета чрез масив \tt a, така че
   \begin{itemize}[<+->]
   \item \tt{a[0]} е корен
@@ -267,7 +276,7 @@
   \end{definition}
   \onslide<+->
   \begin{center}
-    \small \samplebinheap
+    \samplebinheap
   \end{center}
 \end{frame}
 
