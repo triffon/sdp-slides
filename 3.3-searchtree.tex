@@ -4,7 +4,7 @@
 
 \title{Дървета за търсене}
 
-\date{12--16 декември 2019 г.}
+\date{22 декември 2022 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/searchtree.jpg}\\
   \imageAttr{Appletree}{User:MKFF}{https://commons.wikimedia.org/wiki/File:Appletree_2.jpg}{CC0}}
@@ -68,7 +68,7 @@
     },
     inner sep=0pt,
   }
-}     
+}
 
 \newcommand{\bnode}[5][]{
   \matrix[bnodemtx,nodes={text width=1.6em},#1]
@@ -394,10 +394,10 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}[label=rotright]
+\begin{frame}
   \frametitle{Завъртане надясно (zig)}
+  \small
   \begin{center}
-    \small
     \begin{forest}
       default [Y [X [A,trismall] [B,trismall]] [C,trismall]]
     \end{forest}
@@ -406,13 +406,13 @@
       default [X [A,trismall] [Y [B,trismall] [C,trismall]]]
     \end{forest}
   \end{center} \pause \vspace{-2.5ex}
-  \begin{overlayarea}{\textwidth}{24ex}
+  \begin{overlayarea}{\textwidth}{20ex}
     \onslide<+->
-    \begin{onlyenv}<.-.(12)>
+    \begin{onlyenv}<.-.(12)| trans:1-2>
       $$ b'(Y) = ? $$
     \end{onlyenv}
     \onslide<+->
-    \begin{onlyenv}<.-.(5)>
+    \begin{onlyenv}<.-.(5)| trans:1>
       \textbf{I сл. }$b(X) \geq 0$
       \onslide<+-> $\Rightarrow h(B) \geq h(A)$
       \onslide<+-> $\Rightarrow h(X) = h(B) + 1$
@@ -421,7 +421,7 @@
       \onslide<+-> $\Rightarrow b'(Y) = b(Y) + 1$
     \end{onlyenv}
     \onslide<+->
-    \begin{onlyenv}<.-.(5)>
+    \begin{onlyenv}<.-.(5)| trans:2>
       \textbf{II сл.} $b(X) < 0$
       \onslide<+-> $\Rightarrow h(B) < h(A)$
       \onslide<+-> $\Rightarrow h(X) = h(A) + 1$
@@ -430,7 +430,7 @@
       \onslide<+-> $\Rightarrow b'(Y) = b(Y) - b(X) + 1$
     \end{onlyenv}
     \onslide<+->
-    \begin{onlyenv}<.,.(14)->
+    \begin{onlyenv}<.,.(14)-| trans:5>
       \begin{equation*}
         b'(Y) =
         \begin{cases}
@@ -440,11 +440,11 @@
       \end{equation*}
     \end{onlyenv}
     \onslide<+->
-    \begin{onlyenv}<.-.(12)>
+    \begin{onlyenv}<.-.(12)| trans:3-4>
       $$ b'(X) = ? $$
     \end{onlyenv}
     \onslide<+->
-    \begin{onlyenv}<.-.(5)>
+    \begin{onlyenv}<.-.(5)| trans:3>
       \textbf{I сл. }$b'(Y) \leq 0$
       \onslide<+-> $\Rightarrow h(B) \geq h(C)$
       \onslide<+-> $\Rightarrow h'(Y) = h(B) + 1$
@@ -453,7 +453,7 @@
       \onslide<+-> $\Rightarrow b'(X) = b(X) + 1$
     \end{onlyenv}
     \onslide<+->
-    \begin{onlyenv}<.-.(5)>
+    \begin{onlyenv}<.-.(5)| trans:4>
       \textbf{II сл.} $b'(Y) > 0$
       \onslide<+-> $\Rightarrow h(B) < h(C)$
       \onslide<+-> $\Rightarrow h'(Y) = h(C) + 1$
@@ -462,7 +462,7 @@
       \onslide<+-> $\Rightarrow b'(X) = b(X) + b'(Y) + 1$
     \end{onlyenv}
     \onslide<+->
-    \begin{onlyenv}<.->
+    \begin{onlyenv}<.-| trans:5>
       \begin{equation*}
         b'(X) =
         \begin{cases}
@@ -472,7 +472,7 @@
       \end{equation*}
     \end{onlyenv}
     \onslide<+->
-    \begin{onlyenv}<.>
+    \begin{onlyenv}<.| trans:5>
       \vspace{-2ex}
       \begin{equation*}
         b'(X) > b(X), \quad b'(Y) > b(Y)
@@ -483,8 +483,8 @@
 
 \begin{frame}<-5>
   \frametitle{Завъртане наляво (zag)}
+  \small
   \begin{center}
-    \small
     \begin{forest}
       default [X [A,trismall] [Y [B,trismall] [C,trismall]]]
     \end{forest}
