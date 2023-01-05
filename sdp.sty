@@ -346,6 +346,12 @@
 % откриване на въпрос
 \newcommand{\rvl}[1]{\alt<+->{#1}?}
 
+% рефериране на точка от списък
+\newcommand\ballref[1]{%
+\tikz \node[circle, shade,ball color=structure.fg,inner sep=0pt,%
+  text width=6pt,font=\tiny,align=center] {\color{white}#1};
+}
+
 % creative commons признание
 \newcommand{\imageUntitledAttr}[4][.4]{\scalebox{#1}{\textcolor{lightgray}{От #2 (\url{#3}), #4}}}
 \newcommand{\imageAttr}[5][.4]{\scalebox{#1}{\textcolor{lightgray}{``#2'' от #3 (\url{#4}), #5}}}

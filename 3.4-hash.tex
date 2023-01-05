@@ -1,9 +1,10 @@
+\PassOptionsToClass{aspectratio=169}{beamer}
 \documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
 
 \title{Речници}
 
-\date[16.12.2019 г. -- 6.01.2020 г.]{16 декември 2019 г. -- 6 януари 2020 г.}
+\date{5 януари 2023 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/hash.jpg}\\
   \imageBased{A Dictionary Of The English Language}{Jurriaan Persyn}{https://flic.kr/p/6ThMfe}{CC BY-NC 2.0}}
@@ -66,8 +67,8 @@
   \item\label{it:start}  намираме средата на масива \tt{mid = (left + right) / 2}
   \item сравняваме търсения ключ \tt Y с ключа \tt X на позиция mid
   \item ако \tt{Y == X} --- успех
-  \item ако \tt{Y < X} --- търсим \tt Y отляво, \tt{right = mid - 1} и към \ref{it:start}
-  \item ако \tt{Y > X} --- търсим \tt X отдясно, \tt{left = mid + 1} и към \ref{it:start}
+  \item ако \tt{Y < X} --- търсим \tt Y отляво, \tt{right = mid - 1} и към \ballref{\ref{it:start}}
+  \item ако \tt{Y > X} --- търсим \tt X отдясно, \tt{left = mid + 1} и към \ballref{\ref{it:start}}
   \end{enumerate}
   \pause
   \begin{itemize}
