@@ -1,9 +1,10 @@
+\PassOptionsToClass{aspectratio=169}{beamer}
 \documentclass[alsotrans]{beamerswitch}
 \usepackage{sdp}
 
 \title{Графи}
 
-\date{6--13 януари 2019 г.}
+\date{19 януари 2023 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/graph.jpg}\\
   \imageBased{Socialized Energy (AKA Smart Grid)}{Zachary Veach}{https://flic.kr/p/6rTacN}{CC BY-NC-SA 2.0}}
@@ -143,6 +144,7 @@
 
 \begin{frame}<1-19>
   \frametitle{Матрица на съседство}
+  \footnotesize
   \begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
       \begin{equation*}
@@ -164,6 +166,7 @@
     \end{column}
   \end{columns}
   \pause
+  \vspace{-2ex}
   \begin{fixedarea}[.485]
     \alt<-14>{
       \begin{itemize}[<+->]
@@ -185,7 +188,7 @@
   \end{fixedarea}
 \end{frame}
 
-\begin{frame}<1-12>
+\begin{frame}<1-12>[squeeze]
   \frametitle{Матрица на инцидентност}
   \begin{equation*}
     A =
@@ -200,6 +203,7 @@
       \end{array}
     \right)
   \end{equation*}
+  \vspace{-1.8ex}
   \begin{columns}[onlytextwidth]
     \begin{column}{0.7\textwidth}
       \begin{fixedarea}[.465]
@@ -228,6 +232,7 @@
 
 \begin{frame}
   \frametitle{Списък на наследници}
+  \footnotesize
   \begin{columns}[onlytextwidth]
     \begin{column}{0.5\textwidth}
       \begin{equation*}
@@ -246,8 +251,8 @@
       \samplegraph[1]
     \end{column}
   \end{columns}
-  \vspace{-1ex}
-  \begin{fixedarea}[.548]
+  \vspace{-2ex}
+  \begin{fixedarea}[.55]
     \begin{itemize}[<+->]
     \item $D_i = \{v\;|\;(v_i,v) \in E \}$, може да е множество или списък
     \item памет --- \rvl{$O(|V|+|E|)$}
@@ -277,7 +282,8 @@
       \samplegraph[1]
     \end{column}
   \end{columns}
-  \begin{fixedarea}[.5]
+  \vspace{-.5ex}
+  \begin{fixedarea}[.51]
     \begin{itemize}[<+->]
     \item може да е представено като списък или множество
     \item памет --- \rvl{$O(|E|)$}
@@ -309,7 +315,7 @@
 
 \begin{frame}
   \frametitle{Обхождане в дълбочина}
-  \begin{columns}[onlytextwidth]
+  \begin{columns}[T,onlytextwidth]
     \begin{column}{0.6\textwidth}
       \begin{block}{}
         Обхождане на връх \tt v:
@@ -326,11 +332,11 @@
     \end{column}
   \end{columns}
   \pause
+  \vspace{-6ex}
   \begin{itemize}[<+->]
   \item \alert{Имаме ли дъно?}
     \begin{itemize}
-    \item Да: при празен списък от наследници няма рекурсивно
-      извикване!
+    \item Да: при празен списък от наследници!
     \end{itemize}
   \item \alert{Какво се случва ако графът е цикличен?}
     \begin{itemize}
@@ -352,13 +358,15 @@
   \end{enumerate}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[squeeze]
   \frametitle{Схема на обхождане в ширина}
 
-  \begin{columns}[onlytextwidth]
+  \begin{columns}[T,onlytextwidth]
     \begin{column}{0.6\textwidth}
+      \vspace{-3ex}
       \begin{block}{}
         Обхождане, започващо от връх \tt u:
+        \vspace{-.5ex}
         \begin{itemize}
         \item Маркира се \tt u за обхождане на ниво 1
         \item За всеки връх \tt v маркиран за ниво $n$:
@@ -376,6 +384,7 @@
       \samplegraph[1]
     \end{column}
   \end{columns}
+  \vspace{-3ex}
   \onslide<+->
   \begin{itemize}[<+->]
   \item \alert{Какво се случва ако графът е цикличен?}
@@ -466,7 +475,7 @@
       \item става еквивалентно на търсене в дълбочина!
       \end{itemize}
     \item ако в нивото пазим целия път: при завършване на обхождането получаваме списък от всички ациклични пътища
-    \item компромисен вариант: вместо път пазим връх и указател към предшественик път в предното ниво
+    \item компромисен вариант: вместо път пазим връх и указател към предшественик
       \begin{itemize}
       \item не намалява сложността по памет в най-лошия случай!
       \end{itemize}
