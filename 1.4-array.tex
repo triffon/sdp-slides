@@ -215,6 +215,7 @@
   \item ако \tt{Y > X} --- търсим \tt X отдясно, \tt{left = mid + 1} и към \ballref{\ref{it:start}}
   \end{enumerate}
   \pause
+  \vspace{2ex}
   Времева сложност: \pause $O(\log n)$ в средния и най-лошия случай
 \end{frame}
 
@@ -233,12 +234,27 @@
   \end{enumerate}
   \onslide<+->
   Този подход за решение се нарича ``разделяй и владей''.
+  \pause
+  \vspace{2ex}
+  \textbf{Времева сложност:}
+  \begin{itemize}[<+->]
+  \item $O(n\log n)$ в средния случай
+  \item $O(n^2)$ в най-лошия случай
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Алгоритми за търсене и сортиране в STL}
 
   \lst!\#include <algorithm>!
+
+  \begin{itemize}
+  \item \lst{find(begin, end, value)} -- линейно търсене на елемент в контейнер
+  \item \lst{is_sorted(begin, end)} -- проверка дали контейнер е сортиран
+  \item \lst{binary_search(begin, end, value)} -- двоично търсене на елемент в сортиран контейнер
+  \item \lst{merge(begin1, end1, begin2, end2, output)} -- сливане на два сортирани контейнера
+  \item \lst{sort(begin, end)} -- сортиране на контейнер на място
+  \end{itemize}
 \end{frame}
 }{}
 
