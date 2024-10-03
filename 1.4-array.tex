@@ -1,12 +1,13 @@
-\PassOptionsToClass{aspectratio=169}{beamer}
-\documentclass[alsotrans]{beamerswitch}
+\documentclass[alsotrans,beameroptions={aspectratio=169}]{beamerswitch}
 \usepackage{sdp}
 
 \title{Редици}
 
-\date{6 октомври 2022 г.}
+\date{3 октомври 2024 г.}
 
 \titlegraphicx{\basedOnImageWithAttr{10em}{images/array.jpg}{IMGP0612 - dozen eggs}{RaeAllen}{https://flic.kr/p/9vfsS}{\CCBYNCSA{2.0}}}
+
+\newbooltrue{algos}
 
 \begin{document}
 
@@ -199,5 +200,46 @@
   \end{itemize}
 \end{frame}
 
+\ifbool{algos}{
+\section{Алгоритми за сортиране}
+\begin{frame}
+  \frametitle{Двоично търсене}
+  Алгоритъм за двоично търсене в сортиран масив:
+  \begin{enumerate}
+  \item търсим елемент \tt Y в сортиран масив в интервала \tt{[left; right]}
+  \item първоначално \tt{left = 0}, \tt{right = n - 1}
+  \item\label{it:start} намираме средата на масива \tt{mid = (left + right) / 2}
+  \item сравняваме търсения елемент \tt Y с ключа \tt X на позиция mid
+  \item ако \tt{Y == X} --- успех
+  \item ако \tt{Y < X} --- търсим \tt Y отляво, \tt{right = mid - 1} и към \ballref{\ref{it:start}}
+  \item ако \tt{Y > X} --- търсим \tt X отдясно, \tt{left = mid + 1} и към \ballref{\ref{it:start}}
+  \end{enumerate}
+  \pause
+  Времева сложност: \pause $O(\log n)$ в средния и най-лошия случай
+\end{frame}
+
+\begin{frame}
+  \frametitle{Алгоритъм за бързо сортиране}
+
+  \begin{enumerate}[<+->]
+  \item Избираме елемент от масива (``ос'')
+  \item Разделяме масива на две части:
+    \begin{itemize}
+    \item елементи по-малки от оста
+    \item елементи по-големи или равни на оста
+    \end{itemize}
+  \item поставяме оста между двете части на масива
+  \item \alert{рекурсивно} сортираме поотделно двете части на масива
+  \end{enumerate}
+  \onslide<+->
+  Този подход за решение се нарича ``разделяй и владей''.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Алгоритми за търсене и сортиране в STL}
+
+  \lst!\#include <algorithm>!
+\end{frame}
+}{}
 
 \end{document}
