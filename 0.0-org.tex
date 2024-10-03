@@ -1,10 +1,10 @@
-\PassOptionsToClass{aspectratio=169}{beamer}
-\documentclass{beamer}
+\documentclass[alsotrans,beameroptions={aspectratio=169}]{beamerswitch}
 \usepackage{sdp}
+\usepackage{qrcode}
 
 \title{Организация на курса}
 
-\date{6 октомври 2022 г.}
+\date{3 октомври 2024 г.}
 
 \hypersetup{colorlinks,urlcolor=blue,linkcolor=white}
 
@@ -17,11 +17,19 @@
 \begin{frame}
   \frametitle{Екип}
 
+  \textbf{Семинари}
   \begin{itemize}
-  \item \textbf{1 група:} Никола Георгиев
-  \item \textbf{2 група:} Ясен Алексиев{\tiny$^*$}
-  \item \textbf{3 група:} Стефан Вартоломеев
-  \item \textbf{4 група:} Свилен Андонов
+  \item \textbf{5 група:} Иван Арабаджийски
+  \item \textbf{6 група:} Мартин Лаков
+  \item \textbf{7 група:} Наделина Шипочка
+  \item \textbf{8 група:} Алексис Датсерис
+  \end{itemize}
+  \vspace{1ex}
+  \textbf{Практикум}
+  \begin{itemize}
+  \item слято за спец. Информатика и Компютърни науки, 1 и 2 поток
+  \item разпределение в седем групи по избор
+  \item започва от 7.10
   \end{itemize}
 \end{frame}
 
@@ -31,16 +39,10 @@
   \begin{itemize}
   \item Обобщено представяне на студентите от семестъра (ОПСС)
     \begin{itemize}
-    \item Домашна работа: 1 бр. (Д)
-    \item Проект: 1 бр. (П)
     \item Контролни работи: 2 бр. (K$_{1,2}$)
-      \begin{itemize}
-      \item Контролно 1: 24.11, 16:00
-      \item Контролно 2: 5.01, 16:00
-      \end{itemize}
     \item Бонус: обратна връзка от работа през семестъра ($0 \leq \text{ОВ} \leq 0{,}75$)\\
       \begin{equation*}
-        \text{ОПСС} = \frac{\text{Д} + \text{П} + \text{K}_1 + \text{K}_2}4 + \text{ОВ}
+        \text{ОПСС} = \frac{\text{K}_1 + \text{K}_2}4 + \text{ОВ}
       \end{equation*}
     \end{itemize}
   \item Изпити (И)
@@ -60,17 +62,30 @@
 
 \begin{frame}
   \frametitle{Канали за комуникация}
-  \begin{itemize}
-  \item Learn.fmi: Бакалаври, зимен семестър 2022/2023
-    \begin{itemize}
-    \item КН
+  \begin{columns}[T,onlytextwidth]
+    \begin{column}{.7\textwidth}
       \begin{itemize}
-      \item \href{https://learn.fmi.uni-sofia.bg/course/view.php?id=8509}{СДП (КН) 2022/23}
+      \item Learn.fmi: Бакалаври, зимен семестър 2024/2025
+        \begin{itemize}
+        \item КН
+          \begin{itemize}
+          \item \href{https://learn.fmi.uni-sofia.bg/course/view.php?id=10454}{СДП (КН.2) 2024/25}
+        \end{itemize}
       \end{itemize}
+      \vspace{7ex}
+    \item \href{https://discord.gg/fahBXftfpQ}{Discord сървър на ФМИ}
+    \begin{itemize}
+    \item код за покана \tt{fahBXftfpQ}
     \end{itemize}
-  \item \href{https://teams.microsoft.com/l/team/19\%3aUZEWpZa64z9Ns2tWRqscadTdQgtEunExCO5p-zOo1Lg1\%40thread.tacv2/conversations?groupId=01c838dc-0d43-4b32-a71a-e209f21f0551&tenantId=9d05c5fb-e448-4700-8a58-e15b93c84ea9}{Екип в Microsoft Teams}: директно записване с код \tt{0q5dtbx}
-  \item \href{https://teams.microsoft.com/l/meetup-join/19\%3a07f7f2f74bdf434cbcaefdca4d10427a\%40thread.tacv2/1664915548412?context=\%7b\%22Tid\%22\%3a\%229d05c5fb-e448-4700-8a58-e15b93c84ea9\%22\%2c\%22Oid\%22\%3a\%227354cd98-c695-434c-afd6-2d519f48fa53\%22\%7d}{Онлайн излъчване в Teams}
-  \end{itemize}
+  \end{itemize}              
+\end{column}
+\begin{column}{.3\textwidth}
+  \qrcode{https://learn.fmi.uni-sofia.bg/course/view.php?id=10454}
+  
+  \vspace{4ex}
+  \qrcode{https://discord.gg/fahBXftfpQ}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}
@@ -81,8 +96,7 @@
 
     \begin{itemize}
     \item структури от данни
-    \item алгоритми
-    \item масив
+    \item масив (търсене и сортиране)
     \item стек
     \item опашка
     \item свързан списък
@@ -107,9 +121,7 @@
       \end{itemize}
     \item хеш таблица
     \item графи
-    \item алгоритми за сортиране
     \end{itemize}
-
   \end{columns}
 \end{frame}
 
