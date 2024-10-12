@@ -3,7 +3,7 @@
 
 \title{Стек}
 
-\date{10 октомври 2024 г.}
+\date{10--17 октомври 2024 г.}
 
 \titlegraphicx{\imageWithAttr{10em}{images/stack.jpg}{Stack of Rocks, Cattle Point, San Juan Island}{Ryan Harvey}{https://flic.kr/p/aojd1Q}{\CCBYSA{2.0}}}
 
@@ -69,7 +69,82 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}<1-6| trans:1>[fragile]
+\begin{frame}
+  \frametitle{Ограничения на последователния стек}
+
+  \begin{itemize}[<+->]
+  \item Нашата реализация изисква предварително да зададем горна граница на броя на елементите в стека!
+  \item Ако стекът се препълни, програмата няма да може да продължи да работи... въпреки че компютърът има много налична свободна памет
+  \item Дали е възможно стекът да се ``разширява'' при нужда?
+  \end{itemize}
+\end{frame}
+
+\section{Разширяващ се стек}
+
+\begin{frame}
+  \frametitle{Разширяващ се стек}
+
+  \begin{itemize}
+  \item Обектът няма да съдържа целия масив
+  \item Ще се пази указател към масив в динамичната памет
+  \item <3-> При нужда стекът ще се разширява
+  \end{itemize}
+  \vspace{1em}
+  \pause
+  \begin{tikzpicture}
+    % представяне на разширяващия се стек
+    \matrix (s) [widearray] {
+      |(sa) [label={\tt a}]| \& |(top) [label={\tt{top}}]| n\\
+    };
+
+    % паметта за стека
+    \matrix (a) [array,below right=0.5em of s] {
+      |(a0)| a_0 \& a_1 \& a_2 \& \ldots \& |(an)| a_n \\
+    };
+
+    \begin{scope}[pointer,visible on=<2-3| trans:0>]
+      % a сочи към началото на масива
+      \draw (sa.center) to [br] (a0.west);
+      % top е индекс на елемента на върха на стека
+      \draw (top) to [bl] (an.north);
+    \end{scope}
+
+    % разширеният стек
+    \matrix (newa) [array,above right=0.5 em of s,visible on=<4->] {
+      |(newa0)| a_0 \& a_1 \& a_2 \& \ldots \& |(newan)| a_n \&\&\&\&\&\&\&\&\\
+    };
+
+    \begin{scope}[pointer,visible on=<4->]
+      % a сочи към началото на масива
+      \draw (sa.center) to [bl] (newa0.west);
+      % top е индекс на елемента на върха на стека
+      \draw (top) to [br] (newan.south);
+    \end{scope}
+
+    % изтриваме стария масив
+    \draw (a) node[cross,visible on=<4>] {};
+
+  \end{tikzpicture}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Ограничения на разширяващия се стек}
+
+  \begin{itemize}[<+->]
+  \item При разширяване трябва да се копират всички съществуващи данни!
+  \item Операцията \tt{push} обикновено е бърза, но ако се случи да правим разширение, може да е доста по-бавна
+  \item Ако стекът се пълни рядко, то в по-голямата част от живота му паметта няма да се използва
+  \item Дали може да се направи стек, при който:
+    \begin{itemize}
+    \item не се налага копиране на памет
+    \item не се държи излишна памет
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Свързан стек}
+
+\begin{frame}<1-6>[fragile]
   \frametitle{Свързано представяне на стек}
 
   Представяме стека като ``верига'' от двойни кутии
@@ -112,17 +187,42 @@
   \end{center}
 
 \begin{lstlisting}
+template <typename T>
 struct StackElement {
-	int data;
+	T data;
 	StackElement* next;
 };
 \end{lstlisting}
 
   \begin{itemize}
-  \item<2-> включване на елемент (push)
-  \item<3-> изключване на елемент (pop)
+    \item<2-> включване на елемент (push)
+    \item<3-> изключване на елемент (pop)
   \end{itemize}
 
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Ограничения на свързания стек}
+
+  \begin{itemize}[<+->]
+  \item За всеки елемент се изразходва 2-3 пъти повече памет
+  \item Често се заделят и освобождават малки парчета памет
+  \item Какво се случва при копиране на стек?
+    \begin{itemize}
+    \item \lst{LinkedStack<int> s2 = s1; s1.pop();}\tta{ s2.pop(); s2.push(10);}
+    \end{itemize}
+  \item
+    Какво се случва при унищожаване на стек?
+\begin{lstlisting}
+for(int i = 0; i < 1E8; i++) { LinkedStack<int> s; .... }
+@\onslide<+->@
+for(int i = 0; i < 1E8; i++) {
+  LinkedStack<int>* s = new LinkedStack<int>;
+  ....
+  delete s;
+}
+\end{lstlisting}
+  \end{itemize}
 \end{frame}
 
 \section{Приложения на стек}
