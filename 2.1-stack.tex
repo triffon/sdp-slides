@@ -1,12 +1,13 @@
-\PassOptionsToClass{aspectratio=169}{beamer}
-\documentclass[alsotrans]{beamerswitch}
+\documentclass[alsotrans, beameroptions={aspectratio=169}]{beamerswitch}
 \usepackage{sdp}
 
 \title{Стек}
 
-\date{13--20 октомври 2022 г.}
+\date{10 октомври 2024 г.}
 
 \titlegraphicx{\imageWithAttr{10em}{images/stack.jpg}{Stack of Rocks, Cattle Point, San Juan Island}{Ryan Harvey}{https://flic.kr/p/aojd1Q}{\CCBYSA{2.0}}}
+
+\newboolfalse{stream}
 
 \begin{document}
 
@@ -494,7 +495,7 @@ struct StackElement {
   \end{center}
 \end{frame}
 
-\begin{frame}<0>
+\begin{frame}<\switch{stream}>
   \frametitle{Поточна обработка на израз}
   Комбинирането на двата алгоритъма може да се получи по естествен начин при използване на \alert{поточна обработка}:\pause
   \begin{itemize}[<+->]
