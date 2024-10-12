@@ -8,6 +8,8 @@
 \titlegraphicx{\imageWithAttr{10em}{images/stack.jpg}{Stack of Rocks, Cattle Point, San Juan Island}{Ryan Harvey}{https://flic.kr/p/aojd1Q}{\CCBYSA{2.0}}}
 
 \newboolfalse{stream}
+\newbooltrue{restrictions}
+\newbooltrue{resizing}
 
 \begin{document}
 
@@ -44,6 +46,8 @@
   \end{itemize}
 \end{frame}
 
+\section{Последователен стек}
+
 \begin{frame}
   \frametitle{Последователно представяне на стек}
 
@@ -69,7 +73,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}<\switch{restrictions}>
   \frametitle{Ограничения на последователния стек}
 
   \begin{itemize}[<+->]
@@ -79,9 +83,11 @@
   \end{itemize}
 \end{frame}
 
+\ifbool{resizing}{
 \section{Разширяващ се стек}
+}{}
 
-\begin{frame}
+\begin{frame}<\switch{resizing}>
   \frametitle{Разширяващ се стек}
 
   \begin{itemize}
@@ -127,7 +133,7 @@
   \end{tikzpicture}
 \end{frame}
 
-\begin{frame}
+\begin{frame}<\ifbool{resizing}{\ifbool{restrictions}{all:1-}{all:0}}{all:0}>
   \frametitle{Ограничения на разширяващия се стек}
 
   \begin{itemize}[<+->]
@@ -144,7 +150,7 @@
 
 \section{Свързан стек}
 
-\begin{frame}<1-6>[fragile]
+\begin{frame}<1-6| trans:1>[fragile]
   \frametitle{Свързано представяне на стек}
 
   Представяме стека като ``верига'' от двойни кутии
@@ -201,7 +207,7 @@ struct StackElement {
 
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}<\switch{restrictions}>[fragile]
   \frametitle{Ограничения на свързания стек}
 
   \begin{itemize}[<+->]
