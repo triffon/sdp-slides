@@ -4,10 +4,9 @@
 \title{Списък}
 
 % флаг дали да се включват слайдовете за CRTP
-%\def\crtp{article}
-\def\crtp{all}
+\newboolfalse{crtp}
 
-\date{10--24 ноември 2022 г.}
+\date{5–7 ноември 2024 г.}
 
 \titlegraphicx{\untitledImageWithAttr{10em}{images/list.jpg}{Prettysleepy2}{https://pixabay.com/images/id-3517582/}{Pixabay License}}
 
@@ -176,8 +175,7 @@ for(@\textsf{<подходящ тип>}@ it = c.begin(); it != c.end(); ++it) {
 \end{lstlisting}
 \end{frame}
 
-\mode<\crtp>
-\begin{frame}
+\begin{frame}<\switch{crtp}>
   \frametitle{Достъп до производен клас на шаблон}
 
   \textbf{Проблем:} Какъв резултат трябва да връщат операциите \tt{++}, преместващи итераторите?\\[2ex]
@@ -198,7 +196,7 @@ for(@\textsf{<подходящ тип>}@ it = c.begin(); it != c.end(); ++it) {
   \alert{Да! Базовият клас трябва да е \textbf{шаблон, приемащ производния си клас за параметър}}
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}<\switch{crtp}>[fragile]
   \frametitle{Curiously Recurring Template Pattern (CRTP)}
 
 \begin{lstlisting}
@@ -214,7 +212,7 @@ class Derived : public Base<Derived> {
   По този начин шаблонът \lst{Base} може да се обръща към наследяващия го клас.
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}<\switch{crtp}>[fragile]
   \frametitle{Решение на проблема с \lst{operator++}}
 
   \small
@@ -237,9 +235,6 @@ class LinkedListIterator :
 \pause
 Експлицитното преобразуване на типа се налага, понеже \lst{*this} е от тип \lst{Iterator&}, а конструкторът за копиране на \lst{ConcreteIterator} очаква тип \lst{ConcreteIterator&}.
 \end{frame}
-
-\mode
-<all>
 
 \begin{frame}<1-7| trans:3,6>
   \frametitle{\alt<all:1-3>{Включване}{Изключване} на елемент \alt<all:1-3>{в}{от} едносвързан списък}
@@ -346,60 +341,6 @@ class LinkedListIterator :
   \end{enumerate}
 \end{frame}
 
-\section{Функции от по-висок ред}
-
-\begin{frame}
-  \frametitle{Функции от по-висок ред за списъци}
-
-  Нека е даден списък $l = (a_1\,a_2\,a_3\,\ldots\,a_n)$.\\
-  \begin{itemize}[<+->]
-  \item \lst{foldr} --- свиване надясно
-    \begin{equation*}
-      a_1 \oplus \Big(a_2 \oplus \big(\ldots \oplus (a_n \oplus \bot) \ldots\big)\Big),
-    \end{equation*}
-  \item \lst{foldl} --- свиване наляво
-    \begin{equation*}
-      \Big(\ldots\big((\bot \oplus a_1) \oplus a_2\big) \oplus \ldots\Big) \oplus a_n
-    \end{equation*}
-  \item \lst{map} --- изобразяване
-    \begin{equation*}
-      f(a_1), f(a_2), \ldots, f(a_n)
-    \end{equation*}
-  \item \lst{filter} --- филтриране
-    \begin{equation*}
-      a_{k_1}, a_{k_2}, \ldots, a_{k_m},\text{ където }\left\{
-      \begin{array}{l}
-        p(a_{k_i})=\mathtt{true}\text{ за }i\in\{1,\ldots,m\},\\
-        p(a_k)=\mathtt{false}\text{ за }k\notin\{k_1,\ldots k_m\}
-      \end{array}\right.
-    \end{equation*}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Задачи за функции от по-висок ред}
-
-  \textbf{Задача.} Да се намери сумата от нечетните квадрати на числата в даден списък.\\[6ex]
-  \pause
-  \textbf{Задача.} Да се намери произведението от най-малките положителни елементи на списък от списъци от числа.
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{$\lambda$-функции в C++11}
-  \begin{itemize}[<+->]
-  \item \tta{[](}<параметри>\tta{) -> }<тип> \tta{\{}<тяло>\tta{\}}
-  \item създава анонимна ($\lambda$) функция, дефинирана като:\\
-    <тип> $\lambda$\tt(<параметри>\tt{) \{}<тяло>\tt\}
-  \item типът на израза е специален системен клас \tt{ClosureType}, който има операция за преобразуване на типа до указател към функция с горната сигнатура, т.е.\\
-    <тип> \tt{(*)(}<параметри>\tt{);}
-  \item \textbf{Примери:}
-  \item \lst!map([](int x) -> int { return x * x; }, l)!
-  \item \lst!foldr([](int x, int y) -> int { return x + y; }, 0, l)!
-  \end{itemize}
-\end{frame}
-
-% TODO: high order functions iterator range adaptors
-
 \section{Двусвързан списък}
 
 \againframe<2>{doublelinked}
@@ -463,6 +404,59 @@ class LinkedListIterator :
   \end{itemize}
 \end{frame}
 
+\section{Функции от по-висок ред}
+
+\begin{frame}
+  \frametitle{Функции от по-висок ред за списъци}
+
+  Нека е даден списък $l = (a_1\,a_2\,a_3\,\ldots\,a_n)$.\\
+  \begin{itemize}[<+->]
+  \item \lst{foldr} --- свиване надясно
+    \begin{equation*}
+      a_1 \oplus \Big(a_2 \oplus \big(\ldots \oplus (a_n \oplus \bot) \ldots\big)\Big),
+    \end{equation*}
+  \item \lst{foldl} --- свиване наляво
+    \begin{equation*}
+      \Big(\ldots\big((\bot \oplus a_1) \oplus a_2\big) \oplus \ldots\Big) \oplus a_n
+    \end{equation*}
+  \item \lst{map} --- изобразяване
+    \begin{equation*}
+      f(a_1), f(a_2), \ldots, f(a_n)
+    \end{equation*}
+  \item \lst{filter} --- филтриране
+    \begin{equation*}
+      a_{k_1}, a_{k_2}, \ldots, a_{k_m},\text{ където }\left\{
+      \begin{array}{l}
+        p(a_{k_i})=\mathtt{true}\text{ за }i\in\{1,\ldots,m\},\\
+        p(a_k)=\mathtt{false}\text{ за }k\notin\{k_1,\ldots k_m\}
+      \end{array}\right.
+    \end{equation*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Задачи за функции от по-висок ред}
+
+  \textbf{Задача.} Да се намери сумата от нечетните квадрати на числата в даден списък.\\[6ex]
+  \pause
+  \textbf{Задача.} Да се намери произведението от най-малките положителни елементи на списък от списъци от числа.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{$\lambda$-функции в C++11}
+  \begin{itemize}[<+->]
+  \item \tta{[](}<параметри>\tta{) -> }<тип> \tta{\{}<тяло>\tta{\}}
+  \item създава анонимна ($\lambda$) функция, дефинирана като:\\
+    <тип> $\lambda$\tt(<параметри>\tt{) \{}<тяло>\tt\}
+  \item типът на израза е специален системен клас \tt{ClosureType}, който има операция за преобразуване на типа до указател към функция с горната сигнатура, т.е.\\
+    <тип> \tt{(*)(}<параметри>\tt{);}
+  \item \textbf{Примери:}
+  \item \lst!map([](int x) -> int { return x * x; }, l)!
+  \item \lst!foldr([](int x, int y) -> int { return x + y; }, 0, l)!
+  \end{itemize}
+\end{frame}
+
+% TODO: high order functions iterator range adaptors
 \end{document}
 
 % LocalWords:  insertAfter deleteAfter insertFirst insertLast rbegin
