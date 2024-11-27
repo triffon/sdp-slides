@@ -1,0 +1,486 @@
+\documentclass[alsotrans,beameroptions={aspectratio=169}]{beamerswitch}
+\usepackage{sdp}
+
+\title{Самобалансиращи се дървета}
+
+\date{28 ноември 2024 г.}
+
+\titlegraphicx{\includegraphics[height=0.25\textheight]{images/balancedtree.jpg}\\
+  \imageAttr{A lone tree stands in the middle of a path. Tree crooked wind bent.}{pixabay.com}{https://picryl.com/media/tree-crooked-wind-bent-nature-landscapes-b3d824}{CC0}}
+
+\forestset{
+  % стил по подразбиране за дървета
+  default/.style={
+    baseline,
+    for tree={
+      fill=diagramblue,
+      draw,circle,
+      inner sep=0pt,
+      minimum size=3.5ex,
+      edge=->}},
+  % поддърво
+  tri/.style={
+    shape=isosceles triangle,
+    shape border rotate=90,
+    minimum height=12ex,
+    child anchor=north,
+    anchor=north},
+  % малко поддърво
+  trismall/.style={
+    tri,
+    minimum height=8ex},
+}
+
+\tikzset{bnodemtx/.style={
+    basematrix,
+    matrix of nodes,
+    nodes={
+      fill=diagramblue,
+      draw,
+      inner sep=0pt,
+      align=center,
+      minimum height=3.5ex,
+      text height=2.5ex,
+      text depth=.5ex,
+    },
+    inner sep=0pt,
+  }
+}
+
+\newcommand{\bnode}[5][]{
+  \matrix[bnodemtx,nodes={text width=1.6em},#1]
+  (#2data) { #3 \& #4 \& #5\\ };
+  \matrix[bnodemtx,nodes={text width=1.2em},below=-2*\pgflinewidth of #2data.south]
+  (#2next) { \&\&\& \\};
+}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{AVL дървета}
+
+\begin{frame}
+  \frametitle{Самобалансиращи се дървета за търсене}
+  Можем да постигнем сложност $O(\log n)$ на операциите търсене, включване и изключване, ако работим само с балансирани дървета.\\[2ex]
+  \pause
+  \textbf{Идея:} ако дървото се разбалансира след включване или изключване, да го балансираме наново.\\[2ex]
+  \pause
+  Има различни вариации на самобалансиращи се дървета:
+  \begin{itemize}
+  \item 2-3 дърво
+  \item<alert@4> AVL дърво
+  \item червено-черно дърво
+  \item косо дърво (splay tree)
+  \item Декартово дърво (treap)
+  \end{itemize}
+  \pause
+\end{frame}
+
+\begin{frame}
+  \frametitle{AVL дърво}
+  Предложено от Адельсон-Велский и Ландис през 1962 г.\\[2ex]
+  \textbf{Основна идея:} Всяко поддърво $T = (X,L,R)$ поддържа коефициент на баланс:
+  \begin{equation*}
+    b(T) = h(R) - h(L)
+  \end{equation*}
+  \pause
+  \begin{block}{}
+    \begin{center}
+      Едно AVL дърво $T$ е балансирано\\
+      $\Longleftrightarrow$\\
+      $b(T') \in \{-1,0,1\}$ за всяко поддърво $T'$ на $T$
+    \end{center}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Самобалансиране}
+  \begin{itemize}[<+->]
+  \item Операциите за включване и изключване може да променят баланса на някой възел!
+  \item Промяната няма как да е с повече от $\pm 1$ (защо?)
+  \item Разбалансиране се получава при $b(T) = \pm 2$
+    \begin{itemize}
+    \item $b(T) = -2$ --- лявото поддърво е с 2 нива по-високо от дясното
+      \begin{itemize}
+      \item<7-> „завъртаме надясно“ за да балансираме
+      \end{itemize}
+    \item $b(T) = 2$ --- дясното поддърво е с 2 нива по-високо от лявото
+      \begin{itemize}
+      \item<8-> „завъртаме наляво“ за да балансираме
+      \end{itemize}
+    \end{itemize}
+  \item
+    Дефинираме операции за „завъртане“, които възстановяват баланса.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Завъртане надясно (zig)}
+  \small
+  \begin{center}
+    \begin{forest}
+      default [Y [X [A,trismall] [B,trismall]] [C,trismall]]
+    \end{forest}
+    {\Huge$\curvearrowright$}
+    \begin{forest}
+      default [X [A,trismall] [Y [B,trismall] [C,trismall]]]
+    \end{forest}
+  \end{center} \pause \vspace{-2.5ex}
+  \begin{overlayarea}{\textwidth}{20ex}
+    \onslide<+->
+    \begin{onlyenv}<.-.(12)| trans:1-2>
+      $$ b'(Y) = ? $$
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.-.(5)| trans:1>
+      \textbf{I сл. }$b(X) \geq 0$
+      \onslide<+-> $\Rightarrow h(B) \geq h(A)$
+      \onslide<+-> $\Rightarrow h(X) = h(B) + 1$
+      \onslide<+-> $\Rightarrow b(Y) = h(C) - h(X)$
+      \onslide<+-> $ = \underbrace{h(C) - h(B)}_{b'(Y)} - 1$
+      \onslide<+-> $\Rightarrow b'(Y) = b(Y) + 1$
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.-.(5)| trans:2>
+      \textbf{II сл.} $b(X) < 0$
+      \onslide<+-> $\Rightarrow h(B) < h(A)$
+      \onslide<+-> $\Rightarrow h(X) = h(A) + 1$
+      \onslide<+-> $\Rightarrow b(Y) = h(C) - h(A) - 1$
+      \onslide<+-> $ = \underbrace{h(C) - h(B)}_{b'(Y)} + \underbrace{h(B) - h(A)}_{b(X)} - 1$
+      \onslide<+-> $\Rightarrow b'(Y) = b(Y) - b(X) + 1$
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.,.(14)-| trans:5>
+      \begin{equation*}
+        b'(Y) =
+        \begin{cases}
+          b(Y) + 1,&\text{ ако }b(X) \geq 0,\\
+          b(Y) - b(X) + 1,&\text{ ако }b(X) < 0.
+        \end{cases}
+      \end{equation*}
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.-.(12)| trans:3-4>
+      $$ b'(X) = ? $$
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.-.(5)| trans:3>
+      \textbf{I сл. }$b'(Y) \leq 0$
+      \onslide<+-> $\Rightarrow h(B) \geq h(C)$
+      \onslide<+-> $\Rightarrow h'(Y) = h(B) + 1$
+      \onslide<+-> $\Rightarrow b'(X) = h'(Y) - h(A)$
+      \onslide<+-> $ = \underbrace{h(B) - h(A)}_{b(X)} + 1$
+      \onslide<+-> $\Rightarrow b'(X) = b(X) + 1$
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.-.(5)| trans:4>
+      \textbf{II сл.} $b'(Y) > 0$
+      \onslide<+-> $\Rightarrow h(B) < h(C)$
+      \onslide<+-> $\Rightarrow h'(Y) = h(C) + 1$
+      \onslide<+-> $\Rightarrow b'(X) = h(C) + 1 - h(A)$
+      \onslide<+-> $ = \underbrace{h(C) - h(B)}_{b'(Y)} + \underbrace{h(B) - h(A)}_{b(X)} + 1$
+      \onslide<+-> $\Rightarrow b'(X) = b(X) + b'(Y) + 1$
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.-| trans:5>
+      \begin{equation*}
+        b'(X) =
+        \begin{cases}
+          b(X) + 1,&\text{ ако }b'(Y) \leq 0,\\
+          b(X) + b'(Y) + 1,&\text{ ако }b'(Y) > 0.
+        \end{cases}
+      \end{equation*}
+    \end{onlyenv}
+    \onslide<+->
+    \begin{onlyenv}<.| trans:5>
+      \vspace{-2ex}
+      \begin{equation*}
+        b'(X) > b(X), \quad b'(Y) > b(Y)
+      \end{equation*}
+    \end{onlyenv}
+  \end{overlayarea}
+\end{frame}
+
+\begin{frame}<-5>
+  \frametitle{Завъртане наляво (zag)}
+  \small
+  \begin{center}
+    \begin{forest}
+      default [X [A,trismall] [Y [B,trismall] [C,trismall]]]
+    \end{forest}
+    {\Huge$\curvearrowleft$}
+    \begin{forest}
+      default [Y [X [A,trismall] [B,trismall]] [C,trismall]]
+    \end{forest}
+  \end{center}
+  \pause
+  \temporal<3>{
+    \alert{
+      \begin{equation*}
+        b'(Y) =
+        \begin{cases}
+          b(Y) + 1,&\text{ ако }b(X) \geq 0,\\
+          b(Y) - b(X) + 1,&\text{ ако }b(X) < 0.
+        \end{cases}
+      \end{equation*}
+      \begin{equation*}
+        b'(X) =
+        \begin{cases}
+          b(X) + 1,&\text{ ако }b'(Y) \leq 0,\\
+          b(X) + b'(Y) + 1,&\text{ ако }b'(Y) > 0.
+        \end{cases}
+      \end{equation*}
+    }
+  }
+  {
+    \alert{
+      \begin{equation*}
+        b(Y) =
+        \begin{cases}
+          b'(Y) + 1,&\text{ ако }b'(X) \geq 0,\\
+          b'(Y) - b'(X) + 1,&\text{ ако }b'(X) < 0.
+        \end{cases}
+      \end{equation*}
+      \begin{equation*}
+        b(X) =
+        \begin{cases}
+          b'(X) + 1,&\text{ ако }b(Y) \leq 0,\\
+          b'(X) + b(Y) + 1,&\text{ ако }b(Y) > 0.
+        \end{cases}
+      \end{equation*}
+    }
+  }
+  {
+    \begin{equation*}
+      b'(Y) =
+      \begin{cases}
+        b(Y) - 1,&\text{ ако }b'(X) \geq 0,\\
+        b(Y) + b'(X) - 1,&\text{ ако }b'(X) < 0.
+      \end{cases}
+    \end{equation*}
+    \begin{equation*}
+      b'(X) =
+      \begin{cases}
+        b(X) - 1,&\text{ ако }b(Y) \leq 0,\\
+        b(X) - b(Y) - 1,&\text{ ако }b(Y) > 0.
+      \end{cases}
+    \end{equation*}
+  }
+  \onslide<5>
+  \begin{equation*}
+    b'(X) < b(X), \quad b'(Y) < b(Y)
+  \end{equation*}
+\end{frame}
+
+\begin{frame}[label=balright]
+  \frametitle{Балансиране надясно}
+  \begin{center}
+    \scriptsize
+    \begin{forest}
+      default [Z [Y [X [A,trismall] [B,trismall]] [C,trismall]] [D,trismall]]
+    \end{forest}
+    {\Huge$\curvearrowright$}
+    \begin{forest}
+      default [Y [X [A,trismall] [B,trismall]] [Z [C,trismall] [D,trismall]]]
+    \end{forest}
+  \end{center}
+  \begin{itemize}[<+->]
+  \item Въртим надясно, ако $b(Z) = -2$
+  \item \alert{Внимание:} Ако $b(Y) = 1$, то
+    \begin{itemize}
+    \item $b'(Z) = b(Z) + 1  = -1$
+    \item $b'(Y) = b(Y) + 1 = \alert2$
+    \end{itemize}
+  \item Трябва да подсигурим, че $b(Y) \leq 0$...
+  \item ...с предварително завъртане наляво!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Двойно балансиране надясно (zag-zig)}
+  \begin{center}
+    \tiny
+    \begin{forest}
+      default [Z [X [A,trismall] [Y [B,trismall] [C,trismall]]] [D,trismall]]
+    \end{forest}
+    {\LARGE$\curvearrowleft$}
+    \begin{forest}
+      default [Z [Y [X [A,trismall] [B,trismall]] [C,trismall]] [D,trismall]]
+    \end{forest}
+    {\LARGE$\curvearrowright$}
+    \begin{forest}
+      default [Y [X [A,trismall] [B,trismall]] [Z [C,trismall] [D,trismall]]]
+    \end{forest}
+  \end{center}
+  \begin{itemize}[<+->]
+  \item Ако $b(X) = 1$, първо завъртаме наляво около $X$.
+  \item Така $b'(X) \leq 0$ и $b'(Y) \leq 0$
+  \item Вече можем да завъртим надясно около $Y$.
+  \item След балансиране сме сигурни, че $h'(Y) < h(Z)$, т.е. намаляваме височината.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Балансиране наляво}
+  \begin{center}
+    \scriptsize
+    \begin{forest}
+      default [X [A,trismall] [Y [B,trismall] [Z [C,trismall] [D,trismall]]]]
+    \end{forest}
+    {\Huge$\curvearrowleft$}
+    \begin{forest}
+      default [Y [X [A,trismall] [B,trismall]] [Z [C,trismall] [D,trismall]]]
+    \end{forest}
+  \end{center}
+  \begin{itemize}[<+->]
+  \item Въртим наляво, ако $b(Z) = 2$
+  \item \alert{Внимание:} Ако $b(Y) = -1$, то
+    \begin{itemize}
+    \item $b'(Z) = b(Z) - 1  = 1$
+    \item $b'(Y) = b(Y) - 1 = \alert{-2}$
+    \end{itemize}
+  \item Трябва да подсигурим, че $b(Y) \geq 0$...
+  \item ...с предварително завъртане надясно!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Двойно балансиране наляво (zig-zag)}
+  \begin{center}
+    \tiny
+    \begin{forest}
+      default [X [A,trismall] [Z [Y [B,trismall] [C,trismall]] [D,trismall]]]
+    \end{forest}
+    {\LARGE$\curvearrowright$}
+    \begin{forest}
+      default [X [A,trismall] [Y [B,trismall] [Z [C,trismall] [D,trismall]]]]
+    \end{forest}
+    {\LARGE$\curvearrowleft$}
+    \begin{forest}
+      default [Y [X [A,trismall] [B,trismall]] [Z [C,trismall] [D,trismall]]]
+    \end{forest}
+  \end{center}
+  \begin{itemize}[<+->]
+  \item Ако $b(Z) = -1$, първо завъртаме надясно около $Z$.
+  \item Така $b'(Z) \geq 0$ и $b'(Y) \geq 0$
+  \item Вече можем да завъртим наляво около $Y$.
+  \item След балансиране сме сигурни, че $h'(Y) < h(X)$, т.е. намаляваме височината.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Кога да балансираме?}
+  \begin{itemize}[<+->]
+  \item Когато включваме или изключваме елемент, трябва да следим кога балансът се променя
+  \item При промяна на баланс ще трябва да пребалансираме
+  \item Затова ще реализираме включването и изключването \textbf{рекурсивно}
+  \item На обратния ход на рекурсията ще пребалансираме при нужда
+  \item Балансът се променя когато височината на детето се е увеличила или намалила
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Балансиране при включване и изключване}
+  Балансиране при включване
+  \onslide<+->
+  \begin{itemize}[<+->]
+  \item При дъното на \textbf{включването} височината винаги се увеличава с 1
+  \item Ако височината на \textbf{по-ниското дете} се увеличи, то височината на родителя не се променя
+  \item При балансиране винаги компенсираме за увеличената височина на детето
+  \end{itemize}
+  \onslide<+->
+  Балансиране при изключване
+  \begin{itemize}[<+->]
+  \item При дъното на \textbf{изключването} дъното височината винаги се намалява с 1
+  \item Ако височината на \textbf{по-високото дете} се намали, то височината на родителя не се променя
+  \item Ако след балансиране $b(T) \neq 0$, значи сме компенсирали за намалената височина на детето
+  \item Ако след балансиране $b(T) = 0$, значи височината се е намалила
+  \end{itemize}
+\end{frame}
+
+\section{B-дървета}
+
+\begin{frame}
+  \frametitle{B-дървета}
+  \begin{definition}[B-дърво]
+    B-дърво от ред $n$ наричаме $n$-арно дърво ($n \geq 3$), за което:
+    \begin{itemize}
+    \item всички листа са на еднаква височина
+    \item всеки възел съдържа най-много $n-1$ ключа подредени в нарастващ ред
+    \item всеки възел (освен корена) съдържа най-малко $\left\lfloor\frac {n-1}2\right\rfloor$ ключа
+    \item всеки възел с $m$ ключа $k_1,\ldots,k_m$ или няма поддървета, или има точно $m+1$ непразни поддървета $T_0,\ldots, T_m$, които са разположени максимално вляво (т.е. $T_{m+1},\ldots,T_n$ са празни).
+    \item $k_i$ е по-голям от всички ключове в поддърветата $T_j$ за $j \leq i$
+    \item $k_i$ е по-малък от всички ключове в поддърветата $T_j$ за $j > i$
+    \end{itemize}
+  \end{definition}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Пример за B-дърво от ред 4}
+  \begin{center}
+    \ttfamily
+    \begin{tikzpicture}
+      \bnode{b1}38-
+      \bnode[below left =of b1next]{b2}12-
+      \bnode[below      =of b1next]{b3}4--
+      \bnode[below right=of b1next]{b4}{10}{12}{15}
+
+      \draw[pointer] (b1next-1-1.center) to (b2data);
+      \draw[pointer] (b1next-1-2.center) to (b3data);
+      \draw[pointer] (b1next-1-3.center) to (b4data);
+      \nullptr{b1next-1-4}
+      \foreach \node in {2,3,4} {
+        \foreach \idx in {1,2,3,4} {
+          \nullptr{b\node next-1-\idx}
+        }}
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Включване на елемент}
+  % TODO: да се анимират различните случаи с TikZ
+  \begin{itemize}[<+->]
+  \item Прави се опит за включване на елемент в някое листо
+  \item Ако се окаже, че се опитваме да включим елемент в листо, което вече е пълно с $n-1$ ключа:
+    \begin{itemize}
+    \item Разцепваме възела на два други с приблизително еднакъв брой елементи
+    \item Средния по големина ключ се опитваме да вмъкнем в родителя
+    \item Ако в родителя вече има $n-1$ ключа, повтаряме същата схема
+    \item Ако стигнем до корена, правим нов корен само с един ключ и две поддървета
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Изключване на елемент}
+  % TODO: да се анимират различните случаи с TikZ
+  \begin{itemize}[<+->]
+  \item Първо намираме ключа $K$ на елемента в дървото
+    \begin{itemize}
+    \item Ако е в листо, изтриваме го
+    \item Ако е във вътрешен възел, заменяме го с:
+      \begin{itemize}
+      \item най-малкия ключ $>K$, или
+      \item най-големия ключ $<K$
+      \item такъв ключ задължително ще се намира в листо
+      \end{itemize}
+    \end{itemize}
+  \item Ако броят на ключовете в листото падне под минимума:
+    \begin{itemize}
+    \item Опитваме се да заемем ключ и съответно поддърво от някой от двата съседа
+    \item Ако и двата съседа също съдържат минимален брой ключове
+      \begin{itemize}
+      \item Листото се слива с някой от двата си съседа
+      \item Понеже броят на поддърветата в родителя намалява с 1, прехвърляме в листото ключа, който е стоял между двете слети листа в родителя
+      \item Сигурни сме, че в новото листо броят ключове не надвишава максимума, понеже $2\left\lfloor\frac{n-1}2\right\rfloor \leq n - 1$
+      \end{itemize}
+    \end{itemize}
+    \item Ако сега броят на ключовете в родителя падне под минимума, повтаряме същата процедура за него
+  \end{itemize}
+\end{frame}
+
+\end{document}
