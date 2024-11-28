@@ -28,7 +28,7 @@ jobs:
                 2.3-list,
 #                2.4-polylist,
                 3.1-tree,
-#                3.3-searchtree,
+                3.3-searchtree,
 #                3.4-hash,
 #                3.5-graph
               ]
