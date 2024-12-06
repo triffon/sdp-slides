@@ -1,9 +1,15 @@
 \documentclass[alsotrans,beameroptions={aspectratio=169}]{beamerswitch}
 \usepackage{sdp}
 
+% дали да показваме алгоритъма за двоично търсене
+\newboolfalse{binarysearch}
+
+% дали да показваме реализацията „сортиран списък“
+\newboolfalse{sortedlist}
+
 \title{Речници}
 
-\date{28 ноември 2024 г.}
+\date{5 декември 2024 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/hash.jpg}\\
   \imageBased{A Dictionary Of The English Language}{Jurriaan Persyn}{https://flic.kr/p/6ThMfe}{CC BY-NC 2.0}}
@@ -44,7 +50,7 @@
   \end{itemize}
 \end{frame}
 
-\begin{frame}
+\begin{frame}<\switch{sortedlist}>
   \frametitle{Реализация: сортиран списък}
   Свързан списък от двойки (ключ, стойност), сортиран по ключове (считаме, че имаме наредба по ключовете)
   \pause
@@ -58,6 +64,7 @@
 \begin{frame}
   \frametitle{Реализация: сортиран масив}
   Динамичен масив от двойки (ключ, стойност), сортиран по ключове\\
+  \ifbool{binarysearch}{%
   \pause
   Алгоритъм за двоично търсене:
   \begin{enumerate}
@@ -69,6 +76,7 @@
   \item ако \tt{Y < X} --- търсим \tt Y отляво, \tt{right = mid - 1} и към \ballref{\ref{it:start}}
   \item ако \tt{Y > X} --- търсим \tt X отдясно, \tt{left = mid + 1} и към \ballref{\ref{it:start}}
   \end{enumerate}
+  }{}
   \pause
   \begin{itemize}
   \item \tt{lookup(key)} \onslide<+(1)->{--- $O(\log n)$, можем да използваме двоично търсене}
@@ -100,7 +108,7 @@
     \end{itemize}
   \end{itemize}
 \end{frame}
-
+\end{document}
 \section{Хеш таблица}
 
 \begin{frame}
