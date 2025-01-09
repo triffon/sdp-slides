@@ -1,9 +1,9 @@
-\documentclass{beamer}
+\documentclass[alsotrans,beameroptions={aspectratio=169}]{beamerswitch}
 \usepackage{sdp}
 
 \title{Пирамида}
 
-\date{12--19 декември 2017 г.}
+\date{10 януари 2025 г.}
 
 \titlegraphicx{\includegraphics[height=0.25\textheight]{images/heap.jpg}\\
   \imageAttr{Kheops pyramid}{Nina}{https://commons.wikimedia.org/wiki/File:Kheops-Pyramid.jpg}{CC BY-SA 3.0}}
@@ -102,7 +102,7 @@
       \item Продължаваме докато има нарушение или не стигнем до листо
       \item<8> Листата никога не нарушават пирамидалното свойство
       \end{itemize}      
-      \pause
+      \onslide<10->
       Сложност: $O(h)$, където $h$ е височината на пирамидата.
     \end{column}
     \begin{column}{.5\textwidth}
